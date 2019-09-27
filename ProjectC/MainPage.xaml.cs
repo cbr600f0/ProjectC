@@ -28,9 +28,9 @@ namespace ProjectC
             await Navigation.PushAsync(new MIJNPAGINAISWHATEVER());
         }
 
-        private void PageTwoButton_Clicked(object sender, EventArgs e)
+        private async void MultiplayerButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new MultiplayerPage());
         }
 
         private void PageThreeButton_Clicked(object sender, EventArgs e)
