@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ProjectC.Pages.HelpPage">
+<!--A page is only allowed to have 1 element (stacklayout, scrollview, label, image etc). For multiple elements it is required to
+have a StackLayout surrounding everything else.-->
+
+    <!--The scrollview is used when a page has more elements than fit on the page, or the container of the scrollview tag.
+        It will make the container (or entire page) scrollable.-->
+    <ScrollView>
+        <!--The stacklayout is simular to a <div>-->
+        <StackLayout>
+            <!--For an image, you should put the image in the ProjectC.Android part, in the subfolder: Resources/drawable. 
+            (i don't know what the right place for iOs is, since i never used it)-->
+            <Image Source="InsertTheNameOfYourImageHereNoPathIsNeeded" />
+            <!--Basic uneditable textfield-->
+            <Label Text="This will be shown and the user will not be able to change this"/>
+            <!-- An Entry is used for letting the user enter their own text simular to an <input type="Text"> in HTML-->
+            <Entry Width="500" Text="Type your notes here"/>
+               
+            <!--More of these handy tags can be found here:
+            https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views-->
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

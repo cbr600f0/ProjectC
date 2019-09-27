@@ -19,22 +19,26 @@ namespace ProjectC
             InitializeComponent();
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        //This method should be changed by one of you, like the other methods. 
+        //The pagename should not be all-capital but it must start with one.
+        //The Method name is *Pagename*+Button_Clicked
+        //The "Clicked" method on the MainPage.xaml MUST have the same name.
+        private async void MIJNPAGINAISWHATEVERButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MIJNPAGINAISWHATEVER());
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private void PageTwoButton_Clicked(object sender, EventArgs e)
         {
 
         }
 
-        private void Button_Clicked_2(object sender, EventArgs e)
+        private void PageThreeButton_Clicked(object sender, EventArgs e)
         {
 
         }
 
-        private void Button_Clicked_3(object sender, EventArgs e)
+        private void PageFourButton_Clicked(object sender, EventArgs e)
         {
 
         }
