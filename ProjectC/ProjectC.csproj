@@ -15,10 +15,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\HelpPage.xaml">
+    <Compile Update="Pages\helpPage.xaml.cs">
+      <DependentUpon>helpPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\multiplayer.xaml.cs">
+      <DependentUpon>multiplayer.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\multiplayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\MIJNPAGINAISWHATEVER.xaml">
+    <EmbeddedResource Update="Pages\login.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\helpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\singleplayer.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
