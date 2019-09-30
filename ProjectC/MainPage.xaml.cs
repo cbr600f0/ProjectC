@@ -23,24 +23,24 @@ namespace ProjectC
         //The pagename should not be all-capital but it must start with one.
         //The Method name is *Pagename*+Button_Clicked
         //The "Clicked" method on the MainPage.xaml MUST have the same name.
-        private async void MIJNPAGINAISWHATEVERButton_Clicked(object sender, EventArgs e)
+        private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MIJNPAGINAISWHATEVER());
+            await Navigation.PushAsync(new login());
         }
 
-        private void PageTwoButton_Clicked(object sender, EventArgs e)
+        private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new singleplayer());
         }
 
-        private void PageThreeButton_Clicked(object sender, EventArgs e)
+        private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new multiplayer());
         }
 
-        private void PageFourButton_Clicked(object sender, EventArgs e)
+        private async void HelpPageButton_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new helpPage());
         }
     }
 }

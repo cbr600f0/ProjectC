@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MIJNPAGINAISWHATEVER : ContentPage
+    public partial class multiplayer : ContentPage
     {
-        public MIJNPAGINAISWHATEVER()
+        public multiplayer() 
         {
             InitializeComponent();
         }
