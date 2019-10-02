@@ -5,22 +5,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ProjectC.MainPage">
-    <StackLayout BackgroundColor="SkyBlue" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
-        <StackLayout HorizontalOptions="FillAndExpand">
-            <Label Text="SCRALINGO" Font="Bold,27" FontFamily="Comic Sans MS" Grid.Column="1" HorizontalOptions="CenterAndExpand"/>
-            <Image Source="foto.jpg"/>
-        </StackLayout>
-        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
+    <StackLayout BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
+        <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="AUTO"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Margin="0, 30" CornerRadius="5" Text="Login" Clicked="LoginButton_Clicked" />
-            <Button Grid.Row="1" Margin="0, 30" CornerRadius="5" Text="SinglePLayer" Clicked="SinglePlayerButton_Clicked"/>
-            <Button Grid.Row="2" Margin="0, 30" CornerRadius="5" Text="MultiPlayer" Clicked="MultiPlayerButton_Clicked"/>
-            <Button Grid.Row="3" Margin="0, 30" CornerRadius="5" Text="Help" Clicked="HelpPageButton_Clicked"/>
+
+            <StackLayout Grid.Row="0" >
+                <Grid VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="SCRALINGO" Grid.Row="0" Font="Bold,30" FontFamily="Comic Sans MS" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="0" IsEnabled="True"/>
+                    <Image Source="scralingo.jpg" Grid.Row="1" Margin="20, 20, 20, 20"/>
+                </Grid>
+                </StackLayout>
+
+            <StackLayout Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Grid.Column="0" Margin="0, 10" CornerRadius="4" Text="SinglePlayer" Clicked="LoginButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="0" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="MultiPLayer" Clicked="SinglePlayerButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="1" Grid.Column="0" Margin="0, 10" CornerRadius="4" Text="Login" Clicked="MultiPlayerButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="1" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="Register" Clicked="RegisterButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="2" Grid.ColumnSpan="2" Margin="0, 10"   CornerRadius="4" Text="Help" Clicked="HelpPageButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                </Grid>
+            </StackLayout>
         </Grid>
     </StackLayout>
 </ContentPage>
