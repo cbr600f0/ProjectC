@@ -18,12 +18,12 @@ namespace ProjectC.Pages
         }
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PopAsync(true);
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PopAsync(true);
         }
     }
 }
