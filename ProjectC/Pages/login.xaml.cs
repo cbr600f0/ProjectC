@@ -14,7 +14,7 @@ namespace ProjectC.Pages
     {
         public login()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }
