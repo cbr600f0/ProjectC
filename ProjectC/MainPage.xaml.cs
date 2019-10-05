@@ -38,6 +38,10 @@ namespace ProjectC
             await Navigation.PushAsync(new multiplayer());
         }
 
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Register());
+        }
         private async void HelpPageButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new helpPage());
