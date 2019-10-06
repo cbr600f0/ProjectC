@@ -43,5 +43,10 @@ namespace ProjectC.Pages
             Boolean test2 = this.CheckWord("froo");
             this.InitializeComponent();
         }
+
+        private void CheckTest(object sender, EventArgs e)
+        {
+            label.Text = this.CheckWord(wordEntry.Text).ToString();
+        }
     }
 }

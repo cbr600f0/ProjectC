@@ -7,7 +7,12 @@
              x:Class="ProjectC.Pages.SinglePlayer">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Entry x:Name="wordEntry" 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" Placeholder="Type a word here" />
+            
+            <Button Clicked="CheckTest" Text="Check test" />
+            <Label x:Name="label" Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
