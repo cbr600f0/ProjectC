@@ -7,6 +7,48 @@
              x:Class="ProjectC.Pages.SinglePlayer">
     <ContentPage.Content>
         <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="6*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>  
+                <!--Header-->
+                <StackLayout Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Column="0" BackgroundColor="Transparent" BorderColor="Black" Padding="0" Margin="0">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" Margin="0">
+                                <Label Text="Alfred's turn" FontSize="12" Margin="0"/>
+                                <Label Text="Turn: 5" FontSize="12" Margin="0"/>
+                                <Label Text="Turns for shuffle: 3" FontSize="12" Margin="0"/>
+                                <Label Text="Time left: 23 seconds" FontSize="12" Margin="0"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Grid.Column="1" BackgroundColor="Transparent" BorderColor="Black" Padding="0" Margin="0">
+                            <StackLayout>
+                                <Label Text="Fancy text with the name of the game" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="30" />
+                            </StackLayout>
+                        </Frame>
+                        <Frame Grid.Column="2" BackgroundColor="Transparent" BorderColor="Black" Padding="0" Margin="0">
+                            <StackLayout>
+                                <Label Text="1st: alfred, 23 points" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="14" />
+                                <Label Text="2nd: charly 22 points" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="14" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </StackLayout>
+                <!--Middle Part-->
+                <StackLayout Grid.Row="1" x:Name="MiddlePart">
+
+                </StackLayout>
+            </Grid>
+        </StackLayout>
             <Entry x:Name="wordEntry" 
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" Placeholder="Type a word here" />
@@ -15,6 +57,5 @@
             <Label x:Name="label" Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

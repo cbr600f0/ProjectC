@@ -37,14 +37,34 @@ namespace ProjectC.Pages
             }
 
         }
+
+        public Int32 wordRows;
         public SinglePlayer()
         {
             this.InitializeComponent();
+            wordRows = 7;
         }
 
         private void CheckTest(object sender, EventArgs e)
         {
             label.Text = this.CheckWord(wordEntry.Text).ToString();
+        }
+
+        public void UICreater()
+        {
+            //MiddlePart.Children.Add(new Grid()
+            //{
+            //    //RowDefinitions
+            //});
+
+            //for (int i = 0; i < wordRows; i++)
+            //{
+            //    MiddlePart.Children.Add(new Label()
+            //    {C:\Users\cbr600f0\source\repos\ProjectC\ProjectC\Pages\singleplayer.xaml.cs
+            //        Text = "Mark",
+
+            //    });
+            //}
         }
     }
 }
