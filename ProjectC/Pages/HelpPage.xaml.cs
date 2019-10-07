@@ -12,6 +12,7 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class helpPage : ContentPage
     {
+        public Xamarin.Forms.LineBreakMode LineBreakMode { get; set; }
         public helpPage() 
         {
             InitializeComponent();
