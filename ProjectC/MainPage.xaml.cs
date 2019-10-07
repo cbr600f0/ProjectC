@@ -16,7 +16,7 @@ namespace ProjectC
     {
         public MainPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         //This method should be changed by one of you, like the other methods. 
@@ -30,12 +30,12 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new singleplayer());
+            await Navigation.PushAsync(new SinglePlayer());
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new multiplayer());
+            await Navigation.PushAsync(new MultiPlayer());
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace ProjectC
         }
         private async void HelpPageButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new helpPage());
+            await Navigation.PushAsync(new HelpPage());
         }
     }
 }

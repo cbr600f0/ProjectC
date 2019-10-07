@@ -14,7 +14,7 @@ namespace ProjectC.Pages
     {
         public Register()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
