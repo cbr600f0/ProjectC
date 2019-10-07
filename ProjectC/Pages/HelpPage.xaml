@@ -4,29 +4,91 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.helpPage">
+             x:Class="ProjectC.Pages.helpPage"
+             Title="Help Pagina">
+             
     <ContentPage.Content>
+     
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="5,5,5,5">
 
-        <StackLayout Orientation="Vertical" Padding="5,5,5,5">
-            <Label Text="Regels van het spel"
+                
+                <Label Text="SinglePlayer Regels"
                    FontSize="Large"
                    FontAttributes="Bold"/>
-            <Label/>
-            <Label Text="De speler krijgt een reeks aan willekeurige letters, met verschillende waarden. Deze letters moeten worden gebruikt om woorden te maken." 
+                <Label/>
+                <Label Text="- Je krijgt een aantal letters"
                    FontSize="Large"/>
-            <Label Text="De eerste letter van het woord is al op het scherm. De speler moet de rest van het woord dus aanvullen met de beschikbare letters."
+                <Label Text="- Je kan deze letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
-            <Label Text="Indien de speler geen woord kan maken met de beschikbare letters, kan de shuffleknop worden gebruikt om de huidige letters te vervangen met nieuwe letters."
+                <Label Text="- De eerste letter is al gegeven. De rest van de letters moet je aanvullen"
                    FontSize="Large"/>
-            <Label Text="Wanneer de speler een woord heeft gemaakt, zal het letterbordje worden aangevuld met nieuwe letters. Vervolgens herhaalt het proces zich en kan de speler weer een woord maken"
+                <Label Text="- Als je geen woord kan maken, kan je klikken op de shuffleknop om de letters te vervangen"
                    FontSize="Large"/>
-            <Label Text="De speler verdient punten afhankelijk van de woordwaarde van het gemaakte woord. Deze woordwaarde is afhankelijk van de individuele letterwaarden van de letters."
+                <Label Text="- Wanneer je een woord hebt gemaakt, krijg je nieuwe letters en kan je weer een woord maken"
                    FontSize="Large"/>
-            <Label Text="Letters die vaker voorkomen in de Nederlandse taal, zoals E en A, zullen een lagere letterwaarde hebben dan letters die minder vaak voorkomen, zoals X en Q."
+                <Label Text="- Hoe moeilijker het woord dat je maakt, hoe meer punten je krijgt"
                    FontSize="Large"/>
-            <Label Text="Het doel van het spel is om zoveel mogelijk punten te scoren door woorden te maken met de beschikbare letters."
+                <Label Text="- Probeer zoveel mogelijk punten te scoren door woorden te maken!"
                    FontSize="Large"/>
-        </StackLayout>
-        
+
+                <Label/>
+                <Label Text="MultiPlayer Regels"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+                <Label/>
+
+                <Label Text="De speler krijgt een reeks aan willekeurige letters, met verschillende waarden. Deze letters moeten worden gebruikt om woorden te maken." 
+                   FontSize="Large"/>
+                <Label Text="De eerste letter van het woord is al op het scherm. De speler moet de rest van het woord dus aanvullen met de beschikbare letters."
+                   FontSize="Large"/>
+                <Label Text="Indien de speler geen woord kan maken met de beschikbare letters, kan de shuffleknop worden gebruikt om de huidige letters te vervangen met nieuwe letters."
+                   FontSize="Large"/>
+                <Label Text="Wanneer de speler een woord heeft gemaakt, zal het letterbordje worden aangevuld met nieuwe letters. Vervolgens herhaalt het proces zich en kan de speler weer een woord maken"
+                   FontSize="Large"/>
+                <Label Text="De speler verdient punten afhankelijk van de woordwaarde van het gemaakte woord. Deze woordwaarde is afhankelijk van de individuele letterwaarden van de letters."
+                   FontSize="Large"/>
+                <Label Text="Letters die vaker voorkomen in de Nederlandse taal, zoals E en A, zullen een lagere letterwaarde hebben dan letters die minder vaak voorkomen, zoals X en Q."
+                   FontSize="Large"/>
+                <Label Text="Het doel van het spel is om zoveel mogelijk punten te scoren door woorden te maken met de beschikbare letters."
+                   FontSize="Large"/>
+
+
+                <Label/>
+                <Label Text="Registreren"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+                <Label/>
+                <Label Text="- Om te registreren, klik op de Registreren knop in het hoofdscherm"
+                       FontSize="Large"/>
+                <Label Text="- Vul hier je naam, geboortedatum, e-mail adres en wachtwoord in"
+                       FontSize="Large"/>
+                <Label Text="- Klik op Registreer"
+                       FontSize="Large"/>
+                <Label Text="- Je hebt nu een account aangemaakt!"
+                       FontSize="Large"/>
+                <Label Text="- Met dit account kan je inloggen"
+                       FontSize="Large"/>
+
+                <Label/>
+                <Label Text="Inloggen"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
+                <Label/>
+                <Label Text="- Klik op de knop Inloggen op het hoofdscherm om in te loggen"
+                       FontSize="Large"/>
+                <Label Text="- Vul hier je e-mail adres en wachtwoord in"
+                       FontSize="Large"/>
+                <Label Text="- Klik op Inloggen"
+                       FontSize="Large"/>
+                <Label Text="- Je bent nu ingelogd!"
+                       FontSize="Large"/>
+                <Label Text="- Om te spelen kan je klikken op SinglePlayer, of MultiPlayer op het hoofdscherm"
+                       FontSize="Large"/>
+                <Label/>
+            </StackLayout>
+     </ScrollView>
+
+
     </ContentPage.Content>
 </ContentPage>
