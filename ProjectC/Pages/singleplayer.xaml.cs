@@ -39,8 +39,6 @@ namespace ProjectC.Pages
         }
         public SinglePlayer()
         {
-            Boolean test = this.CheckWord("auto");
-            Boolean test2 = this.CheckWord("froo");
             this.InitializeComponent();
         }
 
