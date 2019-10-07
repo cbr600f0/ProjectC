@@ -16,5 +16,15 @@ namespace ProjectC.Pages
         {
             InitializeComponent();
         }
+        //Works like this temporarily. Until we have a functioning login program. 
+        private async void LoginButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+        }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }
