@@ -16,5 +16,14 @@ namespace ProjectC.Pages
         {
             this.InitializeComponent();
         }
+        private async void LoginButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }
