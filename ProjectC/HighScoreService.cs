@@ -3,20 +3,27 @@ using System.Collections.ObjectModel;
 
 namespace ProjectC
 {
+    /// <summary>
+    /// this class will store information about multiplayer high scores.
+    /// </summary>
     public class MultiPlayerHighScore
     {
         public int Rank { get; set; }
         public int Score { get; set; }
         public string User { get; set; }
     }
-
+    /// <summary>
+    /// this class will store information about singel player scores.
+    /// </summary>
     public class SinglePlayerHighScore
     {
         public int Rank { get; set; }
         public int Score { get; set; }
         public DateTime Date { get; set; }
     }
-
+    /// <summary>
+    /// This class return some sample data later it will be from database
+    /// </summary>
     public class HighScoreDataService
     {
         public static ObservableCollection<MultiPlayerHighScore> GetMultiPlayerScores()
@@ -37,6 +44,7 @@ namespace ProjectC
 
             return multiPlayerScores;
         }
+
 
         public static ObservableCollection<SinglePlayerHighScore> GetSinglePlayerScores()
         {
