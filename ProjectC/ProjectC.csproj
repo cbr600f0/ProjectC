@@ -21,6 +21,9 @@
     <Compile Update="Pages\multiplayer.xaml.cs">
       <DependentUpon>multiplayer.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\singleplayer.xaml.cs">
+      <DependentUpon>singleplayer.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

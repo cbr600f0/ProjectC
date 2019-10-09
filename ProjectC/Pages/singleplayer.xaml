@@ -44,8 +44,8 @@
                     </Grid>
                 </StackLayout>
                 <!--Middle Part-->
-                <StackLayout Grid.Row="1" x:Name="MiddlePart">
-
+                <StackLayout Grid.Row="1" x:Name="MiddlePart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    
                 </StackLayout>
             </Grid>
         </StackLayout>
