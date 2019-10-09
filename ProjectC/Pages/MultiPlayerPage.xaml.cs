@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MultiPlayer : ContentPage
+    public partial class MultiPlayerPage : ContentPage
     {
-        public MultiPlayer() 
+        public MultiPlayerPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

@@ -7,6 +7,6 @@ namespace ProjectC.Model
 {
     public interface BaseModel
     {
-        public Guid Id { get; set; }
+        Guid Id { get; set; }
     }
 }

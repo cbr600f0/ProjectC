@@ -25,22 +25,22 @@ namespace ProjectC
         //The "Clicked" method on the MainPage.xaml MUST have the same name.
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new login());
+            await Navigation.PushAsync(new LoginPage());
         }
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new singleplayer());
+            await Navigation.PushAsync(new SinglePlayerPage());
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MultiPlayer());
+            await Navigation.PushAsync(new MultiPlayerPage());
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Register());
+            await Navigation.PushAsync(new RegisterPage());
         }
         private async void HelpPageButton_Clicked(object sender, EventArgs e)
         {

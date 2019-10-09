@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.Register">
+             x:Class="ProjectC.Pages.RegisterPage">
     <ContentPage.Content>
         <StackLayout>
             <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start"/>

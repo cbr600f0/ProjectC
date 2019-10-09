@@ -14,11 +14,11 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class singleplayer : ContentPage
+    public partial class SinglePlayerPage : ContentPage
     {
         public int wordRows = 7;
         public int wordLength = 7;
-        public singleplayer()
+        public SinglePlayerPage()
         {
             InitializeComponent();
             UICreater();

@@ -10,15 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Register : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        public Register()
+        public LoginPage()
         {
             this.InitializeComponent();
         }
-        private async void RegisterButton_Clicked(object sender, EventArgs e)
+        //Works like this temporarily. Until we have a functioning login program. 
+        private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new login());
+            await Navigation.PushAsync(new MainPage());
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
