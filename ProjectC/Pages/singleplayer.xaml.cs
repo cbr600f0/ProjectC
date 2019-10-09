@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -71,6 +73,28 @@ namespace ProjectC.Pages
             }
 
             MiddlePart.Children.Add(grid);
+        }
+
+        private Boolean CheckWord(String word)
+        {
+            String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = client.GetAsync(baseUrl).Result)
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        String data = content.ReadAsStringAsync().Result;
+                        if (data != null)
+                        {
+                            JContainer test = (JContainer)JObject.Parse(data)["matches"];
+                            return test.Count == 0;
+                        }
+                        return false;
+                    }
+
+                }
+            }
         }
     }
 }

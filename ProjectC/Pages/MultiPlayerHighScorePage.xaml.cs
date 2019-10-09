@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HelpPage : ContentPage
+    public partial class MultiPlayerHighScorePage : ContentPage
     {
-        public Xamarin.Forms.LineBreakMode LineBreakMode { get; set; }
-        public HelpPage() 
+        public MultiPlayerHighScorePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }
