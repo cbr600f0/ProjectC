@@ -30,7 +30,7 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayer());
+            await Navigation.PushAsync(new singleplayer());
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)

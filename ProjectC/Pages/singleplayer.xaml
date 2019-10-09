@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.SinglePlayer">
+             x:Class="ProjectC.Pages.singleplayer">
     <ContentPage.Content>
         <StackLayout>
             <Grid>
@@ -44,17 +44,7 @@
                     </Grid>
                 </StackLayout>
                 <!--Middle Part-->
-                <StackLayout Grid.Row="1" x:Name="MiddlePart">
-                    <Entry x:Name="wordEntry" 
-                        VerticalOptions="CenterAndExpand" 
-                        HorizontalOptions="CenterAndExpand" Placeholder="Type a word here" />
-
-                    <Button Clicked="CheckTest" Text="Check test" />
-                    <Label x:Name="label" Text="Welcome to Xamarin.Forms!"
-                        VerticalOptions="CenterAndExpand" 
-                        HorizontalOptions="CenterAndExpand" />
-
-                </StackLayout>
+                <StackLayout Grid.Row="1" x:Name="MiddlePart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>
