@@ -15,10 +15,16 @@ namespace ProjectC.Model
         [MaxLength(12)]
         public String Password { get; set; }
 
-        public String EmailAdress { get; set; }
-        
+        public String HighScore { get; set; }
+
         public User()
         {
+        }
+
+        public User(String userName, String password)
+        {
+            this.UserName = userName;
+            this.Password = password;
         }
     }
 }

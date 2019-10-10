@@ -17,6 +17,7 @@
                 <Entry Grid.Row="0" Placeholder="Username"/>
                 <Entry Grid.Row="1" IsPassword="true" Placeholder="Password"/>
                 <Button Grid.Row="2" Text="Login" Clicked="LoginButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Button Grid.Row="3" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

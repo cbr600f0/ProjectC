@@ -26,5 +26,10 @@ namespace ProjectC.Pages
         {
             await Navigation.PopAsync(true);
         }
+
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
+        }
     }
 }

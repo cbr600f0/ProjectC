@@ -16,7 +16,7 @@ namespace ProjectC.iOS.Business
         }
         public SQLiteConnection GetConnection()
         {
-            String fileName = "Student.db3";
+            String fileName = "UserDatabase.db3";
             String documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             String libraryPath = Path.Combine(documentsPath, "..", "Library");
             String path = Path.Combine(libraryPath, fileName);
