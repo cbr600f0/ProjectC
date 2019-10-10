@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using SQLite.Net;
+using SQLite;
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 
@@ -33,7 +33,7 @@ namespace ProjectC.Business.Service
         {
             try
             {
-                base.AddOrUpdate(ref user);
+                base.AddOrUpdate<User>(ref user);
             }
             catch (Exception)
             {

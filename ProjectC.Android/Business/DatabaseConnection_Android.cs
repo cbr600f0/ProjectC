@@ -2,8 +2,7 @@
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 using System.IO;
-using SQLite.Net.Platform.XamarinAndroid;
-using SQLite.Net;
+using SQLite;
 using ProjectC.Droid.Business;
 
 [assembly: Dependency(typeof(DatabaseConnection_Android))]
@@ -19,8 +18,7 @@ namespace ProjectC.Droid.Business
             String fileName = "UserDatabase.db3";
             String documentPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             String path = Path.Combine(documentPath, fileName);
-            SQLitePlatformAndroid platform = new SQLitePlatformAndroid();
-            SQLiteConnection connection = new SQLiteConnection(platform, path);
+            SQLiteConnection connection = new SQLiteConnection(path, false);
             return connection;
         }
     }

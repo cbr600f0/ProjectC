@@ -13,11 +13,19 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : BasePage
+    public partial class RegisterPage : ContentPage
     {
+        private UserService _userService;
+        protected UserService UserService
+        {
+            get
+            {
+                return this._userService = this._userService ?? new UserService();
+            }
+        }
         public RegisterPage()
         {
-            var test = base.UserService.Get();
+            var test = this.UserService.Get();
             this.InitializeComponent();
             //NavigationPage.SetHasBackButton(this, false);
             eUserName.ReturnCommand = new Command(() => ePassword.Focus());
@@ -42,7 +50,8 @@ namespace ProjectC.Pages
                 User user = new User(eUserName.Text, ePassword.Text);
                 try
                 {
-                    base.UserService.AddOrUpdate(user);
+                    this.UserService.AddOrUpdate(user);
+                    var test = this.UserService.Get();
                 }
                 catch (Exception ex)
                 {

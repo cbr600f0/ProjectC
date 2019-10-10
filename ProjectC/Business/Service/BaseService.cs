@@ -1,15 +1,15 @@
-﻿using SQLite.Net;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using ProjectC.Model;
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
+using SQLite;
 
 namespace ProjectC.Business.Service
 {
-    public class BaseService<T> where T : class, BaseModel
+    public class BaseService<T> where T : class, BaseModel, new()
     {
         private SQLiteConnection _SQLiteConnection;
 
@@ -19,29 +19,29 @@ namespace ProjectC.Business.Service
             _SQLiteConnection.CreateTable<User>();
         }
 
-        public IEnumerable<T> Get<T>() where T : class, BaseModel
+        public IEnumerable<TModel> Get<TModel>() where TModel : new()
         {
-            return _SQLiteConnection.Table<T>();
+            return _SQLiteConnection.Table<TModel>();
         }
 
-        public IEnumerable<T> Get<T>(Guid id) where T : class, BaseModel
+        public IEnumerable<TModel> Get<TModel>(Guid id) where TModel : BaseModel , new()
         {
-            return _SQLiteConnection.Table<T>().Where(t => t.Id == id);
+            return _SQLiteConnection.Table<TModel>().Where(t => t.Id == id);
         }
 
-        public void Delete<T>(Guid id) where T : class, BaseModel
+        public void Delete<TModel>(Guid id) where TModel : class, BaseModel
         {
-            _SQLiteConnection.Delete<T>(id);
+            _SQLiteConnection.Delete<TModel>(id);
         }
 
-        public void AddOrUpdate<TModel>(ref TModel model) where TModel : BaseModel
+        public void AddOrUpdate<TModel>(ref TModel model) where TModel : BaseModel, new()
         {
-            if (this.Get<T>(model.Id).Any())
+            if (model.Id == null || model.Id == Guid.Empty)
             {
-                if(model.Id != null)
-                {
-                    model.Id = Guid.NewGuid();
-                }
+                model.Id = Guid.NewGuid();
+            }
+            if (!this.Get<TModel>(model.Id).Any())
+            {
                 _SQLiteConnection.Insert(model);
             }
             else
