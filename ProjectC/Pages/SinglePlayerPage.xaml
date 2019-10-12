@@ -7,7 +7,7 @@
              x:Class="ProjectC.Pages.SinglePlayerPage">
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
+            <Grid ColumnSpacing="5" RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*" />
                     <RowDefinition Height="6*" />
@@ -16,7 +16,7 @@
                 </Grid.RowDefinitions>
                 <!--Header-->
                 <StackLayout Grid.Row="0">
-                    <Grid>
+                    <Grid ColumnSpacing="0" RowSpacing="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="2*" />
@@ -32,7 +32,7 @@
                         </Frame>
                         <Frame Grid.Column="1" BackgroundColor="Transparent" BorderColor="Black" Padding="0" Margin="0">
                             <StackLayout>
-                                <Label Text="Fancy text with the name of the game" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="30" />
+                                <Label Text="Fancy text with the name of the game" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="30" HorizontalTextAlignment="Center" />
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Column="2" BackgroundColor="Transparent" BorderColor="Black" Padding="0" Margin="0">
@@ -43,8 +43,69 @@
                         </Frame>
                     </Grid>
                 </StackLayout>
+                
                 <!--Middle Part-->
-                <StackLayout Grid.Row="1" x:Name="MiddlePart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <ScrollView Grid.Row="1" x:Name="MiddlePart" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" />
+                
+                <!-- User input part-->
+                <StackLayout Grid.Row="2" HorizontalOptions="End">
+                    <Grid HorizontalOptions="End">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Column="0" BorderColor="Black" x:Name="LetterOne">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="1" BorderColor="Black" x:Name="LetterTwo">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="2" BorderColor="Black" x:Name="LetterThree">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="3" BorderColor="Black" x:Name="LetterFour">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="4" BorderColor="Black" x:Name="LetterFive">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="5" BorderColor="Black" x:Name="LetterSix">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Frame Grid.Column="6" BorderColor="Black" x:Name="LetterSeven">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SwapLetters" />
+                            </Frame.GestureRecognizers>
+                            <Label Text="" />
+                        </Frame>
+                        <Button Clicked="Button_Clicked" Text="Spelen!" />
+                    </Grid>
+                </StackLayout>
+                <!-- Usable letters -->
+                <StackLayout Grid.Row="3" x:Name="UsableLetters" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
