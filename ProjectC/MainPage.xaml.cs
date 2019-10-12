@@ -17,6 +17,10 @@ namespace ProjectC
         public MainPage()
         {
             this.InitializeComponent();
+            if (Application.Current.Properties.ContainsKey("IsLoggedIn"))
+            {
+                Title = "Logged in";
+            }
         }
 
         //This method should be changed by one of you, like the other methods. 

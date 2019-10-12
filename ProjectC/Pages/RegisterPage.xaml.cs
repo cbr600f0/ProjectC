@@ -25,9 +25,7 @@ namespace ProjectC.Pages
         }
         public RegisterPage()
         {
-            var test = this.UserService.Get();
             this.InitializeComponent();
-            //NavigationPage.SetHasBackButton(this, false);
             eUserName.ReturnCommand = new Command(() => ePassword.Focus());
             ePassword.ReturnCommand = new Command(() => eRepeatPassword.Focus());
         }
@@ -51,7 +49,8 @@ namespace ProjectC.Pages
                 try
                 {
                     this.UserService.AddOrUpdate(user);
-                    var test = this.UserService.Get();
+                    await DisplayAlert("Enter Data", "Succesvol geregistreerd", "OK");
+                    await Navigation.PushAsync(new LoginPage());
                 }
                 catch (Exception ex)
                 {
