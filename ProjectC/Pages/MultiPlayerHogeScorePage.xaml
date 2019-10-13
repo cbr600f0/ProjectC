@@ -4,14 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.SinglePlayerHighScorePage">
+             x:Class="ProjectC.Pages.MultiPlayerHighScorePage">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="10,10" Text="MY SCORES"
+            <Label Grid.Row="0" Margin="10,10" Text="MultiPlayer Hoge Scores"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <StackLayout Grid.Row="1" Margin="10,10,0,10">
@@ -26,7 +26,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Text="Rank"/>
                     <Label Grid.Column="1" Grid.Row="0" Text="Score"/>
-                    <Label Grid.Column="2" Grid.Row="0" Text="Date"/>
+                    <Label Grid.Column="2" Grid.Row="0" Text="Speler"/>
 
                 </Grid>
 
@@ -46,7 +46,7 @@
 
                                     <Label Grid.Column="0" Text="{Binding Rank}"/>
                                     <Label Grid.Column="1" Text="{Binding Score}"/>
-                                    <Label Grid.Column="2" Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" />
+                                    <Label Grid.Column="2" Text="{Binding User}"/>
                                 </Grid>
 
                             </ViewCell>
