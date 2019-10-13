@@ -40,8 +40,8 @@
                     <Button Grid.Row="0" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="MultiPLayer" Clicked="MultiPlayerButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
                     <Button Grid.Row="1" Grid.Column="0" Margin="0, 10" CornerRadius="4" Text="Inloggen" Clicked="LoginButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
                     <Button Grid.Row="1" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="Help" Clicked="HelpPageButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
-                    <Button Grid.Row="2" Grid.Column="0" Margin="0, 10" CornerRadius="4" Text="Lokale highscore" Clicked="SinglePlayerHighScoreButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
-                    <Button Grid.Row="2" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="Globale highscore" Clicked="MultiPlayerHighScoreButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="2" Grid.Column="0" Margin="0, 10" CornerRadius="4" Text="Singleplayer High Scores" Clicked="SinglePlayerHighScoreButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Button Grid.Row="2" Grid.Column="1" Margin="0, 10" CornerRadius="4" Text="Multiplayer High Scores" Clicked="MultiPlayerHighScoreButton_Clicked" FontAttributes="Bold" HorizontalOptions="Center" />
                 </Grid>
             </StackLayout>
         </Grid>
