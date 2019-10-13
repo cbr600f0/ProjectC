@@ -22,9 +22,12 @@ namespace ProjectC.Pages
         public int wordRows = 4;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
         public int wordLength = 7;
-        // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element with is troublesome for frames
-        public int unrealHighNumber = 1000000;
+        // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
+        // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
+        public static int unrealHighNumber = 1000000;
 
+        public static char[] charPool = "AAAAAABBCCDDDDDEEEEEEEEEEEEEEEEEEFFGGGHHIIIIJJKKKLLLMMMNNNNNNNNNNOOOOOOPPQRRRRRSSSSSTTTTTUUUVVWWXYZZ".ToCharArray();
+        private static Random random = new Random(DateTime.Now.Millisecond);
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
 
@@ -34,6 +37,7 @@ namespace ProjectC.Pages
             AddLetersToList();
             PlayedWordsUICreator();
             UsableLettersUICreator();
+            RandomLetterGenerator();
         }
 
         public void PlayedWordsUICreator()
@@ -118,7 +122,7 @@ namespace ProjectC.Pages
                         //Creates the labels for the history words (1 label is 1 letter)
                         Content = new Label()
                         {
-                            Text = "A",
+                            Text = RandomLetterGenerator().ToString(),
                             FontSize = 20,
                             HorizontalOptions = LayoutOptions.CenterAndExpand,
                             VerticalOptions = LayoutOptions.CenterAndExpand
@@ -145,16 +149,16 @@ namespace ProjectC.Pages
 
         }
 
-        private Boolean CheckWord(String word)
+        private async Task<bool> CheckWord(string word)
         {
-            String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
+            var baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage response = client.GetAsync(baseUrl).Result)
+                using (HttpResponseMessage response = await client.GetAsync(baseUrl))
                 {
                     using (HttpContent content = response.Content)
                     {
-                        String data = content.ReadAsStringAsync().Result;
+                        var data = await content.ReadAsStringAsync();
                         if (data != null)
                         {
                             JContainer test = (JContainer)JObject.Parse(data)["matches"];
@@ -162,7 +166,6 @@ namespace ProjectC.Pages
                         }
                         return false;
                     }
-
                 }
             }
         }
@@ -212,9 +215,73 @@ namespace ProjectC.Pages
             }
         }
 
+        public async void PushCurrentWord()
+        {
+            string pushingWord = "";
+            StackLayout wordContainer = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand };
+            foreach (var frame in wordCreationBar)
+            {
+                var currentLabel = (Label)frame.Content;
+                if (currentLabel.Text == "")
+                {
+                    await DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
+                    return;
+                }
+                pushingWord += currentLabel.Text;
+            }
+
+            if (!await CheckWord(pushingWord))
+            {
+                await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
+                return;
+            }
+
+            Grid grid = (Grid)MiddlePart.Content;
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            grid.Children.Add(new Label() {
+                Text = "Word " + (grid.RowDefinitions.Count),
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            }, 0, grid.RowDefinitions.Count - 1);
+
+            Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
+            for (int i = 0; i < wordLength; i++)
+            {
+                //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
+                insideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            }
+
+            for (int i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
+            {
+                Label Label = (Label)wordCreationBar[i].Content;
+                string currentLetter = Label.Text;
+                //Creates a frame to get borders around those labels
+                insideGrid.Children.Add(new Frame()
+                {
+                    //Creates the labels for the history words (1 label is 1 letter)
+                    Content = new Label()
+                    {
+                        Text = currentLetter,
+                        FontSize = 20,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand
+                    },
+                    Margin = 0,
+                    Padding = 0,
+                    BorderColor = Color.Black,
+
+                }, i, 0);
+            }
+            wordContainer.Children.Add(insideGrid);
+            grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
+        }
+
         private void Button_Clicked(object sender, EventArgs e)
         {
+            PushCurrentWord();
+        }
 
+        public char RandomLetterGenerator()
+        {
+            return charPool[random.Next(0, charPool.Length - 1)];
         }
     }
-}
+}   
