@@ -2,9 +2,8 @@
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 using System.IO;
-using SQLite.Net;
+using SQLite;
 using ProjectC.iOS.Business;
-using SQLite.Net.Platform.XamarinIOS;
 
 [assembly: Dependency(typeof(DatabaseConnection_IOS))]
 namespace ProjectC.iOS.Business
@@ -16,12 +15,11 @@ namespace ProjectC.iOS.Business
         }
         public SQLiteConnection GetConnection()
         {
-            String fileName = "Student.db3";
+            String fileName = "UserDatabase.db3";
             String documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             String libraryPath = Path.Combine(documentsPath, "..", "Library");
             String path = Path.Combine(libraryPath, fileName);
-            SQLitePlatformIOS platform = new SQLitePlatformIOS();
-            SQLiteConnection connection = new SQLiteConnection(platform, path);
+            SQLiteConnection connection = new SQLiteConnection(path, false);
             return connection;
         }
     }
