@@ -41,12 +41,5 @@ namespace ProjectC.Business.Service
                 throw;
             }
         }
-
-        public Boolean ValidateLogin(String userName, String passWord)
-        {
-            return this.Get()
-                .Where(u => u.UserName == userName && u.Password == passWord)
-                .Any();
-        }
     }
 }
