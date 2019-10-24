@@ -28,7 +28,7 @@
                     </Grid.RowDefinitions>
 
                     
-                    <Image Source="logo_transparent.png" Grid.Row="1" Margin="20, 20, 20, 20"/>
+                    <Image Source="logo_transparent.png" Grid.Row="1" Margin="20, 2, 20, 20"/>
                 </Grid>
                 </StackLayout>
 
