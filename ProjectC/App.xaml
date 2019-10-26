@@ -10,9 +10,9 @@
         
         <ResourceDictionary>
 
-            <Color x:Key="primary-back-title-color">#B6FFAB</Color>
-            <Color x:Key="primary-title-color">#ABFFF6</Color>
-            <Color x:Key="primary-background-color">#B6FFAB</Color>
+            <Color x:Key="primary-back-title-color">#b0ed8f</Color>
+            <Color x:Key="primary-title-color">#b0ed8f</Color>
+            <Color x:Key="primary-background-color">#b0ed8f</Color>
             
             <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-back-title-color}"/>
