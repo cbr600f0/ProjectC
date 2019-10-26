@@ -5,13 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ProjectC.MainPage"
-             Title="">
-    <!-- BackgroundImageSource="BackGround4k.jpeg">--> 
+             Title=""
+             NavigationPage.HasNavigationBar="False"> <!--to remove the title page-->
+    <!-- Background -->
+    <RelativeLayout Padding="0">
+        <Image
+            Aspect="AspectFill"
+            Source="BackGround4k.jpeg"
+            RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+        </Image>
 
 
-
-
-    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
         <Grid VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -41,17 +47,20 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="SinglePlayer" Clicked="SinglePlayerButton_Clicked" />
-                    <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="MultiPLayer" Clicked="MultiPlayerButton_Clicked" />
-                    <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Singleplayer High Scores" Clicked="SinglePlayerHighScoreButton_Clicked"  />
-                    <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Multiplayer High Scores" Clicked="MultiPlayerHighScoreButton_Clicked" />
-                    <Button Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Inloggen" Clicked="LoginButton_Clicked" />
-                    <Button Grid.Row="5" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#0e4e6d" TextColor="#0e4e6d" BackgroundColor="#518fae" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Help" Clicked="HelpPageButton_Clicked"/>
-                    <!--Colours, light to dark. -->                                                                         <!--Blue:   #80b4cd #518fae #337798 #18688e #0e4e6d-->
-                                                                                                                            <!--Green:  #b0ed8f #8fe263 #72d13f #55cd19 #3c960c-->
-                                                                                                                            <!--Yellow: #ffff9a #ffff6f #f0f049 #e1e11d #acac0e-->
+                    <Button Grid.Row="0" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Alleen Spelen" Clicked="SinglePlayerButton_Clicked" />
+                    <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Samen Spelen" Clicked="MultiPlayerButton_Clicked" />
+                    <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Persoonlijke Highscores" Clicked="SinglePlayerHighScoreButton_Clicked"  />
+                    <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Alle Highscores" Clicked="MultiPlayerHighScoreButton_Clicked" />
+                    <Button Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Inloggen" Clicked="LoginButton_Clicked" />
+                    <Button Grid.Row="5" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Help" Clicked="HelpPageButton_Clicked"/>
+                    <!--Colours, light to dark. -->
+                    <!--Blue:   #D8F7F2 #77D4C4 #3AAD9A #0E9780 #005D4E-->
+                    <!--Green:  #EAFDDC #B6F287 #8FE64D #67D314 #398300-->
+                    <!--Yellow: #FBFFDE #F2FD8E #EBFB54 #D5E916 #839100-->
+                        <!--Currently in use: Text color: #398300. Button border: #8FE64D. Button background: #B6F287. Background: #D8F7F2. Title text color: 005D4E-->
                 </Grid>
             </StackLayout>
         </Grid>
     </StackLayout>
+    </RelativeLayout>
 </ContentPage>
