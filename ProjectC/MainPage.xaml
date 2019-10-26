@@ -30,13 +30,11 @@
 
             <StackLayout Grid.Row="0" >
                 <Grid VerticalOptions="FillAndExpand">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    
-                    <Image Source="logo_transparent.png" Grid.Row="1" Margin="20, 20, 20, 20"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="scralingo_blocks.png" Grid.Row="1" Margin="20, 20, 20, 20"/>
                 </Grid>
                 </StackLayout>
 
