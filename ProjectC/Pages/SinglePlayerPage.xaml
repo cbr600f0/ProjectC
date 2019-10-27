@@ -32,7 +32,7 @@
                                     <Label Text="Shuffles: 3" FontSize="Large" Margin="0"/>
                             </StackLayout>
                         </Frame>
-                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="0">
+                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
                                     <Label Text="HighScore: 120" FontSize="Large" Margin="0"/>
                                     <Label Text="Score: 27" FontSize="Large" Margin="0"/>
