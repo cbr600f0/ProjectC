@@ -1,5 +1,4 @@
 ﻿using ProjectC.Business.Service;
-using ProjectC.Helper;
 using ProjectC.Model;
 using System;
 using System.Collections.Generic;
@@ -9,15 +8,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using RegisterPageResource = ProjectC.Resources.RegisterPage;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ChangePassWordPageResource = ProjectC.Resources.ChangePasswordPage;
 
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : ContentPage
+    public partial class ChangePasswordPage : ContentPage
     {
         private UserService _userService;
         protected UserService UserService
@@ -27,59 +26,42 @@ namespace ProjectC.Pages
                 return this._userService = this._userService ?? new UserService();
             }
         }
-        public RegisterPage()
+        private String UserName = String.Empty;
+        public ChangePasswordPage(Boolean remembersPassword, String userName)
         {
-            this.InitializeComponent();
-            eUserName.ReturnCommand = new Command(() => ePassword.Focus());
-            ePassword.ReturnCommand = new Command(() => eRepeatPassword.Focus());
-            foreach(String question in EnumHelper.GetIntWithDisplayNames<SecurityQuestionEnum>().Values)
+            this.UserName = userName;
+            InitializeComponent();
+        }
+
+        private void ChangePasswordButton_Clicked(object sender, EventArgs e)
+        {
+            this.ChangePassword();
+        }
+
+        private async void ChangePassword()
+        {
+            if (String.IsNullOrWhiteSpace(this.ePassword.Text) || String.IsNullOrWhiteSpace(eRepeatPassword.Text))
             {
-                pSecurityQuestion.Items.Add(question);
-            }
-        }
-        private void RegisterButton_Clicked(Object sender, EventArgs e)
-        {
-            this.Register();
-        }
-
-        private async void BackButton_Clicked(Object sender, EventArgs e)
-        {
-            await Navigation.PopAsync(true);
-        }
-
-        private void SecurityQuestionPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            eSecurityQuestion.IsVisible = true;
-        }
-
-        private async void Register()
-        {
-            if (String.IsNullOrWhiteSpace(eUserName.Text) || String.IsNullOrWhiteSpace(ePassword.Text) || String.IsNullOrWhiteSpace(eRepeatPassword.Text))
-            {
-                await DisplayAlert(RegisterPageResource.DataMissing, RegisterPageResource.EnterValidData, RegisterPageResource.OK);
+                await DisplayAlert(ChangePassWordPageResource.DataMissing, ChangePassWordPageResource.EnterValidData, ChangePassWordPageResource.OK);
             }
             else if (!String.Equals(ePassword.Text, eRepeatPassword.Text))
             {
-                this.ShowWarningLabel(RegisterPageResource.EnterSamePassword);
+                this.ShowWarningLabel(ChangePassWordPageResource.EnterSamePassword);
                 ePassword.Text = String.Empty;
                 eRepeatPassword.Text = String.Empty;
             }
             else if (!this.IsValidPassword())
             {
-                this.ShowWarningLabel(RegisterPageResource.InvalidPassword);
-            }
-            else if (this.UserService.Get().Select(u => u.UserName).Contains(eUserName.Text))
-            {
-                this.ShowWarningLabel(RegisterPageResource.UserNameExists);
-                eUserName.Text = String.Empty;
+                this.ShowWarningLabel(ChangePassWordPageResource.InvalidPassword);
             }
             else
             {
-                User user = new User(eUserName.Text, this.HashPassword(ePassword.Text), (SecurityQuestionEnum)pSecurityQuestion.SelectedIndex, eSecurityQuestion.Text);
+                User user = this.UserService.GetByUserName(this.UserName);
+                user.Password = this.HashPassword(ePassword.Text);
                 try
                 {
                     this.UserService.AddOrUpdate(user);
-                    await DisplayAlert(String.Empty, RegisterPageResource.RegisterSuccessful, RegisterPageResource.OK);
+                    await DisplayAlert(String.Empty, ChangePassWordPageResource.UpdateSuccessful, ChangePassWordPageResource.OK);
                     await Navigation.PushAsync(new LoginPage());
                 }
                 catch (Exception ex)
@@ -94,7 +76,7 @@ namespace ProjectC.Pages
         {
             if (!this.IsValidPassword())
             {
-                this.ShowWarningLabel(RegisterPageResource.InvalidPassword);
+                this.ShowWarningLabel(ChangePassWordPageResource.InvalidPassword);
             }
             else
             {
@@ -127,9 +109,9 @@ namespace ProjectC.Pages
 
         private void ShowWarningLabel(String message)
         {
-            lblWarning.Text = message;
-            lblWarning.TextColor = Color.IndianRed;
-            lblWarning.IsVisible = true;
+            this.lblWarning.Text = message;
+            this.lblWarning.TextColor = Color.IndianRed;
+            this.lblWarning.IsVisible = true;
         }
     }
 }

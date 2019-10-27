@@ -41,5 +41,12 @@ namespace ProjectC.Business.Service
                 throw;
             }
         }
+
+        public User GetByUserName(String userName)
+        {
+            return this.Get()
+                .Where(u => u.UserName == userName)
+                .SingleOrDefault();
+        }
     }
 }

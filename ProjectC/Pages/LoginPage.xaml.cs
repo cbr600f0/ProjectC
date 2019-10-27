@@ -3,8 +3,10 @@ using ProjectC.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using LoginPageResource = ProjectC.Resources.LoginPage;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,15 +26,31 @@ namespace ProjectC.Pages
         }
         public LoginPage()
         {
+            List<User> users = this.UserService.Get();
             this.InitializeComponent();
             eUserName.ReturnCommand = new Command(() => ePassword.Focus());
         }
-        //Works like this temporarily. Until we have a functioning login program. 
-        private async void LoginButton_Clicked(object sender, EventArgs e)
+
+        private void LoginButton_Clicked(object sender, EventArgs e)
+        {
+            this.Login();
+        }
+
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterPage());
+        }
+
+        private async void ForgotPasswordButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ForgotPasswordPage());
+        }
+
+        private async void Login()
         {
             List<User> users = this.UserService.Get();
 
-            if (users.Where(u => u.UserName == eUserName.Text && u.Password == ePassword.Text).Any())
+            if (users.Where(u => u.UserName == eUserName.Text && this.ValidatePassword(u.Password, ePassword.Text)).Any())
             {
                 Application.Current.Properties["IsLoggedIn"] = Boolean.TrueString;
                 Application.Current.Properties["UserId"] = users.Where(u => u.UserName == eUserName.Text).Select(u => u.Id).Single();
@@ -40,15 +58,35 @@ namespace ProjectC.Pages
             }
             else
             {
-                lblWarning.Text = "Gebruikersnaam en/of wachtwoord is incorrect";
-                lblWarning.TextColor = Color.IndianRed;
-                lblWarning.IsVisible = true;
+                this.ShowWarningLabel(LoginPageResource.UserNameAndOrPasswordIncorrect);
             }
         }
 
-        private async void RegisterButton_Clicked(object sender, EventArgs e)
+        private Boolean ValidatePassword(String savedPassword, String password)
         {
-            await Navigation.PushAsync(new RegisterPage());
+            Byte[] hashBytes = Convert.FromBase64String(savedPassword);
+
+            Byte[] salt = new Byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+
+            Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, salt, 10000);
+            Byte[] hash = bytes.GetBytes(20);
+
+            for (Int32 i = 0; i < 20; i++)
+            {
+                if (hashBytes[i + 16] != hash[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void ShowWarningLabel(String message)
+        {
+            lblWarning.Text = message;
+            lblWarning.TextColor = Color.IndianRed;
+            lblWarning.IsVisible = true;
         }
     }
 }

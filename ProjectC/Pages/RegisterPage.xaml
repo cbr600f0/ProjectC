@@ -8,7 +8,6 @@
              x:Class="ProjectC.Pages.RegisterPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start"/>
             <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -16,10 +15,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Entry x:Name="eUserName" Grid.Row="0" Placeholder="Gebruikersnaam"/>
-                <Entry x:Name="ePassword" Grid.Row="1" IsPassword="true" Placeholder="Wachtwoord"/>
+                <Entry x:Name="ePassword" Grid.Row="1" IsPassword="true" Placeholder="Wachtwoord" TextChanged="ValidatePassword"/>
                 <Entry x:Name="eRepeatPassword" Grid.Row="2" IsPassword="true" Placeholder="Herhaal wachtwoord"/>
-                <Label x:Name="lblWarning" Grid.Row="3" Text="" IsVisible="False" TextColor="Blue" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
-                <Button x:Name="btnRegister" Grid.Row="4" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Picker x:Name="pSecurityQuestion" Grid.Row="3" Title="Kies een veiligheidsvraag" SelectedIndexChanged="SecurityQuestionPicker_SelectedIndexChanged"/>
+                <Entry x:Name="eSecurityQuestion" Grid.Row="4" Placeholder="Antwoord" IsVisible="False"/>
+                <Label x:Name="lblWarning" Grid.Row="5" Text="" IsVisible="False" TextColor="Blue" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
+                <Button x:Name="btnRegister" Grid.Row="6" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

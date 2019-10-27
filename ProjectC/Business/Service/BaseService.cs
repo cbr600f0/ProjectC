@@ -16,7 +16,7 @@ namespace ProjectC.Business.Service
         {
             get
             {
-                return this._currentUserId.HasValue ? this._currentUserId : Application.Current.Properties.ContainsKey("UserId") ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
+                return this._currentUserId.HasValue ? this._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
             }
         }
 

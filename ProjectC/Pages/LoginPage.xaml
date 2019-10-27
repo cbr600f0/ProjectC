@@ -19,6 +19,7 @@
                 <Label x:Name="lblWarning" Grid.Row="2" Text="" IsVisible="False" TextColor="Blue" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
                 <Button x:Name="btnLogin" Grid.Row="3" Text="Login" Clicked="LoginButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
                 <Button x:Name="btnRegister" Grid.Row="4" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Button x:Name="btnForgotPassword" Grid.Row="5" Text="Wachtwoord vergeten" Clicked="ForgotPasswordButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
