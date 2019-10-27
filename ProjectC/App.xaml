@@ -8,18 +8,31 @@
     
     <Application.Resources>
         
-        <ResourceDictionary>
-
+        <ResourceDictionary>            
             <Color x:Key="primary-back-title-color">#D8F7F2</Color>
             <Color x:Key="primary-title-color">#005D4E</Color>
             <Color x:Key="primary-background-color">#D8F7F2</Color>
-            
+
             <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-back-title-color}"/>
                 <Setter Property="BarTextColor" Value="{StaticResource Key=primary-title-color}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource Key=primary-background-color}"/>
-
             </Style>
+
+            <ControlTemplate x:Key="BackgroundTemplate">
+                <ScrollView>
+                <RelativeLayout>
+                    <Image
+                        Aspect="AspectFill"
+                        Source="BackGround4k.png"
+                        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                    </Image>
+                    <ContentPresenter/>
+                </RelativeLayout>
+                </ScrollView>
+            </ControlTemplate>
+            
         </ResourceDictionary>
 
     </Application.Resources>

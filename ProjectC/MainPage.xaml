@@ -6,15 +6,16 @@
              mc:Ignorable="d"
              x:Class="ProjectC.MainPage"
              Title=""
+             ControlTemplate="{StaticResource BackgroundTemplate}"
              NavigationPage.HasNavigationBar="False"> <!--to remove the title page-->
     <!-- Background -->
     <RelativeLayout Padding="0">
-        <Image
+        <!--<Image
             Aspect="AspectFill"
-            Source="BackGround4k.jpeg"
+            Source="BackGround4k.png"
             RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
             RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-        </Image>
+        </Image>-->
 
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
         <Grid VerticalOptions="FillAndExpand">
@@ -33,7 +34,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Image Source="logo_transparent.png" Grid.Row="1" Margin="40, 40, 40, 40"/>
+                        <Image Source="logo_transparent.png" Grid.Row="1" Margin="10, 40, 10, 100"/>
                 </Grid>
                 </StackLayout>
 
