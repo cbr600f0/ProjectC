@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
              x:Class="ProjectC.Pages.HelpPage"
              Title="Help Pagina">
     <ContentPage.Content>
