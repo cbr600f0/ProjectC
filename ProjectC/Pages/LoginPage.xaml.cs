@@ -88,5 +88,9 @@ namespace ProjectC.Pages
             lblWarning.TextColor = Color.IndianRed;
             lblWarning.IsVisible = true;
         }
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }

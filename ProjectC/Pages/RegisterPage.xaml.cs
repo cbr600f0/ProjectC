@@ -89,7 +89,7 @@ namespace ProjectC.Pages
             }
 
         }
-
+        
         private void ValidatePassword(Object sender, TextChangedEventArgs e)
         {
             if (!this.IsValidPassword())

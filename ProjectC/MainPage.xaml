@@ -10,12 +10,6 @@
              NavigationPage.HasNavigationBar="False"> <!--to remove the title page-->
     <!-- Background -->
     <RelativeLayout Padding="0">
-        <!--<Image
-            Aspect="AspectFill"
-            Source="BackGround4k.png"
-            RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-            RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-        </Image>-->
 
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
         <Grid VerticalOptions="FillAndExpand">

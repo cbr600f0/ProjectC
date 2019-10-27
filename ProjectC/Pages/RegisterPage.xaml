@@ -5,9 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             x:Class="ProjectC.Pages.RegisterPage">
+             x:Class="ProjectC.Pages.RegisterPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
             <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -20,7 +22,7 @@
                 <Picker x:Name="pSecurityQuestion" Grid.Row="3" Title="Kies een veiligheidsvraag" SelectedIndexChanged="SecurityQuestionPicker_SelectedIndexChanged"/>
                 <Entry x:Name="eSecurityQuestion" Grid.Row="4" Placeholder="Antwoord" IsVisible="False"/>
                 <Label x:Name="lblWarning" Grid.Row="5" Text="" IsVisible="False" TextColor="Blue" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
-                <Button x:Name="btnRegister" Grid.Row="6" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Button x:Name="btnRegister" Grid.Row="6" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

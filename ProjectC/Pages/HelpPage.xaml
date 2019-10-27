@@ -6,13 +6,12 @@
              mc:Ignorable="d"
              ControlTemplate="{StaticResource BackgroundTemplate}"
              x:Class="ProjectC.Pages.HelpPage"
-             Title="Help Pagina">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
      
         <ScrollView>
             <StackLayout Orientation="Vertical" Padding="5,5,5,5">
-
-                
+                <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
                 <Label Text="SinglePlayer Regels"
                    FontSize="Large"
                    FontAttributes="Bold"/>
