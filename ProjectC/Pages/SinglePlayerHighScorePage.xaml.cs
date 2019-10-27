@@ -3,10 +3,12 @@ using ProjectC.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
 
 namespace ProjectC.Pages
 {
@@ -51,6 +53,10 @@ namespace ProjectC.Pages
             {
                 lblHeader.Text = "Login om highscores te zien!";
             }
+        }
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
         }
     }
 }
