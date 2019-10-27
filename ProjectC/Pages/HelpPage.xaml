@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
              x:Class="ProjectC.Pages.HelpPage"
              Title="Help Pagina">
     <ContentPage.Content>
@@ -36,20 +37,22 @@
                    FontSize="Large"
                    FontAttributes="Bold"/>
                 <Label/>
-
-                <Label Text="De speler krijgt een reeks aan willekeurige letters, met verschillende waarden. Deze letters moeten worden gebruikt om woorden te maken." 
+                <!--NOTE! Deze regels zijn een van de mogelijkheiden die we kunnen gebruiken. Nadat we getest hebben welke manier het beste werkt, kunnen we de regels weer aanpassen.-->
+                <Label Text="- Jij en je tegenstanders krijgen allemaal dezelfde letters" 
                    FontSize="Large"/>
-                <Label Text="De eerste letter van het woord is al op het scherm. De speler moet de rest van het woord dus aanvullen met de beschikbare letters."
+                <Label Text="- Je kan op je eigen letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
-                <Label Text="Indien de speler geen woord kan maken met de beschikbare letters, kan de shuffleknop worden gebruikt om de huidige letters te vervangen met nieuwe letters."
+                <Label Text="- De eerste letter is al gegeven, deze is voor iedereen hetzelfde. De rest van de letters moet je aanvullen"
                    FontSize="Large"/>
-                <Label Text="Wanneer de speler een woord heeft gemaakt, zal het letterbordje worden aangevuld met nieuwe letters. Vervolgens herhaalt het proces zich en kan de speler weer een woord maken"
+                <Label Text="- Als je geen woord kan maken, kan je klikken op de shuffleknop om letters te vervangen"
                    FontSize="Large"/>
-                <Label Text="De speler verdient punten afhankelijk van de woordwaarde van het gemaakte woord. Deze woordwaarde is afhankelijk van de individuele letterwaarden van de letters."
+                <Label Text="- Degene die als eerste een woord kan maken, krijgt hiervan de punten"
                    FontSize="Large"/>
-                <Label Text="Letters die vaker voorkomen in de Nederlandse taal, zoals E en A, zullen een lagere letterwaarde hebben dan letters die minder vaak voorkomen, zoals X en Q."
+                <Label Text="- Hoe moeilijker het woord, hoe meer punten de winnaar krijgt"
                    FontSize="Large"/>
-                <Label Text="Het doel van het spel is om zoveel mogelijk punten te scoren door woorden te maken met de beschikbare letters."
+                <Label Text="- Nadat iemand een woord gemaakt heeft, krijgt iedereen weer nieuwe letters en een nieuw woord"
+                   FontSize="Large"/>
+                <Label Text="- Degene die op het eind zoveel mogelijk punten heeft, wint!"
                    FontSize="Large"/>
 
 
@@ -60,7 +63,7 @@
                 <Label/>
                 <Label Text="- Om te registreren, klik op de Registreren knop in het hoofdscherm"
                        FontSize="Large"/>
-                <Label Text="- Vul hier je naam, geboortedatum, e-mail adres en wachtwoord in"
+                <Label Text="- Vul hier je gebruikersnaam en wachtwoord in"
                        FontSize="Large"/>
                 <Label Text="- Klik op Registreer"
                        FontSize="Large"/>
@@ -76,7 +79,7 @@
                 <Label/>
                 <Label Text="- Klik op de knop Inloggen op het hoofdscherm om in te loggen"
                        FontSize="Large"/>
-                <Label Text="- Vul hier je e-mail adres en wachtwoord in"
+                <Label Text="- Vul hier je gebruikersnaam en wachtwoord in"
                        FontSize="Large"/>
                 <Label Text="- Klik op Inloggen"
                        FontSize="Large"/>
