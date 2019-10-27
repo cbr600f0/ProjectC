@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
              x:Class="ProjectC.Pages.MultiPlayerHighScorePage">
     <ContentPage.Content>
         <Grid>
@@ -11,7 +12,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="10,10" Text="MultiPlayer Hoge Scores"
+            <Label Grid.Row="0" Margin="10,10" Text="Multiplayer High Scores"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <StackLayout Grid.Row="1" Margin="10,10,0,10">
