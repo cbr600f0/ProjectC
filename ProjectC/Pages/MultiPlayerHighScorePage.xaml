@@ -12,10 +12,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="10,10" Text="Multiplayer High Scores"
+            <Label x:Name="lblHeader" Grid.Row="0" Margin="10,10" Text="Multiplayer High Scores"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <StackLayout Grid.Row="1" Margin="10,10,0,10">
+            <StackLayout x:Name="slHighscores" Grid.Row="1" Margin="10,10,0,10" IsVisible="False">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -27,11 +27,11 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Text="Rank"/>
                     <Label Grid.Column="1" Grid.Row="0" Text="Score"/>
-                    <Label Grid.Column="2" Grid.Row="0" Text="Speler"/>
+                    <Label Grid.Column="2" Grid.Row="0" Text="Gebruikersnaam"/>
 
                 </Grid>
 
-                <ListView x:Name="highScoresListView">
+                <ListView x:Name="lvHighscores">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -45,9 +45,10 @@
                                         <ColumnDefinition Width="30*" />
                                     </Grid.ColumnDefinitions>
 
+
                                     <Label Grid.Column="0" Text="{Binding Rank}"/>
-                                    <Label Grid.Column="1" Text="{Binding Score}"/>
-                                    <Label Grid.Column="2" Text="{Binding User}"/>
+                                    <Label Grid.Column="1" Text="{Binding Points}"/>
+                                    <Label Grid.Column="2" Text="{Binding UserName}" />
                                 </Grid>
 
                             </ViewCell>

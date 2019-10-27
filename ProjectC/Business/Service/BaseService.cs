@@ -11,12 +11,22 @@ namespace ProjectC.Business.Service
 {
     public class BaseService<T> where T : class, BaseModel, new()
     {
+        private Guid? _currentUserId;
+        protected Guid? CurrentUserId
+        {
+            get
+            {
+                return this._currentUserId.HasValue ? this._currentUserId : Application.Current.Properties.ContainsKey("UserId") ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
+            }
+        }
+
         private SQLiteConnection _SQLiteConnection;
 
         public BaseService()
         {
             _SQLiteConnection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             _SQLiteConnection.CreateTable<User>();
+            _SQLiteConnection.CreateTable<HighScore>();
         }
 
         public IEnumerable<TModel> Get<TModel>() where TModel : new()
