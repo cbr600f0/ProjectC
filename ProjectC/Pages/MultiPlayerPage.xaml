@@ -5,10 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             x:Class="ProjectC.Pages.MultiPlayerPage">
+             x:Class="ProjectC.Pages.MultiPlayerPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
+            <Label Text="This is the multiplayer page!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

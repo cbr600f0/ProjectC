@@ -50,5 +50,9 @@ namespace ProjectC.Pages
         {
             await Navigation.PushAsync(new RegisterPage());
         }
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }
