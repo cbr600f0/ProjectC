@@ -53,11 +53,11 @@ namespace ProjectC.Pages
 
         public SinglePlayerPage()
         {
-            this.InitializeComponent();
-            this.AddLetersToList();
-            this.PlayedWordsUICreator();
-            this.UsableLettersUICreator();
-            this.RandomLetterGenerator();
+            InitializeComponent();
+            AddLettersToList();
+            PlayedWordsUICreator();
+            UsableLettersUICreator();
+            RandomLetterGenerator();
         }
 
         public void PlayedWordsUICreator()
@@ -201,7 +201,7 @@ namespace ProjectC.Pages
             frame.BackgroundColor = Color.Red;
         }
 
-        public void AddLetersToList()
+        public void AddLettersToList()
         {
             wordCreationBar.Add(LetterOne);
             wordCreationBar.Add(LetterTwo);
@@ -212,7 +212,12 @@ namespace ProjectC.Pages
             wordCreationBar.Add(LetterSeven);
         }
 
-        public void SwapLetters(Object sender, EventArgs e)
+        public void ClearLettersFromList()
+        {
+            wordCreationBar.Clear();
+        }
+
+        public void SwapLetters(object sender, EventArgs e)
         {
             foreach (View gridFrame in grid.Children)
             {
@@ -292,6 +297,8 @@ namespace ProjectC.Pages
             }
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
+            ClearLettersFromList();
+            AddLettersToList();
         }
 
         private void Button_Clicked(Object sender, EventArgs e)
