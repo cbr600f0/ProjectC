@@ -113,5 +113,10 @@ namespace ProjectC.Pages
             this.lblWarning.TextColor = Color.IndianRed;
             this.lblWarning.IsVisible = true;
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }

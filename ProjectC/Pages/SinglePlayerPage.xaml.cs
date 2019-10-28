@@ -248,11 +248,17 @@ namespace ProjectC.Pages
         }
 
         public void AddLetersToList(Frame frame)
+
         {
             wordCreationBar.Add(frame);
         }
 
-        public void SwapLetters(Object sender, EventArgs e)
+        public void ClearLettersFromList()
+        {
+            wordCreationBar.Clear();
+        }
+
+        public void SwapLetters(object sender, EventArgs e)
         {
             foreach (View gridFrame in grid.Children)
             {
