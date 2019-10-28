@@ -19,7 +19,7 @@ namespace ProjectC.Pages
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
-        public int wordRows = 4;
+        public int wordRows = 0;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
         public int wordLength = 7;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
@@ -30,6 +30,11 @@ namespace ProjectC.Pages
         private static Random random = new Random(DateTime.Now.Millisecond);
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
+        private bool pushWordDebug = false;
+        private Int32 points = 0;
+        private Int32 turn = 0;
+
+        List<Frame> UsableLetterList = new List<Frame>();
 
         public SinglePlayerPage()
         {
@@ -88,6 +93,7 @@ namespace ProjectC.Pages
                     }, i, 0);
                 }
 
+
                 //Adds the whole word (defined in the insideGrid) to the stacklayout
                 wordContainer.Children.Add(insideGrid);
                 //Adds the stacklayout with the whole word in it to the right side of the row (so the player name and the word are next to each other)
@@ -135,12 +141,12 @@ namespace ProjectC.Pages
                         HeightRequest = unrealHighNumber
                     };
 
+
                     //These 3 lines adds the on click event to the frame (can be beautified)
                     var tapGestureRecognizer = new TapGestureRecognizer();
                     tapGestureRecognizer.Tapped += (s, e) => { DebugAlertTester(s, e); };
+                    UsableLetterList.Add(frame);
                     frame.GestureRecognizers.Add(tapGestureRecognizer);
-
-
                     grid.Children.Add(frame, i, d);
                 }
             }
@@ -230,18 +236,30 @@ namespace ProjectC.Pages
                 pushingWord += currentLabel.Text;
             }
 
-            if (!await CheckWord(pushingWord))
+            if (pushWordDebug)
             {
-                await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
-                return;
+                if (!await CheckWord(pushingWord))
+                {
+                    await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
+                    return;
+                }
             }
 
             Grid grid = (Grid)MiddlePart.Content;
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            grid.Children.Add(new Label() {
+            Grid leftsideGrid = new Grid();
+            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
+            leftsideGrid.Children.Add(new Label() {
                 Text = "Word " + (grid.RowDefinitions.Count),
                 HorizontalOptions = LayoutOptions.CenterAndExpand
-            }, 0, grid.RowDefinitions.Count - 1);
+            }, 0, 0);
+
+            leftsideGrid.Children.Add(new Label()
+            {
+                Text = WordPointsCalculator().ToString()
+            }, 1, 0);
 
             Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
             for (int i = 0; i < wordLength; i++)
@@ -272,9 +290,11 @@ namespace ProjectC.Pages
             }
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
+            EmptyPushwordBar();
+            FillUsableLetterBord();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void PushButton_Clicked(object sender, EventArgs e)
         {
             PushCurrentWord();
         }
@@ -282,6 +302,143 @@ namespace ProjectC.Pages
         public char RandomLetterGenerator()
         {
             return charPool[random.Next(0, charPool.Length - 1)];
+        }
+
+        public void EmptyPushwordBar()
+        {
+            foreach (Frame frame in wordCreationBar)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = "";
+            }
+        }
+
+        private void DebugButton_Clicked(object sender, EventArgs e)
+        {
+            if (pushWordDebug)
+            {
+                pushWordDebug = false;
+                debugButtonPushBar.BackgroundColor = Color.Green;
+            }
+            else
+            {
+                pushWordDebug = true;
+                debugButtonPushBar.BackgroundColor = Color.Red;
+            }
+        }
+
+        public void FillUsableLetterBord()
+        {
+            foreach (Frame frame in UsableLetterList)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = label.Text == "" ? RandomLetterGenerator().ToString() : label.Text;
+            }
+        }
+
+        private void ShuffleUsableLetterBord(object sender, EventArgs e)
+        {
+            foreach (Frame frame in UsableLetterList)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = RandomLetterGenerator().ToString();
+            }
+            EmptyPushwordBar();
+        }
+
+        public int WordPointsCalculator()
+        {
+            int totalPoints = 0;
+            foreach (Frame frame in wordCreationBar)
+            {
+                Label label = (Label)frame.Content;
+                switch (label.Text)
+                {
+                    case "A":
+                        totalPoints += 1;
+                        break;
+                    case "B":
+                        totalPoints += 3;
+                        break;
+                    case "C":
+                        totalPoints += 5;
+                        break;
+                    case "D":
+                        totalPoints += 2;
+                        break;
+                    case "E":
+                        totalPoints += 1;
+                        break;
+                    case "F":
+                        totalPoints += 4;
+                        break;
+                    case "G":
+                        totalPoints += 3;
+                        break;
+                    case "H":
+                        totalPoints += 4;
+                        break;
+                    case "I":
+                        totalPoints += 1;
+                        break;
+                    case "J":
+                        totalPoints += 4;
+                        break;
+                    case "K":
+                        totalPoints += 3;
+                        break;
+                    case "L":
+                        totalPoints += 3;
+                        break;
+                    case "M":
+                        totalPoints += 3;
+                        break;
+                    case "N":
+                        totalPoints += 1;
+                        break;
+                    case "O":
+                        totalPoints += 1;
+                        break;
+                    case "P":
+                        totalPoints += 3;
+                        break;
+                    case "Q":
+                        totalPoints += 10;
+                        break;
+                    case "R":
+                        totalPoints += 2;
+                        break;
+                    case "S":
+                        totalPoints += 2;
+                        break;
+                    case "T":
+                        totalPoints += 2;
+                        break;
+                    case "U":
+                        totalPoints += 4;
+                        break;
+                    case "V":
+                        totalPoints += 4;
+                        break;
+                    case "W":
+                        totalPoints += 5;
+                        break;
+                    case "X":
+                        totalPoints += 8;
+                        break;
+                    case "Y":
+                        totalPoints += 8;
+                        break;
+                    case "Z":
+                        totalPoints += 4;
+                        break;
+                    default:
+                        totalPoints += 1;
+                        break;
+                }
+            }
+
+            return totalPoints;
         }
     }
 }   

@@ -127,7 +127,16 @@
                     <!-- Usable letters -->
                     <StackLayout Grid.Row="3" x:Name="UsableLetters" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Margin="0, 15, 0, 0" Padding="10, 5" BackgroundColor="#D4D4D4"/>
                     <StackLayout Grid.Row="4" Margin="0" Padding="0">
-                        <Button Clicked="Button_Clicked" Text="Woord pushen" />
+                        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="debugButtonPushBar" Clicked="DebugButton_Clicked" BackgroundColor="Green" Grid.Column="0"/>
+                        <Button Clicked="PushButton_Clicked" Text="Woord pushen" Grid.Column="1"/>
+                        <Button Clicked="ShuffleUsableLetterBord" Text="SHUFFLE" Grid.Column="2" />
+                    </Grid>
                     </StackLayout>
                 </Grid>
             </StackLayout>
