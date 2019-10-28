@@ -10,12 +10,6 @@
              NavigationPage.HasNavigationBar="False"> <!--to remove the title page-->
     <!-- Background -->
     <RelativeLayout Padding="0">
-        <!--<Image
-            Aspect="AspectFill"
-            Source="BackGround4k.png"
-            RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-            RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-        </Image>-->
 
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
         <Grid VerticalOptions="FillAndExpand">
@@ -49,7 +43,7 @@
                     <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Samen Spelen" Clicked="MultiPlayerButton_Clicked" />
                     <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Persoonlijke Highscores" Clicked="SinglePlayerHighScoreButton_Clicked"  />
                     <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Alle Highscores" Clicked="MultiPlayerHighScoreButton_Clicked" />
-                    <Button Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Inloggen" Clicked="LoginButton_Clicked" />
+                    <Button x:Name="btnLogin" Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Inloggen" Clicked="LoginButton_Clicked" />
                     <Button Grid.Row="5" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Text="Help" Clicked="HelpPageButton_Clicked"/>
                     <!--Colours, light to dark. -->
                     <!--Blue:   #D8F7F2 #77D4C4 #3AAD9A #0E9780 #005D4E-->

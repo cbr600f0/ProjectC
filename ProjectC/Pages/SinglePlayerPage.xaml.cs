@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProjectC.Business.Service;
+using ProjectC.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,17 +18,35 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerPage : ContentPage
     {
+        private HighScoreService _highScoreService;
+        protected HighScoreService HighScoreService
+        {
+            get
+            {
+                return this._highScoreService = this._highScoreService ?? new HighScoreService();
+            }
+        }
+
+        private Guid? _currentUserId;
+        protected Guid? CurrentUserId
+        {
+            get
+            {
+                return this._currentUserId.HasValue ? this._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
+            }
+        }
+
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
-        public int wordRows = 0;
+        public Int32 wordRows = 0;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
-        public int wordLength = 7;
+        public Int32 wordLength = 7;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
         // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
-        public static int unrealHighNumber = 1000000;
+        public static Int32 unrealHighNumber = 1000000;
 
-        public static char[] charPool = "AAAAAABBCCDDDDDEEEEEEEEEEEEEEEEEEFFGGGHHIIIIJJKKKLLLMMMNNNNNNNNNNOOOOOOPPQRRRRRSSSSSTTTTTUUUVVWWXYZZ".ToCharArray();
+        public static Char[] charPool = "AAAAAABBCCDDDDDEEEEEEEEEEEEEEEEEEFFGGGHHIIIIJJKKKLLLMMMNNNNNNNNNNOOOOOOPPQRRRRRSSSSSTTTTTUUUVVWWXYZZ".ToCharArray();
         private static Random random = new Random(DateTime.Now.Millisecond);
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
@@ -38,11 +58,11 @@ namespace ProjectC.Pages
 
         public SinglePlayerPage()
         {
-            InitializeComponent();
-            AddLetersToList();
-            PlayedWordsUICreator();
-            UsableLettersUICreator();
-            RandomLetterGenerator();
+            this.InitializeComponent();
+            this.AddLetersToList();
+            this.PlayedWordsUICreator();
+            this.UsableLettersUICreator();
+            this.RandomLetterGenerator();
         }
 
         public void PlayedWordsUICreator()
@@ -51,7 +71,7 @@ namespace ProjectC.Pages
             StackLayout wordContainer = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand };
             Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
 
-            for (int i = 0; i < wordRows; i++)
+            for (Int32 i = 0; i < wordRows; i++)
             {
                 //Defines the amount of rows needed for all the past-created (history) words
                 grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
@@ -61,20 +81,20 @@ namespace ProjectC.Pages
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
 
             // Creates the rows where the past-created (history) words are.
-            for (int row = 0; row < grid.RowDefinitions.Count(); row++)
+            for (Int32 row = 0; row < grid.RowDefinitions.Count(); row++)
             {
                 wordContainer.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 // Adds the label (name of the person who played the word) to the left of the word
                 grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand}, 0, row);
                 
-                for (int i = 0; i < wordLength; i++)
+                for (Int32 i = 0; i < wordLength; i++)
                 {
                     //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
                     insideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
                 }
 
                 //Adds the letters to create 1 word
-                for (int i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
+                for (Int32 i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
                 {
                     //Creates a frame to get borders around those labels
                     insideGrid.Children.Add(new Frame()
@@ -110,17 +130,17 @@ namespace ProjectC.Pages
 
         public void UsableLettersUICreator()
         {
-            for (int i = 0; i < wordLength; i++)
+            for (Int32 i = 0; i < wordLength; i++)
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            for (int d = 0; d < 2; d++)
+            for (Int32 d = 0; d < 2; d++)
             {
                 //Adds the letters to create 1 word
-                for (int i = 0; i < (grid.ColumnDefinitions.Count); i++)
+                for (Int32 i = 0; i < (grid.ColumnDefinitions.Count); i++)
                 {
                     //Creates a frame to get borders around those labels
                     Frame frame = new Frame()
@@ -128,7 +148,7 @@ namespace ProjectC.Pages
                         //Creates the labels for the history words (1 label is 1 letter)
                         Content = new Label()
                         {
-                            Text = RandomLetterGenerator().ToString(),
+                            Text = this.RandomLetterGenerator().ToString(),
                             FontSize = 20,
                             HorizontalOptions = LayoutOptions.CenterAndExpand,
                             VerticalOptions = LayoutOptions.CenterAndExpand
@@ -155,16 +175,16 @@ namespace ProjectC.Pages
 
         }
 
-        private async Task<bool> CheckWord(string word)
+        private async Task<Boolean> CheckWord(string word)
         {
-            var baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
+            String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage response = await client.GetAsync(baseUrl))
                 {
                     using (HttpContent content = response.Content)
                     {
-                        var data = await content.ReadAsStringAsync();
+                        String data = await content.ReadAsStringAsync();
                         if (data != null)
                         {
                             JContainer test = (JContainer)JObject.Parse(data)["matches"];
@@ -176,11 +196,11 @@ namespace ProjectC.Pages
             }
         }
 
-        public void DebugAlertTester(object sender, EventArgs e)
+        public void DebugAlertTester(Object sender, EventArgs e)
         {
-            var frame = (Frame)sender;
+            Frame frame = (Frame)sender;
 
-            foreach (var gridFrame in grid.Children)
+            foreach (View gridFrame in grid.Children)
             {
                 gridFrame.BackgroundColor = Color.Transparent;
             }
@@ -198,9 +218,9 @@ namespace ProjectC.Pages
             wordCreationBar.Add(LetterSeven);
         }
 
-        public void SwapLetters(object sender, EventArgs e)
+        public void SwapLetters(Object sender, EventArgs e)
         {
-            foreach (var gridFrame in grid.Children)
+            foreach (View gridFrame in grid.Children)
             {
                 if (gridFrame.BackgroundColor == Color.Red)
                 {
@@ -211,7 +231,7 @@ namespace ProjectC.Pages
                     Frame wordCreationFrame = (Frame)sender;
                     Label wordCreationLabel = (Label)wordCreationFrame.Content;
 
-                    string placeHolder = wordCreationLabel.Text;
+                    String placeHolder = wordCreationLabel.Text;
                     wordCreationLabel.Text = currentLabel.Text;
                     currentLabel.Text = placeHolder;
 
@@ -225,12 +245,12 @@ namespace ProjectC.Pages
         {
             string pushingWord = "";
             StackLayout wordContainer = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand };
-            foreach (var frame in wordCreationBar)
+            foreach (Frame frame in wordCreationBar)
             {
-                var currentLabel = (Label)frame.Content;
+                Label currentLabel = (Label)frame.Content;
                 if (currentLabel.Text == "")
                 {
-                    await DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
+                    await this.DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
                     return;
                 }
                 pushingWord += currentLabel.Text;
@@ -262,16 +282,16 @@ namespace ProjectC.Pages
             }, 1, 0);
 
             Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-            for (int i = 0; i < wordLength; i++)
+            for (Int32 i = 0; i < wordLength; i++)
             {
                 //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
                 insideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             }
 
-            for (int i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
+            for (Int32 i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
             {
                 Label Label = (Label)wordCreationBar[i].Content;
-                string currentLetter = Label.Text;
+                String currentLetter = Label.Text;
                 //Creates a frame to get borders around those labels
                 insideGrid.Children.Add(new Frame()
                 {
@@ -299,7 +319,7 @@ namespace ProjectC.Pages
             PushCurrentWord();
         }
 
-        public char RandomLetterGenerator()
+        public Char RandomLetterGenerator()
         {
             return charPool[random.Next(0, charPool.Length - 1)];
         }
@@ -439,6 +459,13 @@ namespace ProjectC.Pages
             }
 
             return totalPoints;
+        }
+        //Tijdelijke functie
+        private void PushPointsToDatabase(Int32 points)
+        {
+            //Gebruiker moet ingelogd zijn!!!
+            HighScore highScore = new HighScore(this.CurrentUserId.Value, points, DateTimeOffset.Now);
+            this.HighScoreService.AddOrUpdate(highScore);
         }
     }
 }   

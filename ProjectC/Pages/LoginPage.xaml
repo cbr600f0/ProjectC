@@ -5,9 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             x:Class="ProjectC.Pages.LoginPage">
+             x:Class="ProjectC.Pages.LoginPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
             <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -17,8 +19,9 @@
                 <Entry x:Name="eUserName" Grid.Row="0" Placeholder="Username"/>
                 <Entry x:Name="ePassword" Grid.Row="1" IsPassword="true" Placeholder="Password"/>
                 <Label x:Name="lblWarning" Grid.Row="2" Text="" IsVisible="False" TextColor="Blue" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
-                <Button x:Name="btnLogin" Grid.Row="3" Text="Login" Clicked="LoginButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
-                <Button x:Name="btnRegister" Grid.Row="4" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Button x:Name="btnLogin" Grid.Row="3" Text="Login" Clicked="LoginButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
+                <Button x:Name="btnRegister" Grid.Row="4" Text="Registreer" Clicked="RegisterButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
+                <Button x:Name="btnForgotPassword" Grid.Row="5" Text="Wachtwoord vergeten" Clicked="ForgotPasswordButton_Clicked" VerticalOptions="Center" HorizontalOptions="Center"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

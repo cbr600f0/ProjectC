@@ -5,18 +5,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             x:Class="ProjectC.Pages.MultiPlayerHighScorePage">
+             x:Class="ProjectC.Pages.MultiPlayerHighScorePage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Margin="10,10" Text="Multiplayer High Scores"
+            <StackLayout Grid.Row="0">
+                <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
+                <Label x:Name="lblHeader" Margin="10,10" Text="Multiplayer High Scores"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <StackLayout Grid.Row="1" Margin="10,10,0,10">
-                <Grid>
+            </StackLayout>
+                <StackLayout x:Name="slHighscores" Grid.Row="1" Margin="10,10,0,10" IsVisible="False">
+                    <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
@@ -27,11 +31,11 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Text="Rank"/>
                     <Label Grid.Column="1" Grid.Row="0" Text="Score"/>
-                    <Label Grid.Column="2" Grid.Row="0" Text="Speler"/>
+                    <Label Grid.Column="2" Grid.Row="0" Text="Gebruikersnaam"/>
 
                 </Grid>
 
-                <ListView x:Name="highScoresListView">
+                <ListView x:Name="lvHighscores">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -45,9 +49,10 @@
                                         <ColumnDefinition Width="30*" />
                                     </Grid.ColumnDefinitions>
 
+
                                     <Label Grid.Column="0" Text="{Binding Rank}"/>
-                                    <Label Grid.Column="1" Text="{Binding Score}"/>
-                                    <Label Grid.Column="2" Text="{Binding User}"/>
+                                    <Label Grid.Column="1" Text="{Binding Points}"/>
+                                    <Label Grid.Column="2" Text="{Binding UserName}" />
                                 </Grid>
 
                             </ViewCell>
