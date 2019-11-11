@@ -27,6 +27,15 @@ namespace ProjectC.Pages
             }
         }
 
+        private UserService _userService;
+        protected UserService UserService
+        {
+            get
+            {
+                return this._userService = this._userService ?? new UserService();
+            }
+        }
+
         private Guid? _currentUserId;
         protected Guid? CurrentUserId
         {
@@ -39,9 +48,9 @@ namespace ProjectC.Pages
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
-        public Int32 wordRows = 4;
+        public Int32 wordRows = 0;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
-        public Int32 wordLength = 7;
+        public Int32 wordLength = 5;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
         // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
         public static Int32 unrealHighNumber = 1000000;
@@ -50,14 +59,50 @@ namespace ProjectC.Pages
         private static Random random = new Random(DateTime.Now.Millisecond);
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-
-        public SinglePlayerPage()
+        private bool pushWordDebug = false;
+        private Int32 totalPoints = 0;
+        private Int32 turn = 10;
+        private int remainingShuffles = 3;
+        public List<Frame> UsableLetterList = new List<Frame>();
+        public HighScore highscore;
+        public string currentUser;
+        public SinglePlayerPage(string difficulty)
         {
+            switch (difficulty)
+            {
+                case "easy":
+                    wordLength = 3;
+                    break;
+                case "medium":
+                    wordLength = 5;
+                    break;
+                case "hard":
+                    wordLength = 7;
+                    break;
+                case "legendary":
+                    wordLength = 10;
+                    break;
+                default:
+                    break;
+            }
             this.InitializeComponent();
-            this.AddLetersToList();
             this.PlayedWordsUICreator();
             this.UsableLettersUICreator();
             this.RandomLetterGenerator();
+            this.UIPushBarCreation();
+
+            try
+            {
+                highscore = this.HighScoreService.GetByUserId(this.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                viewHighscore.Text = highscore != null ? "HighScore: " + highscore.Points.ToString() : "HighScore: 0";
+            }
+            catch { }
+            try
+            {
+                currentUser = this.UserService.Get(this.CurrentUserId.Value).UserName;
+                viewCurrentPlayer.Text = currentUser;
+            }
+            catch { }
         }
 
         public void PlayedWordsUICreator()
@@ -108,6 +153,7 @@ namespace ProjectC.Pages
                     }, i, 0);
                 }
 
+
                 //Adds the whole word (defined in the insideGrid) to the stacklayout
                 wordContainer.Children.Add(insideGrid);
                 //Adds the stacklayout with the whole word in it to the right side of the row (so the player name and the word are next to each other)
@@ -155,12 +201,12 @@ namespace ProjectC.Pages
                         HeightRequest = unrealHighNumber
                     };
 
+
                     //These 3 lines adds the on click event to the frame (can be beautified)
-                    TapGestureRecognizer tapGestureRecognizer = new TapGestureRecognizer();
-                    tapGestureRecognizer.Tapped += (s, e) => { this.DebugAlertTester(s, e); };
+                    var tapGestureRecognizer = new TapGestureRecognizer();
+                    tapGestureRecognizer.Tapped += (s, e) => { DebugAlertTester(s, e); };
+                    UsableLetterList.Add(frame);
                     frame.GestureRecognizers.Add(tapGestureRecognizer);
-
-
                     grid.Children.Add(frame, i, d);
                 }
             }
@@ -201,15 +247,10 @@ namespace ProjectC.Pages
             frame.BackgroundColor = Color.Red;
         }
 
-        public void AddLetersToList()
+        public void AddLetersToList(Frame frame)
+
         {
-            wordCreationBar.Add(LetterOne);
-            wordCreationBar.Add(LetterTwo);
-            wordCreationBar.Add(LetterThree);
-            wordCreationBar.Add(LetterFour);
-            wordCreationBar.Add(LetterFive);
-            wordCreationBar.Add(LetterSix);
-            wordCreationBar.Add(LetterSeven);
+            wordCreationBar.Add(frame);
         }
 
         public void SwapLetters(Object sender, EventArgs e)
@@ -228,6 +269,8 @@ namespace ProjectC.Pages
                     String placeHolder = wordCreationLabel.Text;
                     wordCreationLabel.Text = currentLabel.Text;
                     currentLabel.Text = placeHolder;
+
+                    viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator() + " punten";
 
                     gridFrame.BackgroundColor = Color.Transparent;
                     continue;
@@ -250,18 +293,30 @@ namespace ProjectC.Pages
                 pushingWord += currentLabel.Text;
             }
 
-            if (!await CheckWord(pushingWord))
+            if (pushWordDebug)
             {
-                await this.DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
-                return;
+                if (!await CheckWord(pushingWord))
+                {
+                    await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
+                    return;
+                }
             }
 
             Grid grid = (Grid)MiddlePart.Content;
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            grid.Children.Add(new Label() {
+            Grid leftsideGrid = new Grid();
+            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
+            leftsideGrid.Children.Add(new Label() {
                 Text = "Word " + (grid.RowDefinitions.Count),
                 HorizontalOptions = LayoutOptions.CenterAndExpand
-            }, 0, grid.RowDefinitions.Count - 1);
+            }, 0, 0);
+
+            leftsideGrid.Children.Add(new Label()
+            {
+                Text = WordPointsCalculator().ToString()
+            }, 1, 0);
 
             Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
             for (Int32 i = 0; i < wordLength; i++)
@@ -292,9 +347,20 @@ namespace ProjectC.Pages
             }
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
+            turn--;
+            totalPoints += WordPointsCalculator();
+            viewPointCounter.Text = "totale score: " + totalPoints;
+            viewTurnCounter.Text = "beurten over: " + turn;
+            if (turn <= 0)
+            {
+                GameOverHandler();
+            }
+            EmptyPushwordBar();
+            FillUsableLetterBord();
+            viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator() + " punten";
         }
 
-        private void Button_Clicked(Object sender, EventArgs e)
+        private void PushButton_Clicked(object sender, EventArgs e)
         {
             PushCurrentWord();
         }
@@ -304,12 +370,198 @@ namespace ProjectC.Pages
             return charPool[random.Next(0, charPool.Length - 1)];
         }
 
+        public void EmptyPushwordBar()
+        {
+            foreach (Frame frame in wordCreationBar)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = "";
+            }
+        }
+
+        private void DebugButton_Clicked(object sender, EventArgs e)
+        {
+            if (pushWordDebug)
+            {
+                pushWordDebug = false;
+                debugButtonPushBar.BackgroundColor = Color.Green;
+            }
+            else
+            {
+                pushWordDebug = true;
+                debugButtonPushBar.BackgroundColor = Color.Red;
+            }
+        }
+
+        public void FillUsableLetterBord()
+        {
+            foreach (Frame frame in UsableLetterList)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = label.Text == "" ? RandomLetterGenerator().ToString() : label.Text;
+            }
+        }
+
+        private void ShuffleUsableLetterBord(object sender, EventArgs e)
+        {
+            if (remainingShuffles <= 0)
+            {
+                return;
+            }
+            foreach (Frame frame in UsableLetterList)
+            {
+                Label label = (Label)frame.Content;
+                label.Text = RandomLetterGenerator().ToString();
+            }
+            EmptyPushwordBar();
+            remainingShuffles--;
+            shuffleCounter.Text = "Shuffles: " + remainingShuffles;
+        }
+
+        public int WordPointsCalculator()
+        {
+            int totalPoints = 0;
+            foreach (Frame frame in wordCreationBar)
+            {
+                Label label = (Label)frame.Content;
+                switch (label.Text)
+                {
+                    case "A":
+                        totalPoints += 1;
+                        break;
+                    case "B":
+                        totalPoints += 3;
+                        break;
+                    case "C":
+                        totalPoints += 5;
+                        break;
+                    case "D":
+                        totalPoints += 2;
+                        break;
+                    case "E":
+                        totalPoints += 1;
+                        break;
+                    case "F":
+                        totalPoints += 4;
+                        break;
+                    case "G":
+                        totalPoints += 3;
+                        break;
+                    case "H":
+                        totalPoints += 4;
+                        break;
+                    case "I":
+                        totalPoints += 1;
+                        break;
+                    case "J":
+                        totalPoints += 4;
+                        break;
+                    case "K":
+                        totalPoints += 3;
+                        break;
+                    case "L":
+                        totalPoints += 3;
+                        break;
+                    case "M":
+                        totalPoints += 3;
+                        break;
+                    case "N":
+                        totalPoints += 1;
+                        break;
+                    case "O":
+                        totalPoints += 1;
+                        break;
+                    case "P":
+                        totalPoints += 3;
+                        break;
+                    case "Q":
+                        totalPoints += 10;
+                        break;
+                    case "R":
+                        totalPoints += 2;
+                        break;
+                    case "S":
+                        totalPoints += 2;
+                        break;
+                    case "T":
+                        totalPoints += 2;
+                        break;
+                    case "U":
+                        totalPoints += 4;
+                        break;
+                    case "V":
+                        totalPoints += 4;
+                        break;
+                    case "W":
+                        totalPoints += 5;
+                        break;
+                    case "X":
+                        totalPoints += 8;
+                        break;
+                    case "Y":
+                        totalPoints += 8;
+                        break;
+                    case "Z":
+                        totalPoints += 4;
+                        break;
+                    default:
+                        totalPoints += 0;
+                        break;
+                }
+            }
+
+            return totalPoints;
+        }
         //Tijdelijke functie
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
             HighScore highScore = new HighScore(this.CurrentUserId.Value, points, DateTimeOffset.Now);
             this.HighScoreService.AddOrUpdate(highScore);
+        }
+
+
+        protected void UIPushBarCreation()
+        {
+            Grid grid = new Grid() {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
+            };
+            for (Int32 i = 0; i < wordLength; i++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            }
+            for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
+            {
+
+                Frame frame = new Frame()
+                {
+                    Padding = 0,
+                    Margin = 0,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    BorderColor = Color.Black,
+                    Content = new Label()
+                    {
+                        Text = "",
+                        FontSize = 20,
+                        VerticalOptions = LayoutOptions.CenterAndExpand,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand
+                    }
+                };
+
+                var tapGestureRecognizer = new TapGestureRecognizer();
+                tapGestureRecognizer.Tapped += (s, e) => { SwapLetters(s, e); };
+                frame.GestureRecognizers.Add(tapGestureRecognizer);
+                grid.Children.Add(frame, i, 0);
+                AddLetersToList(frame);
+                wordCreationBarStackLayout.Children.Add(grid);
+            }
+        }
+        public async void GameOverHandler()
+        {
+            this.HighScoreService.AddOrUpdate(new HighScore(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            await Navigation.PushAsync(new MainPage());
         }
     }
 }   
