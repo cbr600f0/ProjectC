@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\MultiPlayerHogeScorePage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Pages\helpPage.xaml.cs">
       <DependentUpon>helpPage.xaml</DependentUpon>
     </Compile>
