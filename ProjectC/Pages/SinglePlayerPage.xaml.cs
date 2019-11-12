@@ -18,12 +18,12 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerPage : ContentPage
     {
-        private HighScoreService _highScoreService;
-        protected HighScoreService HighScoreService
+        private ScoreService _scoreService;
+        protected ScoreService ScoreService
         {
             get
             {
-                return this._highScoreService = this._highScoreService ?? new HighScoreService();
+                return this._scoreService = this._scoreService ?? new ScoreService();
             }
         }
 
@@ -64,7 +64,7 @@ namespace ProjectC.Pages
         private Int32 turn = 10;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public HighScore highscore;
+        public Score score;
         public string currentUser;
         public SinglePlayerPage(string difficulty)
         {
@@ -93,8 +93,8 @@ namespace ProjectC.Pages
 
             try
             {
-                highscore = this.HighScoreService.GetByUserId(this.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
-                viewHighscore.Text = highscore != null ? "HighScore: " + highscore.Points.ToString() : "HighScore: 0";
+                score = this.ScoreService.GetByUserId(this.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
             try
@@ -516,8 +516,8 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
-            HighScore highScore = new HighScore(this.CurrentUserId.Value, points, DateTimeOffset.Now);
-            this.HighScoreService.AddOrUpdate(highScore);
+            Score score = new Score(this.CurrentUserId.Value, points, DateTimeOffset.Now);
+            this.ScoreService.AddOrUpdate(score);
         }
 
 
@@ -560,7 +560,7 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
-            this.HighScoreService.AddOrUpdate(new HighScore(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            this.ScoreService.AddOrUpdate(new Score(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
             await Navigation.PushAsync(new MainPage());
         }
     }

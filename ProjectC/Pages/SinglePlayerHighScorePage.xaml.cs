@@ -15,12 +15,12 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerHighScorePage : ContentPage
     {
-        private HighScoreService _highScoreService;
-        protected HighScoreService HighScoreService
+        private ScoreService _scoreService;
+        protected ScoreService ScoreService
         {
             get
             {
-                return this._highScoreService = this._highScoreService ?? new HighScoreService();
+                return this._scoreService = this._scoreService ?? new ScoreService();
             }
         }
 
@@ -35,38 +35,10 @@ namespace ProjectC.Pages
 
         public SinglePlayerHighScorePage()
         {
-            //test data
-            if (this.CurrentUserId.HasValue && !this.HighScoreService.Get().Any())
-            {
-                List<HighScore> highScores1 = new List<HighScore>() 
-                {
-                    new HighScore(this.CurrentUserId.Value, 100, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 3435, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 24234, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 2323, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 55, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 6, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 6252, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 51, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 413424, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 1234, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 431, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 500, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 999, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 9990, DateTimeOffset.Now),
-                    new HighScore(this.CurrentUserId.Value, 343, DateTimeOffset.Now),
-                };
-
-                foreach(HighScore highScore in highScores1)
-                {
-                    this.HighScoreService.AddOrUpdate(highScore);
-                }
-            }
-
             InitializeComponent();
             if (this.CurrentUserId.HasValue)
             {
-                List<HighScore> highScores = this.HighScoreService.GetRankedHighScores(true);
+                List<Score> highScores = this.ScoreService.GetRankedScores(true);
                 if (highScores.Any())
                 {
                     lvHighscores.ItemsSource = highScores;

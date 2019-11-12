@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjectC.Model
 {
-    public class HighScore : BaseModel
+    public class Score : BaseModel
     {
         [PrimaryKey]
         public Guid Id { get; set; }
@@ -20,11 +20,11 @@ namespace ProjectC.Model
 
         public DateTimeOffset Date { get; set; }
 
-        public HighScore()
+        public Score()
         {
         }
 
-        public HighScore(Guid userId, Int32 points, DateTimeOffset date)
+        public Score(Guid userId, Int32 points, DateTimeOffset date)
         {
             this.UserId = userId;
             this.Points = points;
