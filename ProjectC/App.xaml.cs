@@ -8,6 +8,7 @@ namespace ProjectC
     {
         public App()
         {
+            Application.Current.Properties["IsLoggedIn"] = false;
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());

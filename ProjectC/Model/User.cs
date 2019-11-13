@@ -15,16 +15,22 @@ namespace ProjectC.Model
         [MaxLength(12)]
         public String Password { get; set; }
 
+        public SecurityQuestionEnum SecurityQuestion { get; set; }
+
+        public String SecurityQuestionAnswer { get; set; }
+
         public String HighScore { get; set; }
 
         public User()
         {
         }
 
-        public User(String userName, String password)
+        public User(String userName, String password, SecurityQuestionEnum securityQuestion, String securityQuestionAnswer)
         {
             this.UserName = userName;
             this.Password = password;
+            this.SecurityQuestion = securityQuestion;
+            this.SecurityQuestionAnswer = securityQuestionAnswer;
         }
     }
 }

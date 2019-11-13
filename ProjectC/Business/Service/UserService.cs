@@ -42,11 +42,11 @@ namespace ProjectC.Business.Service
             }
         }
 
-        public Boolean ValidateLogin(String userName, String passWord)
+        public User GetByUserName(String userName)
         {
             return this.Get()
-                .Where(u => u.UserName == userName && u.Password == passWord)
-                .Any();
+                .Where(u => u.UserName == userName)
+                .SingleOrDefault();
         }
     }
 }

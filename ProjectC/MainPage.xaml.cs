@@ -14,12 +14,25 @@ namespace ProjectC
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private Guid? _currentUserId;
+        protected Guid? CurrentUserId
+        {
+            get
+            {
+                return this._currentUserId.HasValue ? this._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
+            }
+        }
+
         public MainPage()
         {
             this.InitializeComponent();
-            if (Application.Current.Properties.ContainsKey("IsLoggedIn"))
+            if (this.CurrentUserId.HasValue)
             {
-                Title = "Logged in";
+                btnLogin.Text = "Uitloggen";
+            }
+            else
+            {
+                btnLogin.Text = "Inloggen";
             }
         }
 
@@ -29,12 +42,21 @@ namespace ProjectC
         //The "Clicked" method on the MainPage.xaml MUST have the same name.
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginPage());
+            if (!this.CurrentUserId.HasValue)
+            {
+                await Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                Application.Current.Properties["IsLoggedIn"] = false;
+                btnLogin.Text = "Inloggen";
+                await DisplayAlert("Logout", "Succesvol uitgelogd", "Ok");
+            }
         }
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerPage());
+            await Navigation.PushAsync(new DifficultySelectScreen());
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
@@ -51,14 +73,9 @@ namespace ProjectC
             await Navigation.PushAsync(new HelpPage());
         }
 
-        private async void SinglePlayerHighScoreButton_Clicked(object sender, EventArgs e)
+        private async void HighScoresPageButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerHighScorePage());
-        }
-
-        private async void MultiPlayerHighScoreButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MultiPlayerHighScorePage());
+            await Navigation.PushAsync(new HighScoresPage());
         }
     }
 }
