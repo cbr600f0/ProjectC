@@ -46,9 +46,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>SecurityQuestionEnum.resx</DependentUpon>
     </Compile>
-    <Compile Update="Pages\HogeScoresPage.xaml.cs">
-      <DependentUpon>HogeScoresPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -67,13 +64,16 @@
     <EmbeddedResource Update="Pages\helpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\MultiPlayerHighScorePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\MultiPlayerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\HogeScoresPage.xaml">
+    <EmbeddedResource Update="Pages\SinglePlayerHighScorePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\SinglePlayerPage.xaml">

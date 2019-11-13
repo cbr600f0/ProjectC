@@ -73,9 +73,14 @@ namespace ProjectC
             await Navigation.PushAsync(new HelpPage());
         }
 
-        private async void HighScoresPageButton_Clicked(object sender, EventArgs e)
+        private async void SinglePlayerHighScoreButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HighScoresPage());
+            await Navigation.PushAsync(new SinglePlayerHighScorePage());
+        }
+
+        private async void MultiPlayerHighScoreButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MultiPlayerHighScorePage());
         }
     }
 }

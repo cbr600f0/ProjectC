@@ -1,17 +1,19 @@
-﻿using System;
+using ProjectC.Business.Service;
+using ProjectC.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProjectC.Business.Service;
-using ProjectC.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HighScoresPage : TabbedPage
+    public partial class SinglePlayerHighScorePage : ContentPage
     {
         private HighScoreService _highScoreService;
         protected HighScoreService HighScoreService
@@ -31,37 +33,12 @@ namespace ProjectC.Pages
             }
         }
 
-
-        public HighScoresPage()
+        public SinglePlayerHighScorePage()
         {
-            InitializeComponent();
-
-            showMultiPlayerHighScores();
-            showSinglePlayerHighScore();
-
-        }
-
-
-        private void showMultiPlayerHighScores()
-        {
-            List<HighScore> highScores = this.HighScoreService.GetRankedHighScores(false);
-            if (highScores.Any())
-            {
-                multiPlayerHighScoresListView.ItemsSource = highScores;
-                slMultiPlayerHighscores.IsVisible = true;
-            }
-            else
-            {
-                lblMultiPlayerHeader.Text = "Er zijn nog geen punten gehaald.";
-            }
-
-        }
-
-        private void showSinglePlayerHighScore()
-        {
+            //test data
             if (this.CurrentUserId.HasValue && !this.HighScoreService.Get().Any())
             {
-                List<HighScore> highScores1 = new List<HighScore>()
+                List<HighScore> highScores1 = new List<HighScore>() 
                 {
                     new HighScore(this.CurrentUserId.Value, 100, DateTimeOffset.Now),
                     new HighScore(this.CurrentUserId.Value, 3435, DateTimeOffset.Now),
@@ -80,30 +57,34 @@ namespace ProjectC.Pages
                     new HighScore(this.CurrentUserId.Value, 343, DateTimeOffset.Now),
                 };
 
-                foreach (HighScore highScore in highScores1)
+                foreach(HighScore highScore in highScores1)
                 {
                     this.HighScoreService.AddOrUpdate(highScore);
                 }
             }
 
+            InitializeComponent();
             if (this.CurrentUserId.HasValue)
             {
                 List<HighScore> highScores = this.HighScoreService.GetRankedHighScores(true);
                 if (highScores.Any())
                 {
-                    singlePlayerHighScoresListView.ItemsSource = highScores;
-                    slSinglePlayerHighscores.IsVisible = true;
+                    lvHighscores.ItemsSource = highScores;
+                    slHighscores.IsVisible = true;
                 }
                 else
                 {
-                    lblSinglePlayerHeader.Text = "Je hebt nog geen punten gehaald.";
+                    lblHeader.Text = "Je hebt nog geen punten gehaald.";
                 }
             }
             else
             {
-                lblSinglePlayerHeader.Text = "Login om highscores te zien!";
+                lblHeader.Text = "Login om highscores te zien!";
             }
-
+        }
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
         }
     }
 }
