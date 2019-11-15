@@ -1,19 +1,17 @@
-using ProjectC.Business.Service;
-using ProjectC.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectC.Business.Service;
+using ProjectC.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SinglePlayerHighScorePage : ContentPage
+    public partial class HighScoresPage : TabbedPage
     {
         public SinglePlayerHighScorePage()
         {
@@ -23,22 +21,20 @@ namespace ProjectC.Pages
                 List<Score> highScores = BasePage.ScoreService.GetRankedScores(true);
                 if (highScores.Any())
                 {
-                    lvHighscores.ItemsSource = highScores;
-                    slHighscores.IsVisible = true;
+                    singlePlayerHighScoresListView.ItemsSource = highScores;
+                    slSinglePlayerHighscores.IsVisible = true;
                 }
                 else
                 {
-                    lblHeader.Text = "Je hebt nog geen punten gehaald.";
+                    lblSinglePlayerHeader.Text = "Je hebt nog geen punten gehaald.";
                 }
             }
             else
             {
-                lblHeader.Text = "Login om highscores te zien!";
+                lblSinglePlayerHeader.Text = "Login om highscores te zien!";
             }
+
         }
-        private async void BackButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync(true);
-        }
+
     }
 }
