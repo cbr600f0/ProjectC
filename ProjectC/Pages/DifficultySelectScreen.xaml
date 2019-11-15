@@ -10,14 +10,20 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="MakkelijkButton_Clicked" Text="Makkelijk" />
-            <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="NormaalButton_Clicked" Text="Normaal" />
-            <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="MoeilijkButton_Clicked" Text="Moeilijk" />
-            <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="LegendarischButton_Clicked" Text="Legendarisch"  />
+            <Button Grid.Row="0" Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+            <Label Text="Moeilijkheidsgraad" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
+
+            <StackLayout Margin="10" Grid.Row="2">
+                <CarouselView>
+                    <CarouselView.ItemsSource>
+                        <x:Array Type="{x:FontImage}">
+                            <Image Source="{FontImage &#xf30c;, FontFamily={OnPlatform iOS=Ionicons, Android=ionicons.ttf#}, Size=44}"></Image>
+                        </x:Array>
+                    </CarouselView.ItemsSource>
+                </CarouselView>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
