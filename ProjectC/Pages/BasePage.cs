@@ -8,12 +8,30 @@ namespace ProjectC.Pages
 {
     public class BasePage : ContentPage
     {
-        private UserService _userService;
-        protected UserService UserService
+        private static Guid? _currentUserId;
+        public static Guid? CurrentUserId
         {
             get
             {
-                return this._userService = this._userService ?? new UserService();
+                return BasePage._currentUserId.HasValue ? BasePage._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
+            }
+        }
+
+        private static UserService _userService;
+        public static UserService UserService
+        {
+            get
+            {
+                return BasePage._userService = BasePage._userService ?? new UserService();
+            }
+        }
+
+        private static ScoreService _scoreService;
+        public static ScoreService ScoreService
+        {
+            get
+            {
+                return BasePage._scoreService = BasePage._scoreService ?? new ScoreService();
             }
         }
     }

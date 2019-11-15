@@ -18,33 +18,6 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerPage : ContentPage
     {
-        private ScoreService _scoreService;
-        protected ScoreService ScoreService
-        {
-            get
-            {
-                return this._scoreService = this._scoreService ?? new ScoreService();
-            }
-        }
-
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
-
-        private Guid? _currentUserId;
-        protected Guid? CurrentUserId
-        {
-            get
-            {
-                return this._currentUserId.HasValue ? this._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
-            }
-        }
-
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
@@ -93,13 +66,13 @@ namespace ProjectC.Pages
 
             try
             {
-                score = this.ScoreService.GetByUserId(this.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
                 viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
             try
             {
-                currentUser = this.UserService.Get(this.CurrentUserId.Value).UserName;
+                currentUser = BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName;
                 viewCurrentPlayer.Text = currentUser;
             }
             catch { }
@@ -516,8 +489,8 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
-            Score score = new Score(this.CurrentUserId.Value, points, DateTimeOffset.Now);
-            this.ScoreService.AddOrUpdate(score);
+            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
+            BasePage.ScoreService.AddOrUpdate(score);
         }
 
 
@@ -560,7 +533,7 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
-            this.ScoreService.AddOrUpdate(new Score(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
             await Navigation.PushAsync(new MainPage());
         }
     }

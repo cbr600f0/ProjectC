@@ -18,14 +18,6 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChangePasswordPage : ContentPage
     {
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
         private String UserName = String.Empty;
         public ChangePasswordPage(Boolean remembersPassword, String userName)
         {
@@ -56,11 +48,11 @@ namespace ProjectC.Pages
             }
             else
             {
-                User user = this.UserService.GetByUserName(this.UserName);
+                User user = BasePage.UserService.GetByUserName(this.UserName);
                 user.Password = this.HashPassword(ePassword.Text);
                 try
                 {
-                    this.UserService.AddOrUpdate(user);
+                    BasePage.UserService.AddOrUpdate(user);
                     await DisplayAlert(String.Empty, ChangePassWordPageResource.UpdateSuccessful, ChangePassWordPageResource.OK);
                     await Navigation.PushAsync(new LoginPage());
                 }

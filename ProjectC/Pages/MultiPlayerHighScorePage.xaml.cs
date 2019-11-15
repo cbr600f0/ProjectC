@@ -17,19 +17,10 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MultiPlayerHighScorePage : ContentPage
     {
-        private ScoreService _scoreService;
-        protected ScoreService ScoreService
-        {
-            get
-            {
-                return this._scoreService = this._scoreService ?? new ScoreService();
-            }
-        }
-
         public MultiPlayerHighScorePage()
         {
             InitializeComponent();
-            List<Score> highScores = this.ScoreService.GetRankedScores(false);
+            List<Score> highScores = BasePage.ScoreService.GetRankedScores(false);
             if (highScores.Any())
             {
                 lvHighscores.ItemsSource = highScores;
