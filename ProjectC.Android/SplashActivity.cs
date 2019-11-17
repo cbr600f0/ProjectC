@@ -24,6 +24,8 @@ namespace ProjectC.Droid
         {
             base.OnCreate(savedInstanceState, persistentState);
             Log.Debug(TAG, "SplashActivity.OnCreate");
+            Finish();
+            OverridePendingTransition(0, 0);
         }
 
         // Launches the startup task
