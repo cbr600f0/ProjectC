@@ -3,56 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:ProjectC.Model"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.DifficultySelectPage">
-    <!--<ContentPage.Resources>
-        <DataTemplate x:Key="Easy">
-            <StackLayout>
-                <Image Source="Emoji_Easy.png"></Image>
-                <Label Text="Makkelijk"></Label>
-            </StackLayout>
-        </DataTemplate>
-        <DataTemplate x:Key="Medium">
-            <StackLayout>
-                <Image Source="Emoji_Medium.png"></Image>
-                <Label Text="Gemiddeld"></Label>
-            </StackLayout>
-        </DataTemplate>
-        <DataTemplate x:Key="Hard">
-            <StackLayout>
-                <Image Source="Emoji_Hard.png"></Image>
-                <Label Text="Moeilijk"></Label>
-            </StackLayout>
-        </DataTemplate>
-        <DataTemplate x:Key="Legend">
-            
-        </DataTemplate>
-    </ContentPage.Resources>-->
+             x:Class="ProjectC.Pages.DifficultySelectPage"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <model:DifficultyViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Button Style="{StaticResource BackButton}" Clicked=""></Button>
-            <Label Text="Moeilijkheidsgraad" VerticalOptions="StartAndExpand"></Label>
-            <CarouselView>
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"></Button>
+            <Label Text="Moeilijkheidsgraad" FontSize="Title" HorizontalTextAlignment="Center"></Label>
+            <CarouselView ItemsSource="{Binding Difficulties}">
                 <CarouselView.ItemTemplate>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Baboon</x:String>
-                        <x:String>Capuchin Monkey</x:String>
-                        <x:String>Blue Monkey</x:String>
-                        <x:String>Squirrel Monkey</x:String>
-                        <x:String>Golden Lion Tamarin</x:String>
-                        <x:String>Howler Monkey</x:String>
-                        <x:String>Japanese Macaque</x:String>
-                        <x:String>Mandrill</x:String>
-                        <x:String>Proboscis Monkey</x:String>
-                        <x:String>Red-shanked Douc</x:String>
-                        <x:String>Gray-shanked Douc</x:String>
-                        <x:String>Golden Snub-nosed Monkey</x:String>
-                        <x:String>Black Snub-nosed Monkey</x:String>
-                        <x:String>Tonkin Snub-nosed Monkey</x:String>
-                        <x:String>Thomas's Langur</x:String>
-                        <x:String>Purple-faced Langur</x:String>
-                        <x:String>Gelada</x:String>
-                    </x:Array>
+                    <DataTemplate>
+                        <StackLayout VerticalOptions="End">
+                            <Button ImageSource="{Binding Image}" WidthRequest="300" Clicked="DifficultyButton_Clicked"></Button>
+                            <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center"></Label>
+                        </StackLayout>
+                    </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
         </StackLayout>

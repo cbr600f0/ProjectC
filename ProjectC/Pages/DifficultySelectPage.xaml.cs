@@ -16,5 +16,31 @@ namespace ProjectC.Pages
         {
             InitializeComponent();
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        private async void DifficultyButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SinglePlayerPage(""));
+        }
+        //private async void EasyButton_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new SinglePlayerPage("easy"));
+        //}
+        //private async void MediumButton_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new SinglePlayerPage("medium"));
+        //}
+        //private async void HardButton_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new SinglePlayerPage("hard"));
+        //}
+        //private async void LegendButton_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new SinglePlayerPage("legendary"));
+        //}
     }
 }
