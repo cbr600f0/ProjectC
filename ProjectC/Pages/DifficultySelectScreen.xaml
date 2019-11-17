@@ -1,29 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="ProjectC.Pages.DifficultySelectScreen">
-    <ContentPage.Content>
-
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="5*"/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
-            <Label Text="Moeilijkheidsgraad" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Title"/>
-
-            <StackLayout Margin="10" Grid.Row="2">
-                <CarouselView>
-                    <CarouselView.ItemsSource>
-                        <x:Array Type="{x:FontImage}">
-                            <Image Source="{FontImage &#xf30c;, FontFamily={OnPlatform iOS=Ionicons, Android=ionicons.ttf#}, Size=44}"></Image>
-                        </x:Array>
-                    </CarouselView.ItemsSource>
-                </CarouselView>
-            </StackLayout>
-        </Grid>
-    </ContentPage.Content>
-</ContentPage>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+    <CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="CarouselPageNavigation.DifficultySelectScreen">
+    <ContentPage>
+        <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS, Android" Value="0,40,0,0" />
+            </OnPlatform>
+        </ContentPage.Padding>
+        <StackLayout>
+            <!--<Button Style="{StaticResource BackButton}" Clicked=""></Button>
+            <Label Text="Moeilijkheidsgraad" VerticalOptions="StartAndExpand"></Label>
+            <Button ImageSource="Emoji_Easy.png" Clicked=""></Button>
+            <Label Text="Makkelijk"></Label>-->
+        </StackLayout>
+    </ContentPage>
+    <ContentPage>
+        
+    </ContentPage>
+    <ContentPage>
+        
+    </ContentPage>
+</CarouselPage>
