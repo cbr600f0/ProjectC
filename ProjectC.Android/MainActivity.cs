@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Net;
 
 namespace ProjectC.Droid
 {
@@ -21,6 +22,9 @@ namespace ProjectC.Droid
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            ServicePointManager.ServerCertificateValidationCallback += (o, cert, chain, errors) => true;
+
             base.LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(Int32 requestCode, String[] permissions, [GeneratedEnum] Permission[] grantResults)

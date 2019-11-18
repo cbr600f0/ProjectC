@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using ProjectC.Pages;
+using ProjectC.Model;
 
 namespace ProjectC
 {
@@ -26,6 +27,14 @@ namespace ProjectC
         public MainPage()
         {
             this.InitializeComponent();
+            if(!BasePage.UserService.Get().Any())
+            {
+                User user = new User("martijn", "wachtwoord", SecurityQuestionEnum.PetQuestion, "kat");
+                user.Id = new Guid("8787108A-DD83-4248-880F-EDD450405C69");
+                BasePage.UserService.AddOrUpdate(user);
+            }
+
+
             if (this.CurrentUserId.HasValue)
             {
                 btnLogin.Text = "Uitloggen";
