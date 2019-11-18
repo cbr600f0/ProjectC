@@ -9,6 +9,7 @@
     <Application.Resources>
 
         <ResourceDictionary>
+
             <Color x:Key="primary-back-title-color">#D8F7F2</Color>
             <Color x:Key="primary-title-color">#005D4E</Color>
             <Color x:Key="primary-background-color">#D8F7F2</Color>
