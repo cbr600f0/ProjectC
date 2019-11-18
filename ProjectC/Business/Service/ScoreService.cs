@@ -41,7 +41,6 @@ namespace ProjectC.Business.Service
 
         public void AddOrUpdate(Score score)
         {
-            score.UserName = this.UserService.Get(score.UserId).UserName;
             try
             {
                 base.AddOrUpdate<Score>(ref score);
@@ -60,8 +59,9 @@ namespace ProjectC.Business.Service
                 .ToList();
         }
 
-        public List<Score> GetRankedScores(Boolean isLocal)
+        public List<VMScore> GetRankedScores(Boolean isLocal)
         {
+            List<VMScore> vmScores = new List<VMScore>();
 
             List<Score> scores = isLocal ? this.GetByUserId(base.CurrentUserId.Value)
                 .OrderByDescending(hs => hs.Points)
@@ -76,10 +76,10 @@ namespace ProjectC.Business.Service
 
             foreach (Score score in scores)
             {
-                score.Rank = rank;
+                vmScores.Add(new VMScore(this.UserService.Get(score.UserId).UserName, rank, score.Points, score.Date));
                 rank++;
             }
-            return scores;
+            return vmScores;
         }
     }
 }

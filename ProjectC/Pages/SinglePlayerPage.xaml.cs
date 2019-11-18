@@ -200,8 +200,8 @@ namespace ProjectC.Pages
                         String data = await content.ReadAsStringAsync();
                         if (data != null)
                         {
-                            JContainer test = (JContainer)JObject.Parse(data)["matches"];
-                            return test.Count == 0;
+                            JContainer matches = (JContainer)JObject.Parse(data)["matches"];
+                            return matches.Count == 0;
                         }
                         return false;
                     }

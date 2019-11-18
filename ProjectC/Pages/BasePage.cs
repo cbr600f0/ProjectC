@@ -1,4 +1,5 @@
-﻿using ProjectC.Business.Service;
+﻿using ProjectC.Business.APIService;
+using ProjectC.Business.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,24 @@ namespace ProjectC.Pages
             get
             {
                 return BasePage._scoreService = BasePage._scoreService ?? new ScoreService();
+            }
+        }
+
+        private static UserAPIService _userAPIService;
+        public static UserAPIService UserAPIService
+        {
+            get
+            {
+                return BasePage._userAPIService = BasePage._userAPIService ?? new UserAPIService();
+            }
+        }
+
+        private static ScoreAPIService _scoreAPIService;
+        public static ScoreAPIService ScoreAPIService
+        {
+            get
+            {
+                return BasePage._scoreAPIService = BasePage._scoreAPIService ?? new ScoreAPIService();
             }
         }
     }
