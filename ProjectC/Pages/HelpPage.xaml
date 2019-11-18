@@ -87,6 +87,7 @@
                 <Label Text="- Om te spelen kan je klikken op SinglePlayer, of MultiPlayer op het hoofdscherm"
                        FontSize="Large"/>
                 <Label/>
+                <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
             </StackLayout>
      </ScrollView>
 
