@@ -26,7 +26,7 @@ namespace ProjectC.Business.Service
         {
             _SQLiteConnection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             _SQLiteConnection.CreateTable<User>();
-            _SQLiteConnection.CreateTable<HighScore>();
+            _SQLiteConnection.CreateTable<Score>();
         }
 
         public IEnumerable<TModel> Get<TModel>() where TModel : new()

@@ -5,26 +5,28 @@ using System.Text;
 
 namespace ProjectC.Model
 {
-    public class HighScore : BaseModel
+    public class Score : BaseModel
     {
         [PrimaryKey]
         public Guid Id { get; set; }
 
+        public DateTimeOffset CreatedAt { get; set; }
+
+        public DateTimeOffset? ModifiedAt { get; set; }
+
+        public DateTimeOffset? LastSynchronized { get; set; }
+
         public Guid UserId { get; set; }
-
-        public String UserName { get; set; }
-
-        public Int32? Rank { get; set; }
 
         public Int32 Points { get; set; }
 
         public DateTimeOffset Date { get; set; }
 
-        public HighScore()
+        public Score()
         {
         }
 
-        public HighScore(Guid userId, Int32 points, DateTimeOffset date)
+        public Score(Guid userId, Int32 points, DateTimeOffset date)
         {
             this.UserId = userId;
             this.Points = points;

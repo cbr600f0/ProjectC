@@ -16,17 +16,9 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
         public LoginPage()
         {
-            List<User> users = this.UserService.Get();
+            List<User> users = BasePage.UserService.Get();
             this.InitializeComponent();
             eUserName.ReturnCommand = new Command(() => ePassword.Focus());
         }
@@ -48,7 +40,7 @@ namespace ProjectC.Pages
 
         private async void Login()
         {
-            List<User> users = this.UserService.Get();
+            List<User> users = BasePage.UserService.Get();
 
             if (users.Where(u => u.UserName == eUserName.Text && this.ValidatePassword(u.Password, ePassword.Text)).Any())
             {
