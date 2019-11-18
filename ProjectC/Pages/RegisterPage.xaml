@@ -9,7 +9,7 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Back" Clicked="BackButton_Clicked" HorizontalOptions="Start" VerticalOptions="Start" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold"/>
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
             <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

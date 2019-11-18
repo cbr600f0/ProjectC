@@ -7,11 +7,16 @@
              x:Class="ProjectC.App">
     
     <Application.Resources>
-        
-        <ResourceDictionary>            
+
+        <ResourceDictionary>
+
             <Color x:Key="primary-back-title-color">#D8F7F2</Color>
             <Color x:Key="primary-title-color">#005D4E</Color>
             <Color x:Key="primary-background-color">#D8F7F2</Color>
+
+            <Color x:Key="ButtonBorder">#8FE64D</Color>
+            <Color x:Key="ButtonText">#398300</Color>
+            <Color x:Key="ButtonBack">#B6F287</Color>
 
             <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-back-title-color}"/>
@@ -19,21 +24,32 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource Key=primary-background-color}"/>
             </Style>
 
+            <Style x:Key="BackButton" TargetType="Button">
+                <Setter Property="Text" Value="Terug"/>
+                <Setter Property="Margin" Value="5,5,5,5"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BorderColor" Value="{StaticResource Key=ButtonBorder}"/>
+                <Setter Property="TextColor" Value="{StaticResource Key=ButtonText}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource Key=ButtonBack}"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
             <ControlTemplate x:Key="BackgroundTemplate">
-                <ScrollView>
-                <RelativeLayout>
-                    <Image
+                        <ScrollView>
+                            <RelativeLayout>
+                                <Image
                         Aspect="AspectFill"
                         Source="BackGround4k.png"
                         RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                         RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
-                    </Image>
-                    <ContentPresenter/>
-                </RelativeLayout>
-                </ScrollView>
-            </ControlTemplate>
-            
+                                </Image>
+                                <ContentPresenter/>
+                            </RelativeLayout>
+                        </ScrollView>
+                    </ControlTemplate>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>
