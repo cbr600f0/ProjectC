@@ -18,33 +18,6 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerPage : ContentPage
     {
-        private HighScoreService _highScoreService;
-        protected HighScoreService HighScoreService
-        {
-            get
-            {
-                return this._highScoreService = this._highScoreService ?? new HighScoreService();
-            }
-        }
-
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
-
-        private Guid? _currentUserId;
-        protected Guid? CurrentUserId
-        {
-            get
-            {
-                return this._currentUserId.HasValue ? this._currentUserId : Boolean.Parse(Application.Current.Properties["IsLoggedIn"].ToString()) ? (Guid?)Guid.Parse(Application.Current.Properties["UserId"].ToString()) : null;
-            }
-        }
-
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
@@ -64,11 +37,12 @@ namespace ProjectC.Pages
         private Int32 turn = 10;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public HighScore highscore;
         public string currentUser = "";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
+        public Score score;
+        public string currentUser;
         {
             switch (difficulty)
             {
@@ -96,13 +70,13 @@ namespace ProjectC.Pages
 
             try
             {
-                highscore = this.HighScoreService.GetByUserId(this.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
-                viewHighscore.Text = highscore != null ? "HighScore: " + highscore.Points.ToString() : "HighScore: 0";
+                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
             try
             {
-                currentUser = this.UserService.Get(this.CurrentUserId.Value).UserName;
+                currentUser = BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName;
                 viewCurrentPlayer.Text = currentUser;
             }
             catch { }
@@ -238,8 +212,8 @@ namespace ProjectC.Pages
                         String data = await content.ReadAsStringAsync();
                         if (data != null)
                         {
-                            JContainer test = (JContainer)JObject.Parse(data)["matches"];
-                            return test.Count == 0;
+                            JContainer matches = (JContainer)JObject.Parse(data)["matches"];
+                            return matches.Count == 0;
                         }
                         return false;
                     }
@@ -559,8 +533,8 @@ namespace ProjectC.Pages
             {
                 return;
             }
-            HighScore highScore = new HighScore(this.CurrentUserId.Value, points, DateTimeOffset.Now);
-            this.HighScoreService.AddOrUpdate(highScore);
+            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
+            BasePage.ScoreService.AddOrUpdate(score);
         }
 
 
@@ -605,8 +579,8 @@ namespace ProjectC.Pages
         public async void GameOverHandler()
         {
             if (this._currentUserId.HasValue)
-            {
-                this.HighScoreService.AddOrUpdate(new HighScore(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            {   
+            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
             }
             await Navigation.PushAsync(new MainPage());
         }

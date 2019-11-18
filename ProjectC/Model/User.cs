@@ -10,6 +10,12 @@ namespace ProjectC.Model
         [PrimaryKey]
         public Guid Id { get; set; }
 
+        public DateTimeOffset CreatedAt { get; set; }
+
+        public DateTimeOffset? ModifiedAt { get; set; }
+
+        public DateTimeOffset? LastSynchronized { get; set; }
+
         public String UserName { get; set; }
 
         [MaxLength(12)]
