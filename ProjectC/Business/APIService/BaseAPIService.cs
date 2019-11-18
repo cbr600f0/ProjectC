@@ -32,7 +32,7 @@ namespace ProjectC.Business.APIService
 
         private IEnumerable<TModel> GetModelFromApi<TModel>() where TModel : new()
         {
-            String baseUrl = $"https://192.168.0.156:44353/api/{typeof(T).Name.ToLower()}";
+            String baseUrl = $"https://145.137.57.188:44353/api/{typeof(T).Name.ToLower()}";
 
             WebClient client = new WebClient();
             String result = client.DownloadString(baseUrl);
