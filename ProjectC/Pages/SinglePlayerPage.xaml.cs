@@ -50,7 +50,7 @@ namespace ProjectC.Pages
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
         public Int32 wordRows = 0;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
-        public Int32 wordLength = 5;
+        public Int32 wordLength;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
         // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
         public static Int32 unrealHighNumber = 1000000;
@@ -65,7 +65,7 @@ namespace ProjectC.Pages
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
         public HighScore highscore;
-        public string currentUser;
+        public string currentUser = "";
         public SinglePlayerPage(string difficulty)
         {
             switch (difficulty)
@@ -114,7 +114,7 @@ namespace ProjectC.Pages
             for (Int32 i = 0; i < wordRows; i++)
             {
                 //Defines the amount of rows needed for all the past-created (history) words
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
+                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
             //Creates 2 spaces, 25% for the playername who played the word, 75% for the word that is played.
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -125,8 +125,8 @@ namespace ProjectC.Pages
             {
                 wordContainer.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 // Adds the label (name of the person who played the word) to the left of the word
-                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand}, 0, row);
-                
+                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, row);
+
                 for (Int32 i = 0; i < wordLength; i++)
                 {
                     //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
@@ -313,7 +313,8 @@ namespace ProjectC.Pages
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
-            leftsideGrid.Children.Add(new Label() {
+            leftsideGrid.Children.Add(new Label()
+            {
                 Text = "Word " + (grid.RowDefinitions.Count),
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             }, 0, 0);
@@ -521,6 +522,10 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
+            if (!this._currentUserId.HasValue)
+            {
+                return;
+            }
             HighScore highScore = new HighScore(this.CurrentUserId.Value, points, DateTimeOffset.Now);
             this.HighScoreService.AddOrUpdate(highScore);
         }
@@ -528,7 +533,8 @@ namespace ProjectC.Pages
 
         protected void UIPushBarCreation()
         {
-            Grid grid = new Grid() {
+            Grid grid = new Grid()
+            {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
@@ -565,8 +571,11 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
-            this.HighScoreService.AddOrUpdate(new HighScore(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            if (this._currentUserId.HasValue)
+            {
+                this.HighScoreService.AddOrUpdate(new HighScore(this.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            }
             await Navigation.PushAsync(new MainPage());
         }
     }
-}   
+}
