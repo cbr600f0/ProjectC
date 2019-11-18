@@ -9,6 +9,7 @@
              ControlTemplate="{StaticResource BackgroundTemplate}"
              NavigationPage.HasNavigationBar="False"> <!--to remove the title page-->
     <!-- Background -->
+    
     <RelativeLayout Padding="0">
 
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
