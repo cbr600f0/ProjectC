@@ -11,7 +11,8 @@ namespace ProjectC
             Application.Current.Properties["IsLoggedIn"] = false;
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            var splashPage = new NavigationPage(new SplashScreen());
+            MainPage = splashPage;
         }
 
         protected override void OnStart()
