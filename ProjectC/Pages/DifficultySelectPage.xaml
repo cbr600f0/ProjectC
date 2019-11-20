@@ -6,25 +6,45 @@
              xmlns:model="clr-namespace:ProjectC.Model"
              mc:Ignorable="d"
              x:Class="ProjectC.Pages.DifficultySelectPage"
-             ControlTemplate="{StaticResource BackgroundTemplate}"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <model:DifficultyViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="easy">
+            <StackLayout>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="EasyButton_Clicked"></Button>
+                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="med">
+            <StackLayout>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="MediumButton_Clicked"></Button>
+                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="hard">
+            <StackLayout HorizontalOptions="Fill">
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="HardButton_Clicked"></Button>
+                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="legend">
+            <StackLayout>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="LegendButton_Clicked"></Button>
+                <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
+            </StackLayout>
+        </DataTemplate>
+
+        <model:DifficultDataTemplateSelector x:Key="DifficultySelector" Easy="{StaticResource easy}" Med="{StaticResource med}" Hard="{StaticResource hard}" Legend="{StaticResource legend}"/>
+
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"></Button>
-            <Label Text="Moeilijkheidsgraad" FontSize="Title" HorizontalTextAlignment="Center"></Label>
-            <CarouselView ItemsSource="{Binding Difficulties}">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout VerticalOptions="End">
-                            <Button ImageSource="{Binding Image}" WidthRequest="300" Clicked="DifficultyButton_Clicked"></Button>
-                            <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center"></Label>
-                        </StackLayout>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+            <Label Text="Moeilijkheidsgraad" FontSize="30"  FontAttributes="Bold"  HorizontalTextAlignment="Center" TextColor="#005D4E"></Label>
+            <CarouselView ItemsSource="{Binding Difficulties}" ItemTemplate="{StaticResource DifficultySelector}" VerticalOptions="Center"></CarouselView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -27,25 +27,25 @@ namespace ProjectC.Model
         {
             source.Add(new Difficulty
             {
-                Name = "Makkelijk",
+                Name = "Makkelijk ->",
                 Image = "Emoji_Easy.png",
                 Clicked = "easy"
             });
             source.Add(new Difficulty
             {
-                Name = "Gemiddeld",
+                Name = "<- Gemiddeld ->",
                 Image = "Emoji_Medium.png",
-                Clicked = "medium"
+                Clicked = "med"
             });
             source.Add(new Difficulty
             {
-                Name = "Moeilijk",
+                Name = "<- Moeilijk ->",
                 Image = "Emoji_Hard.png",
                 Clicked = "hard"
             });
             source.Add(new Difficulty
             {
-                Name = "Legendarisch",
+                Name = "<- Legendarisch",
                 Image = "Emoji_Legendary.png",
                 Clicked = "legend" 
             }); ;
