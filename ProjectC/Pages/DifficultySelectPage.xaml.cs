@@ -28,19 +28,19 @@ namespace ProjectC.Pages
         }
         private async void EasyButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerPage("easy"));
+            await Navigation.PushAsync(new SinglePlayerPage("easy", 2));
         }
         private async void MediumButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerPage("medium"));
+            await Navigation.PushAsync(new SinglePlayerPage("medium", 2));
         }
         private async void HardButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerPage("hard"));
+            await Navigation.PushAsync(new SinglePlayerPage("hard", 2));
         }
         private async void LegendButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SinglePlayerPage("legendary"));
+            await Navigation.PushAsync(new SinglePlayerPage("legendary", 2));
         }
     }
 }
