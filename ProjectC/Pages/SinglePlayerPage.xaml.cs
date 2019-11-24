@@ -21,9 +21,9 @@ namespace ProjectC.Pages
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
-        public Int32 wordRows = 0;
+        public Int32 wordRows = 5;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
-        public Int32 wordLength = 5;
+        public Int32 wordLength;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
         // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
         public static Int32 unrealHighNumber = 1000000;
@@ -37,9 +37,12 @@ namespace ProjectC.Pages
         private Int32 turn = 10;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
+        public string currentUser = "";
+        public int difficultyMultiplier = 2;
+        public int currentLetterValue;
+        public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         public Score score;
         public string currentUser;
-        public SinglePlayerPage(string difficulty)
         {
             switch (difficulty)
             {
@@ -58,6 +61,7 @@ namespace ProjectC.Pages
                 default:
                     break;
             }
+            this.difficultyMultiplier = difficultyMultiplier;
             this.InitializeComponent();
             this.PlayedWordsUICreator();
             this.UsableLettersUICreator();
@@ -87,7 +91,7 @@ namespace ProjectC.Pages
             for (Int32 i = 0; i < wordRows; i++)
             {
                 //Defines the amount of rows needed for all the past-created (history) words
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
+                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
             //Creates 2 spaces, 25% for the playername who played the word, 75% for the word that is played.
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -98,8 +102,8 @@ namespace ProjectC.Pages
             {
                 wordContainer.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 // Adds the label (name of the person who played the word) to the left of the word
-                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand}, 0, row);
-                
+                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, row);
+
                 for (Int32 i = 0; i < wordLength; i++)
                 {
                     //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
@@ -109,20 +113,28 @@ namespace ProjectC.Pages
                 //Adds the letters to create 1 word
                 for (Int32 i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
                 {
+                    StackLayout stacklaout = new StackLayout();
+                    stacklaout.Children.Add(new Label()
+                    {
+                        Text = "A",
+                        FontSize = 20,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand
+                    });
+                    stacklaout.Children.Add(new Label()
+                    {
+                        Text = currentLetterValue.ToString(),
+                        FontSize = 13,
+                        HorizontalTextAlignment = TextAlignment.Center
+                    });
+
                     //Creates a frame to get borders around those labels
                     insideGrid.Children.Add(new Frame()
                     {
                         //Creates the labels for the history words (1 label is 1 letter)
-                        Content = new Label()
-                        {
-                            Text = "A",
-                            FontSize = 20,
-                            HorizontalOptions = LayoutOptions.CenterAndExpand
-                        },
+                        Content = stacklaout,
                         Margin = 0,
                         Padding = 0,
-                        BorderColor = Color.Black,
-
+                        BorderColor = Color.Black
                     }, i, 0);
                 }
 
@@ -150,7 +162,7 @@ namespace ProjectC.Pages
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            for (Int32 d = 0; d < 2; d++)
+            for (Int32 d = 0; d < difficultyMultiplier; d++)
             {
                 //Adds the letters to create 1 word
                 for (Int32 i = 0; i < (grid.ColumnDefinitions.Count); i++)
@@ -281,7 +293,8 @@ namespace ProjectC.Pages
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
-            leftsideGrid.Children.Add(new Label() {
+            leftsideGrid.Children.Add(new Label()
+            {
                 Text = "Word " + (grid.RowDefinitions.Count),
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             }, 0, 0);
@@ -400,85 +413,112 @@ namespace ProjectC.Pages
                 switch (label.Text)
                 {
                     case "A":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "B":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "C":
-                        totalPoints += 5;
+                        currentLetterValue = 5;
+                        totalPoints += currentLetterValue;
                         break;
                     case "D":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "E":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "F":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "G":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "H":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "I":
-                        totalPoints += 1;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "J":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "K":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "L":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "M":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "N":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "O":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "P":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Q":
-                        totalPoints += 10;
+                        currentLetterValue = 10;
+                        totalPoints += currentLetterValue;
                         break;
                     case "R":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "S":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "T":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "U":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "V":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "W":
-                        totalPoints += 5;
+                        currentLetterValue = 5;
+                        totalPoints += currentLetterValue;
                         break;
                     case "X":
-                        totalPoints += 8;
+                        currentLetterValue = 8;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Y":
-                        totalPoints += 8;
+                        currentLetterValue = 8;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Z":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     default:
-                        totalPoints += 0;
+                        currentLetterValue = 0;
+                        totalPoints += currentLetterValue;
                         break;
                 }
             }
@@ -489,6 +529,10 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
+            if (!this._currentUserId.HasValue)
+            {
+                return;
+            }
             Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
             BasePage.ScoreService.AddOrUpdate(score);
         }
@@ -496,7 +540,8 @@ namespace ProjectC.Pages
 
         protected void UIPushBarCreation()
         {
-            Grid grid = new Grid() {
+            Grid grid = new Grid()
+            {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
@@ -533,8 +578,16 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
+            if (this._currentUserId.HasValue)
+            {   
             BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            }
             await Navigation.PushAsync(new MainPage());
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
-}   
+}
