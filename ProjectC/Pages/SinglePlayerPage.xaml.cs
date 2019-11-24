@@ -40,9 +40,9 @@ namespace ProjectC.Pages
         public string currentUser = "";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
-        public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         public Score score;
-        public string currentUser;
+
+        public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
             switch (difficulty)
             {
@@ -61,6 +61,8 @@ namespace ProjectC.Pages
                 default:
                     break;
             }
+
+
             this.difficultyMultiplier = difficultyMultiplier;
             this.InitializeComponent();
             this.PlayedWordsUICreator();
@@ -529,7 +531,7 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
-            if (!this._currentUserId.HasValue)
+            if (!BasePage.CurrentUserId.HasValue)
             {
                 return;
             }
@@ -578,7 +580,7 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
-            if (this._currentUserId.HasValue)
+            if (BasePage.CurrentUserId.HasValue)
             {   
             BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
             }
