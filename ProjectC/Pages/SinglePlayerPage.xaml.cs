@@ -48,7 +48,7 @@ namespace ProjectC.Pages
         public List<Frame> wordCreationBar = new List<Frame>();
         //Amount of words already made (change this number to a large number (example: 30) to see the scroll function.)
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
-        public Int32 wordRows = 5;
+        public Int32 wordRows = 2;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
         public Int32 wordLength;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
