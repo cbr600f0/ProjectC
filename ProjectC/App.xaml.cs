@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using ProjectC.Business.Interface;
 using ProjectC.Business.Service;
 using ProjectC.Model;
@@ -53,10 +54,13 @@ namespace ProjectC
 
         private void SynchronizeUsers()
         {
-            List<User> usersFromAPI = BasePage.UserAPIService.Get();
-            List<User> usersFromDataBase = BasePage.UserService.Get();
+            if(CrossConnectivity.Current.IsConnected && this.ApiIsAvailable())
+            {
+                List<User> usersFromAPI = BasePage.UserAPIService.Get();
+                List<User> usersFromDataBase = BasePage.UserService.Get();
 
-            this.Synchronize<User>(usersFromAPI, usersFromDataBase, new User());
+                this.Synchronize<User>(usersFromAPI, usersFromDataBase, new User());
+            }
         }
 
         private void SynchronizeScores()
@@ -144,6 +148,21 @@ namespace ProjectC
 
             App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
             App.client.UploadValuesAsync(new Uri(baseUrl), method, nvc);
+        }
+
+        private Boolean ApiIsAvailable()
+        {
+            String baseUrl = "https://145.137.57.54:44353/api/testconnection";
+            try
+            {
+                WebClient client = new WebClient();
+                String result = client.DownloadString(baseUrl);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

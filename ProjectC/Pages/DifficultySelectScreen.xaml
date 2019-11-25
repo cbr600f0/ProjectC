@@ -25,8 +25,8 @@
                 <Button x:Name="hardButton" Grid.Row="2" Grid.Column="0" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="MoeilijkButton_Clicked" Text="Moeilijk" />
                 <Button x:Name="legendaryButton" Grid.Row="2" Grid.Column="1" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="LegendarischButton_Clicked" Text="Legendarisch"  />
 
-                <Button x:Name="easyLettersButton" Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="EasyDifficultySelector" Text="veel letters (makkelijk)"  />
-                <Button x:Name="hardLettersButton" Grid.Row="4" Grid.Column="1" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="HardDifficultySelector" Text="wienig letters (moeilijk)"  />
+                <Button x:Name="easyLettersButton" Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="EasyDifficultySelector" Text="Veel letters (makkelijk)"  />
+                <Button x:Name="hardLettersButton" Grid.Row="4" Grid.Column="1" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="HardDifficultySelector" Text="Weinig letters (moeilijk)"  />
             </Grid>
         </StackLayout>
     </ContentPage.Content>

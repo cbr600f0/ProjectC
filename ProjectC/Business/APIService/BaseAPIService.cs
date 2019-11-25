@@ -26,6 +26,14 @@ namespace ProjectC.Business.APIService
                 return this._userService = this._userService ?? new UserService();
             }
         }
+        private ScoreService _scoreService;
+        protected ScoreService ScoreService
+        {
+            get
+            {
+                return this._scoreService = this._scoreService ?? new ScoreService();
+            }
+        }
 
         #endregion
         public BaseAPIService()
