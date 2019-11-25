@@ -4,20 +4,30 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
              x:Class="ProjectC.Pages.DifficultySelectScreen">
     <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
+                <Button x:Name="easyButton" Grid.Row="1" Grid.Column="0" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="MakkelijkButton_Clicked" Text="Makkelijk" />
+                <Button x:Name="mediumButton" Grid.Row="1" Grid.Column="1" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="NormaalButton_Clicked" Text="Normaal" />
+                <Button x:Name="hardButton" Grid.Row="2" Grid.Column="0" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="MoeilijkButton_Clicked" Text="Moeilijk" />
+                <Button x:Name="legendaryButton" Grid.Row="2" Grid.Column="1" Margin="10, 10" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B0B0B0" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="LegendarischButton_Clicked" Text="Legendarisch"  />
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="MakkelijkButton_Clicked" Text="Makkelijk" />
-            <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="NormaalButton_Clicked" Text="Normaal" />
-            <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill"  Clicked="MoeilijkButton_Clicked" Text="Moeilijk" />
-            <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="LegendarischButton_Clicked" Text="Legendarisch"  />
-        </Grid>
+                <Button x:Name="easyLettersButton" Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="EasyDifficultySelector" Text="veel letters (makkelijk)"  />
+                <Button x:Name="hardLettersButton" Grid.Row="4" Grid.Column="1" Margin="10, 0" Padding="0,0,0,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Fill" Clicked="HardDifficultySelector" Text="wienig letters (moeilijk)"  />
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

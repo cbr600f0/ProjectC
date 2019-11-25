@@ -23,7 +23,7 @@ namespace ProjectC.Pages
         //Don't raise this number to high. It'll take a long time to create all the elements (100 word rows might take over 15 seconds to create)
         public Int32 wordRows = 0;
         //the name speaks for itself. Change this to 15 to create a 15 letter word.
-        public Int32 wordLength = 5;
+        public Int32 wordLength;
         // This number is used for the "heightRequest" property. Without this, the element will scale down to it's biggest element which is troublesome for frames
         // Through hight "request", the element will choose between 1: the largest available size (what we want) and 2: this number
         public static Int32 unrealHighNumber = 1000000;
@@ -37,9 +37,11 @@ namespace ProjectC.Pages
         private Int32 turn = 10;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
+        public string currentUser = "";
+        public int difficultyMultiplier = 2;
+        public int currentLetterValue;
         public Score score;
-        public string currentUser;
-        public SinglePlayerPage(string difficulty)
+        public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
             switch (difficulty)
             {
@@ -58,10 +60,10 @@ namespace ProjectC.Pages
                 default:
                     break;
             }
+            this.difficultyMultiplier = difficultyMultiplier;
             this.InitializeComponent();
             this.PlayedWordsUICreator();
             this.UsableLettersUICreator();
-            this.RandomLetterGenerator();
             this.UIPushBarCreation();
 
             try
@@ -87,7 +89,7 @@ namespace ProjectC.Pages
             for (Int32 i = 0; i < wordRows; i++)
             {
                 //Defines the amount of rows needed for all the past-created (history) words
-                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star)});
+                grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             }
             //Creates 2 spaces, 25% for the playername who played the word, 75% for the word that is played.
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -98,8 +100,8 @@ namespace ProjectC.Pages
             {
                 wordContainer.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 // Adds the label (name of the person who played the word) to the left of the word
-                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand}, 0, row);
-                
+                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, row);
+
                 for (Int32 i = 0; i < wordLength; i++)
                 {
                     //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
@@ -109,20 +111,28 @@ namespace ProjectC.Pages
                 //Adds the letters to create 1 word
                 for (Int32 i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
                 {
+                    StackLayout stacklaout = new StackLayout();
+                    stacklaout.Children.Add(new Label()
+                    {
+                        Text = "A",
+                        FontSize = 20,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand
+                    });
+                    stacklaout.Children.Add(new Label()
+                    {
+                        Text = currentLetterValue.ToString(),
+                        FontSize = 13,
+                        HorizontalTextAlignment = TextAlignment.Center
+                    });
+
                     //Creates a frame to get borders around those labels
                     insideGrid.Children.Add(new Frame()
                     {
                         //Creates the labels for the history words (1 label is 1 letter)
-                        Content = new Label()
-                        {
-                            Text = "A",
-                            FontSize = 20,
-                            HorizontalOptions = LayoutOptions.CenterAndExpand
-                        },
+                        Content = stacklaout,
                         Margin = 0,
                         Padding = 0,
-                        BorderColor = Color.Black,
-
+                        BorderColor = Color.Black
                     }, i, 0);
                 }
 
@@ -150,31 +160,43 @@ namespace ProjectC.Pages
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            for (Int32 d = 0; d < 2; d++)
+            for (Int32 d = 0; d < difficultyMultiplier; d++)
             {
                 //Adds the letters to create 1 word
                 for (Int32 i = 0; i < (grid.ColumnDefinitions.Count); i++)
                 {
+                    Grid gridForLabels = new Grid();
+                    gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+                    gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
+                    gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+                    gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                    gridForLabels.ColumnSpacing = 0;
+                    gridForLabels.RowSpacing = 0;
+                    gridForLabels.Children.Add(new Label()
+                    {
+                        Text = RandomLetterGenerator().ToString(),
+                        FontSize = 20,
+                        HorizontalOptions = LayoutOptions.CenterAndExpand,
+                        VerticalOptions = LayoutOptions.CenterAndExpand
+                    }, 0, 0);
+
+                    gridForLabels.Children.Add(new Label()
+                    {
+                        Text = currentLetterValue.ToString(),
+                        FontSize = 12,
+                        Margin = 0
+                    }, 1, 1);
                     //Creates a frame to get borders around those labels
                     Frame frame = new Frame()
                     {
-                        //Creates the labels for the history words (1 label is 1 letter)
-                        Content = new Label()
-                        {
-                            Text = this.RandomLetterGenerator().ToString(),
-                            FontSize = 20,
-                            HorizontalOptions = LayoutOptions.CenterAndExpand,
-                            VerticalOptions = LayoutOptions.CenterAndExpand
-                        },
                         BorderColor = Color.Black,
+                        Content = gridForLabels,
+                        HeightRequest = unrealHighNumber,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
                         VerticalOptions = LayoutOptions.FillAndExpand,
-                        Margin = 0,
                         Padding = 0,
-                        HeightRequest = unrealHighNumber
+                        Margin = 0
                     };
-
-
                     //These 3 lines adds the on click event to the frame (can be beautified)
                     var tapGestureRecognizer = new TapGestureRecognizer();
                     tapGestureRecognizer.Tapped += (s, e) => { DebugAlertTester(s, e); };
@@ -221,32 +243,57 @@ namespace ProjectC.Pages
         }
 
         public void AddLetersToList(Frame frame)
-
         {
             wordCreationBar.Add(frame);
         }
 
         public void SwapLetters(Object sender, EventArgs e)
         {
+            Frame wordCreationFrame = (Frame)sender;
+            Grid gridTwo = (Grid)wordCreationFrame.Content;
+            Label wordCreationLabel = (Label)gridTwo.Children[0];
+            Label pointsLabel = (Label)gridTwo.Children[1];
+
             foreach (View gridFrame in grid.Children)
             {
                 if (gridFrame.BackgroundColor == Color.Red)
                 {
                     //making sure that the program knows which 2 labels are tapped (on your own board and on the bar you want to create the word)
                     Frame currentFrame = (Frame)gridFrame;
-                    Label currentLabel = (Label)currentFrame.Content;
-
-                    Frame wordCreationFrame = (Frame)sender;
-                    Label wordCreationLabel = (Label)wordCreationFrame.Content;
+                    Grid gridOne = (Grid)currentFrame.Content;
+                    Label currentLabel = (Label)gridOne.Children[0];
+                    Label currentPointsLabel = (Label)gridOne.Children[1];
 
                     String placeHolder = wordCreationLabel.Text;
                     wordCreationLabel.Text = currentLabel.Text;
                     currentLabel.Text = placeHolder;
 
-                    viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator() + " punten";
+                    placeHolder = pointsLabel.Text;
+                    pointsLabel.Text = currentPointsLabel.Text;
+                    currentPointsLabel.Text = placeHolder;
+
+                    viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator(wordCreationBar) + " punten";
 
                     gridFrame.BackgroundColor = Color.Transparent;
-                    continue;
+                    return;
+                }
+            }
+
+            if (wordCreationLabel.Text != "")
+            {
+                foreach (View gridFrame in grid.Children)
+                {//making sure that the program knows which 2 labels are tapped (on your own board and on the bar you want to create the word)
+                    Frame currentFrame = (Frame)gridFrame;
+                    Grid gridOne = (Grid)currentFrame.Content;
+                    Label currentLabel = (Label)gridOne.Children[0];
+                    Label currentPointsLabel = (Label)gridOne.Children[1];
+                    if (currentLabel.Text == "")
+                    {
+                        currentLabel.Text = wordCreationLabel.Text;
+                        currentPointsLabel.Text = pointsLabel.Text;
+                        wordCreationLabel.Text = "";
+                        pointsLabel.Text = "";
+                    }
                 }
             }
         }
@@ -257,7 +304,8 @@ namespace ProjectC.Pages
             StackLayout wordContainer = new StackLayout() { VerticalOptions = LayoutOptions.CenterAndExpand };
             foreach (Frame frame in wordCreationBar)
             {
-                Label currentLabel = (Label)frame.Content;
+                Grid frameGrid = (Grid)frame.Content;
+                Label currentLabel = (Label)frameGrid.Children[0];
                 if (currentLabel.Text == "")
                 {
                     await this.DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
@@ -281,14 +329,15 @@ namespace ProjectC.Pages
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
-            leftsideGrid.Children.Add(new Label() {
+            leftsideGrid.Children.Add(new Label()
+            {
                 Text = "Word " + (grid.RowDefinitions.Count),
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             }, 0, 0);
 
             leftsideGrid.Children.Add(new Label()
             {
-                Text = WordPointsCalculator().ToString()
+                Text = WordPointsCalculator(wordCreationBar).ToString()
             }, 1, 0);
 
             Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
@@ -300,28 +349,52 @@ namespace ProjectC.Pages
 
             for (Int32 i = 0; i < insideGrid.ColumnDefinitions.Count; i++)
             {
-                Label Label = (Label)wordCreationBar[i].Content;
-                String currentLetter = Label.Text;
+                Frame frame = (Frame)wordCreationBar[i];
+                Grid frameGrid = (Grid)frame.Content;
+                Label label = (Label)frameGrid.Children[0];
+                string currentLetter = label.Text.ToString();
+                List<Frame> localFrameList = new List<Frame>() { wordCreationBar[i] };
+
+                WordPointsCalculator(localFrameList);
+
+                Grid gridForLabels = new Grid();
+                gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+                gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
+                gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+                gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                gridForLabels.ColumnSpacing = 0;
+                gridForLabels.RowSpacing = 0;
+                gridForLabels.Children.Add(new Label()
+                {
+                    Text = currentLetter,
+                    FontSize = 20,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                }, 0, 0);
+
+                gridForLabels.Children.Add(new Label()
+                {
+                    Text = currentLetterValue.ToString(),
+                    FontSize = 12,
+                    Margin = 0
+                }, 1, 1);
                 //Creates a frame to get borders around those labels
                 insideGrid.Children.Add(new Frame()
                 {
-                    //Creates the labels for the history words (1 label is 1 letter)
-                    Content = new Label()
-                    {
-                        Text = currentLetter,
-                        FontSize = 20,
-                        HorizontalOptions = LayoutOptions.CenterAndExpand
-                    },
-                    Margin = 0,
-                    Padding = 0,
                     BorderColor = Color.Black,
-
+                    Content = gridForLabels,
+                    HeightRequest = 40,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.FillAndExpand,
+                    Padding = 0,
+                    Margin = 0
                 }, i, 0);
             }
+
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
             turn--;
-            totalPoints += WordPointsCalculator();
+            totalPoints += WordPointsCalculator(wordCreationBar);
             viewPointCounter.Text = "totale score: " + totalPoints;
             viewTurnCounter.Text = "beurten over: " + turn;
             if (turn <= 0)
@@ -330,7 +403,7 @@ namespace ProjectC.Pages
             }
             EmptyPushwordBar();
             FillUsableLetterBord();
-            viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator() + " punten";
+            viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator(wordCreationBar) + " punten";
         }
 
         private void PushButton_Clicked(object sender, EventArgs e)
@@ -340,14 +413,19 @@ namespace ProjectC.Pages
 
         public Char RandomLetterGenerator()
         {
-            return charPool[random.Next(0, charPool.Length - 1)];
+            char randomLetter = charPool[random.Next(0, charPool.Length - 1)];
+            currentLetterValue = WordPointsCalculator(new List<Frame>() { new Frame() { Content = new Label() { Text = randomLetter.ToString()} } });
+            return randomLetter;
         }
 
         public void EmptyPushwordBar()
         {
             foreach (Frame frame in wordCreationBar)
             {
-                Label label = (Label)frame.Content;
+                Grid grid = (Grid)frame.Content;
+                Label label = (Label)grid.Children[0];
+                label.Text = "";
+                label = (Label)grid.Children[1];
                 label.Text = "";
             }
         }
@@ -370,8 +448,14 @@ namespace ProjectC.Pages
         {
             foreach (Frame frame in UsableLetterList)
             {
-                Label label = (Label)frame.Content;
-                label.Text = label.Text == "" ? RandomLetterGenerator().ToString() : label.Text;
+                Grid grid = (Grid)frame.Content;
+                Label label = (Label)grid.Children[0];
+                Label labelPoints = (Label)grid.Children[1];
+                if (label.Text == "")
+                {
+                    label.Text = RandomLetterGenerator().ToString();
+                    labelPoints.Text = currentLetterValue.ToString();
+                }
             }
         }
 
@@ -383,102 +467,141 @@ namespace ProjectC.Pages
             }
             foreach (Frame frame in UsableLetterList)
             {
-                Label label = (Label)frame.Content;
+                Grid grid = (Grid)frame.Content;
+                Label label = (Label)grid.Children[0];
                 label.Text = RandomLetterGenerator().ToString();
+                Label labelPoints = (Label)grid.Children[1];
+                labelPoints.Text = currentLetterValue.ToString();
             }
             EmptyPushwordBar();
             remainingShuffles--;
             shuffleCounter.Text = "Shuffles: " + remainingShuffles;
         }
 
-        public int WordPointsCalculator()
+        public int WordPointsCalculator(List<Frame> FrameList)
         {
+            Label label;
             int totalPoints = 0;
-            foreach (Frame frame in wordCreationBar)
+            foreach (Frame frame in FrameList)
             {
-                Label label = (Label)frame.Content;
+                try
+                {
+                    Grid mark = (Grid)frame.Content;
+                    label = (Label)mark.Children[0];
+                }
+                catch (Exception)
+                {
+                    label = (Label)frame.Content;
+                }
                 switch (label.Text)
                 {
                     case "A":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "B":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "C":
-                        totalPoints += 5;
+                        currentLetterValue = 5;
+                        totalPoints += currentLetterValue;
                         break;
                     case "D":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "E":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "F":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "G":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "H":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "I":
-                        totalPoints += 1;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "J":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "K":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "L":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "M":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "N":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "O":
-                        totalPoints += 1;
+                        currentLetterValue = 1;
+                        totalPoints += currentLetterValue;
                         break;
                     case "P":
-                        totalPoints += 3;
+                        currentLetterValue = 3;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Q":
-                        totalPoints += 10;
+                        currentLetterValue = 10;
+                        totalPoints += currentLetterValue;
                         break;
                     case "R":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "S":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "T":
-                        totalPoints += 2;
+                        currentLetterValue = 2;
+                        totalPoints += currentLetterValue;
                         break;
                     case "U":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "V":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     case "W":
-                        totalPoints += 5;
+                        currentLetterValue = 5;
+                        totalPoints += currentLetterValue;
                         break;
                     case "X":
-                        totalPoints += 8;
+                        currentLetterValue = 8;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Y":
-                        totalPoints += 8;
+                        currentLetterValue = 8;
+                        totalPoints += currentLetterValue;
                         break;
                     case "Z":
-                        totalPoints += 4;
+                        currentLetterValue = 4;
+                        totalPoints += currentLetterValue;
                         break;
                     default:
-                        totalPoints += 0;
+                        currentLetterValue = 0;
+                        totalPoints += currentLetterValue;
                         break;
                 }
             }
@@ -489,6 +612,10 @@ namespace ProjectC.Pages
         private void PushPointsToDatabase(Int32 points)
         {
             //Gebruiker moet ingelogd zijn!!!
+            if (!BasePage.CurrentUserId.HasValue)
+            {
+                return;
+            }
             Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
             BasePage.ScoreService.AddOrUpdate(score);
         }
@@ -496,7 +623,8 @@ namespace ProjectC.Pages
 
         protected void UIPushBarCreation()
         {
-            Grid grid = new Grid() {
+            Grid grid = new Grid()
+            {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.FillAndExpand
             };
@@ -506,21 +634,37 @@ namespace ProjectC.Pages
             }
             for (int i = 0; i < grid.ColumnDefinitions.Count; i++)
             {
+                Grid gridForLabels = new Grid();
+                gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(3, GridUnitType.Star) });
+                gridForLabels.RowDefinitions.Add(new RowDefinition { Height = new GridLength(2, GridUnitType.Star) });
+                gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) });
+                gridForLabels.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
+                gridForLabels.ColumnSpacing = 0;
+                gridForLabels.RowSpacing = 0;
+                gridForLabels.Children.Add(new Label()
+                {
+                    Text = "",
+                    FontSize = 20,
+                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                }, 0, 0);
 
+                gridForLabels.Children.Add(new Label()
+                {
+                    Text = "",
+                    FontSize = 12,
+                    Margin = 0
+                }, 1, 1);
+                //Creates a frame to get borders around those labels
                 Frame frame = new Frame()
                 {
-                    Padding = 0,
-                    Margin = 0,
+                    BorderColor = Color.Black,
+                    Content = gridForLabels,
+                    HeightRequest = unrealHighNumber,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
                     VerticalOptions = LayoutOptions.FillAndExpand,
-                    BorderColor = Color.Black,
-                    Content = new Label()
-                    {
-                        Text = "",
-                        FontSize = 20,
-                        VerticalOptions = LayoutOptions.CenterAndExpand,
-                        HorizontalOptions = LayoutOptions.CenterAndExpand
-                    }
+                    Padding = 0,
+                    Margin = 0
                 };
 
                 var tapGestureRecognizer = new TapGestureRecognizer();
@@ -533,8 +677,16 @@ namespace ProjectC.Pages
         }
         public async void GameOverHandler()
         {
+            if (BasePage.CurrentUserId.HasValue)
+            {   
             BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            }
             await Navigation.PushAsync(new MainPage());
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
-}   
+}
