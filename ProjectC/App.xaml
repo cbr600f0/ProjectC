@@ -14,14 +14,40 @@
             <Color x:Key="primary-title-color">#005D4E</Color>
             <Color x:Key="primary-background-color">#D8F7F2</Color>
 
-            <Color x:Key="ButtonBorder">#8FE64D</Color>
-            <Color x:Key="ButtonText">#398300</Color>
-            <Color x:Key="ButtonBack">#B6F287</Color>
+            <Color x:Key="GreenBorder">#8FE64D</Color>
+            <Color x:Key="GreenText">#398300</Color>
+            <Color x:Key="GreenBack">#B6F287</Color>
+
+            <Color x:Key="BlueBorder">#3AAD9A</Color>
+            <Color x:Key="BlueText">#005D4E</Color>
+            <Color x:Key="BlueBack">#77D4C4</Color>
+            <Color x:Key="BluePage">#D8F7F2</Color>
+
+            <Color x:Key="YellowBorder">#EBFB54</Color>
+            <Color x:Key="YellowText">#839100</Color>
+            <Color x:Key="YellowBack">#FBFFDE</Color>
+
+            <!--Colours, light to dark. -->
+            <!--Blue:   #D8F7F2 #77D4C4 #3AAD9A #0E9780 #005D4E-->
+            <!--Green:  #EAFDDC #B6F287 #8FE64D #67D314 #398300-->
+            <!--Yellow: #FBFFDE #F2FD8E #EBFB54 #D5E916 #839100-->
 
             <Style ApplyToDerivedTypes="true" TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource Key=primary-back-title-color}"/>
                 <Setter Property="BarTextColor" Value="{StaticResource Key=primary-title-color}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource Key=primary-background-color}"/>
+            </Style>
+
+            <Style x:Key="TitleButtons" TargetType="Button">
+                <Setter Property="Margin" Value="10,0"/>
+                <Setter Property="Padding" Value="40,0,40,0"/>
+                <Setter Property="CornerRadius" Value="4"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BorderColor" Value="{StaticResource GreenBorder}"/>
+                <Setter Property="TextColor" Value="{StaticResource GreenText}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
             </Style>
 
             <Style x:Key="BackButton" TargetType="Button">
@@ -30,11 +56,17 @@
                 <Setter Property="HorizontalOptions" Value="Start"/>
                 <Setter Property="VerticalOptions" Value="Start"/>
                 <Setter Property="BorderWidth" Value="3"/>
-                <Setter Property="BorderColor" Value="{StaticResource Key=ButtonBorder}"/>
-                <Setter Property="TextColor" Value="{StaticResource Key=ButtonText}"/>
-                <Setter Property="BackgroundColor" Value="{StaticResource Key=ButtonBack}"/>
+                <Setter Property="BorderColor" Value="{StaticResource GreenBorder}"/>
+                <Setter Property="TextColor" Value="{StaticResource GreenText}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
                 <Setter Property="FontSize" Value="Large"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+            <Style x:Key="DifficultyButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource BluePage}"/>
+                <Setter Property="WidthRequest" Value="500"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
             </Style>
 
             <ControlTemplate x:Key="BackgroundTemplate">
