@@ -31,19 +31,19 @@
                 </StackLayout>
 
             <StackLayout Grid.Row="1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button Style="{StaticResource TitleButtons}" Grid.Row="0" Grid.Column="0" Text="Alleen Spelen" Clicked="SinglePlayerButton_Clicked" />
-                    <Button Style="{StaticResource TitleButtons}" Grid.Row="1" Grid.Column="0" Text="Samen Spelen" Clicked="MultiPlayerButton_Clicked" />
-                    <Button Style="{StaticResource TitleButtons}" Grid.Row="2" Grid.Column="0" Text="Highscores" Clicked="HighScoresPageButton_Clicked" />
-                    <Button Style="{StaticResource TitleButtons}" Grid.Row="3" Grid.Column="0" Text="Inloggen" Clicked="LoginButton_Clicked" x:Name="btnLogin"/>
-                    <Button Style="{StaticResource TitleButtons}" Grid.Row="4" Grid.Column="0" Text="Help" Clicked="HelpPageButton_Clicked"/>
-                  </Grid>
-            </StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="0" Grid.Column="0" Text="Alleen Spelen" Clicked="SinglePlayerButton_Clicked" />
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="1" Grid.Column="0" Text="Samen Spelen" Clicked="MultiPlayerButton_Clicked" />
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="2" Grid.Column="0" Text="Highscores" Clicked="HighScoresPageButton_Clicked" />
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="3" Grid.Column="0" Text="Inloggen" Clicked="LoginButton_Clicked" x:Name="btnLogin"/>
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="4" Grid.Column="0" Text="Help" Clicked="HelpPageButton_Clicked"/>
+                    </Grid>
+                </StackLayout>
         </Grid>
     </StackLayout>
     </RelativeLayout>

@@ -65,7 +65,8 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DifficultySelectPage());
+            //await Navigation.PushAsync(new TestPageToBeDeleted());
+            await Navigation.PushAsync(new DifficultySelectScreen());
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
@@ -80,6 +81,11 @@ namespace ProjectC
         private async void HelpPageButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new HelpPage());
+        }
+
+        private async void SettingsPageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
         }
 
         private async void HighScoresPageButton_Clicked(object sender, EventArgs e)
