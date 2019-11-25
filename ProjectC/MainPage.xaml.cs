@@ -83,6 +83,11 @@ namespace ProjectC
             await Navigation.PushAsync(new HelpPage());
         }
 
+        private async void SettingsPageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SettingsPage());
+        }
+
         private async void HighScoresPageButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new HighScoresPage());

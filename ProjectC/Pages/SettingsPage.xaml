@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="ProjectC.Pages.SettingsPage"
+             Title="Instellingen"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
+             NavigationPage.HasNavigationBar="True">
+    <ContentPage.Content>
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection Title="Gebruikersinstellingen: " TextColor="Black">
+                    <TextCell Text="Gebruikersnaam" TextColor="Black"/>
+                </TableSection>
+                
+                <TableSection Title="Wachtwoord aanpassen: " TextColor="Black">
+                    <EntryCell Label="Huidig Wachtwoord: " Placeholder="Wachtwoord"/>
+                    <EntryCell Label="Nieuw Wachtwoord: " Placeholder="Wachtwoord"/>
+                </TableSection>
+
+                <TableSection Title="geluidsinstellingen: " TextColor="Black">
+                    <SwitchCell Text="Zet hele app op stil "/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

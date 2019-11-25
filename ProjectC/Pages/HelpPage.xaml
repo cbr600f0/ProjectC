@@ -20,7 +20,7 @@
                    FontSize="Large"/>
                 <Label Text="- Je kan deze letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
-                <Label Text="- De eerste letter is al gegeven. De rest van de letters moet je aanvullen"
+                <Label Text="- Gebruik deze letters om een woord te maken. Het woord moet precies uit het aantal gevraagde letters bestaan"
                    FontSize="Large"/>
                 <Label Text="- Als je geen woord kan maken, kan je klikken op de shuffleknop om de letters te vervangen"
                    FontSize="Large"/>
@@ -41,7 +41,7 @@
                    FontSize="Large"/>
                 <Label Text="- Je kan op je eigen letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
-                <Label Text="- De eerste letter is al gegeven, deze is voor iedereen hetzelfde. De rest van de letters moet je aanvullen"
+                <Label Text="- Gebruik deze letters om een woord te maken. Het bord ziet er hetzelfde uit voor beide spelers"
                    FontSize="Large"/>
                 <Label Text="- Als je geen woord kan maken, kan je klikken op de shuffleknop om letters te vervangen"
                    FontSize="Large"/>
