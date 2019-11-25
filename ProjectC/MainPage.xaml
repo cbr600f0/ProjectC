@@ -41,9 +41,17 @@
                         <Button Style="{StaticResource TitleButtons}" Grid.Row="1" Grid.Column="0" Text="Samen Spelen" Clicked="MultiPlayerButton_Clicked" />
                         <Button Style="{StaticResource TitleButtons}" Grid.Row="2" Grid.Column="0" Text="Highscores" Clicked="HighScoresPageButton_Clicked" />
                         <Button Style="{StaticResource TitleButtons}" Grid.Row="3" Grid.Column="0" Text="Inloggen" Clicked="LoginButton_Clicked" x:Name="btnLogin"/>
-                        <Button Style="{StaticResource TitleButtons}" Grid.Row="4" Grid.Column="0" Text="Help" Clicked="HelpPageButton_Clicked"/>
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="4" Grid.Column="0" Text="Instellingen" Clicked="SettingsPageButton_Clicked"/>
+                        <Button Style="{StaticResource TitleButtons}" Grid.Row="5" Grid.Column="0" Text="Help" Clicked="HelpPageButton_Clicked"/>
                     </Grid>
-                </StackLayout>
+                        <Button Grid.Row="0" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Alleen Spelen" FontSize="Large" Clicked="SinglePlayerButton_Clicked" />
+                        <Button Grid.Row="1" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Samen Spelen" FontSize="Large" Clicked="MultiPlayerButton_Clicked" />
+                        <Button Grid.Row="2" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Highscores" FontSize="Large" Clicked="HighScoresPageButton_Clicked" />
+                        <Button Grid.Row="3" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Inloggen" FontSize="Large" Clicked="LoginButton_Clicked" />
+                        <Button Grid.Row="4" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Instellingen" FontSize="Large" Clicked="SettingsPageButton_Clicked"/>
+                        <Button Grid.Row="5" Grid.Column="0" Margin="10, 0" Padding="40,0,40,0" CornerRadius="4" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontAttributes="Bold" HorizontalOptions="Fill" Text="Help" FontSize="Large" Clicked="HelpPageButton_Clicked"/>
+                    
+            </StackLayout>
         </Grid>
     </StackLayout>
     </RelativeLayout>
