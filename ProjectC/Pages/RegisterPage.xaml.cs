@@ -19,14 +19,6 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
         public RegisterPage()
         {
             this.InitializeComponent();
@@ -68,7 +60,7 @@ namespace ProjectC.Pages
             {
                 this.ShowWarningLabel(RegisterPageResource.InvalidPassword);
             }
-            else if (this.UserService.Get().Select(u => u.UserName).Contains(eUserName.Text))
+            else if (BasePage.UserService.Get().Select(u => u.UserName).Contains(eUserName.Text))
             {
                 this.ShowWarningLabel(RegisterPageResource.UserNameExists);
                 eUserName.Text = String.Empty;
@@ -78,7 +70,7 @@ namespace ProjectC.Pages
                 User user = new User(eUserName.Text, this.HashPassword(ePassword.Text), (SecurityQuestionEnum)pSecurityQuestion.SelectedIndex, eSecurityQuestion.Text);
                 try
                 {
-                    this.UserService.AddOrUpdate(user);
+                    BasePage.UserService.AddOrUpdate(user);
                     await DisplayAlert(String.Empty, RegisterPageResource.RegisterSuccessful, RegisterPageResource.OK);
                     await Navigation.PushAsync(new LoginPage());
                 }

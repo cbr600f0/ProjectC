@@ -7,5 +7,9 @@ namespace ProjectC.Model
     public interface BaseModel
     {
         Guid Id { get; set; }
+
+        DateTimeOffset CreatedAt { get; set; }
+
+        DateTimeOffset? ModifiedAt { get; set; }
     }
 }

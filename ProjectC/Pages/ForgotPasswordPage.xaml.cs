@@ -18,14 +18,6 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForgotPasswordPage : ContentPage
     {
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
         public ForgotPasswordPage()
         {
             InitializeComponent();
@@ -47,7 +39,7 @@ namespace ProjectC.Pages
 
         private async void ValidateData()
         {
-            List<User> users = this.UserService.Get();
+            List<User> users = BasePage.UserService.Get();
 
             if(users.Where(u => u.UserName == eUserName.Text && u.SecurityQuestion == (SecurityQuestionEnum)pSecurityQuestion.SelectedIndex && u.SecurityQuestionAnswer == eSecurityQuestion.Text).Any())
             {

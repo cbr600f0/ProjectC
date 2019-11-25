@@ -9,7 +9,7 @@ using ProjectC.Business.Interface;
 
 namespace ProjectC.Business.Service
 {
-    public class HighScoreService : BaseService<HighScore>
+    public class ScoreService : BaseService<Score>
     {
         private UserService _userService;
         protected UserService UserService
@@ -20,31 +20,30 @@ namespace ProjectC.Business.Service
             }
         }
 
-        public HighScoreService() : base()
+        public ScoreService() : base()
         {
         }
 
-        public List<HighScore> Get()
+        public List<Score> Get()
         {
-            return base.Get<HighScore>().ToList();
+            return base.Get<Score>().ToList();
         }
 
-        public HighScore Get(Guid id)
+        public Score Get(Guid id)
         {
-            return base.Get<HighScore>(id).SingleOrDefault();
+            return base.Get<Score>(id).SingleOrDefault();
         }
 
         public void Delete(Guid id)
         {
-            base.Delete<HighScore>(id);
+            base.Delete<Score>(id);
         }
 
-        public void AddOrUpdate(HighScore highscore)
+        public void AddOrUpdate(Score score)
         {
-            highscore.UserName = this.UserService.Get(highscore.UserId).UserName;
             try
             {
-                base.AddOrUpdate<HighScore>(ref highscore);
+                base.AddOrUpdate<Score>(ref score);
             }
             catch (Exception)
             {
@@ -52,18 +51,19 @@ namespace ProjectC.Business.Service
             }
         }
 
-        public List<HighScore> GetByUserId(Guid userId)
+        public List<Score> GetByUserId(Guid userId)
         {
-            return base.Get<HighScore>()
+            return base.Get<Score>()
                 .Where(hs => hs.UserId == userId)
                 .OrderByDescending(hs => hs.Points)
                 .ToList();
         }
 
-        public List<HighScore> GetRankedHighScores(Boolean isLocal)
+        public List<VMScore> GetRankedScores(Boolean isLocal)
         {
+            List<VMScore> vmScores = new List<VMScore>();
 
-            List<HighScore> highScores = isLocal ? this.GetByUserId(base.CurrentUserId.Value)
+            List<Score> scores = isLocal ? this.GetByUserId(base.CurrentUserId.Value)
                 .OrderByDescending(hs => hs.Points)
                 .Take(10)
                 .ToList()
@@ -74,12 +74,12 @@ namespace ProjectC.Business.Service
 
             Int32 rank = 1;
 
-            foreach (HighScore highScore in highScores)
+            foreach (Score score in scores)
             {
-                highScore.Rank = rank;
+                vmScores.Add(new VMScore(this.UserService.Get(score.UserId).UserName, rank, score.Points, score.Date));
                 rank++;
             }
-            return highScores;
+            return vmScores;
         }
     }
 }
