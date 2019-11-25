@@ -426,6 +426,8 @@ namespace ProjectC.Pages
                 Grid grid = (Grid)frame.Content;
                 Label label = (Label)grid.Children[0];
                 label.Text = "";
+                label = (Label)grid.Children[1];
+                label.Text = "";
             }
         }
 
@@ -450,8 +452,11 @@ namespace ProjectC.Pages
                 Grid grid = (Grid)frame.Content;
                 Label label = (Label)grid.Children[0];
                 Label labelPoints = (Label)grid.Children[1];
-                label.Text = label.Text == "" ? RandomLetterGenerator().ToString() : label.Text;
-                label.Text = currentLetterValue.ToString();
+                if (label.Text == "")
+                {
+                    label.Text = RandomLetterGenerator().ToString();
+                    labelPoints.Text = currentLetterValue.ToString();
+                }
             }
         }
 
@@ -463,8 +468,11 @@ namespace ProjectC.Pages
             }
             foreach (Frame frame in UsableLetterList)
             {
-                Label label = (Label)frame.Content;
+                Grid grid = (Grid)frame.Content;
+                Label label = (Label)grid.Children[0];
                 label.Text = RandomLetterGenerator().ToString();
+                Label labelPoints = (Label)grid.Children[1];
+                labelPoints.Text = currentLetterValue.ToString();
             }
             EmptyPushwordBar();
             remainingShuffles--;
