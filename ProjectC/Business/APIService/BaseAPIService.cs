@@ -10,11 +10,24 @@ using System.Net.Http;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using ProjectC.Business.Service;
 
 namespace ProjectC.Business.APIService
 {
     public class BaseAPIService<T> where T : class, BaseModel, new()
     {
+        #region Services
+
+        private UserService _userService;
+        protected UserService UserService
+        {
+            get
+            {
+                return this._userService = this._userService ?? new UserService();
+            }
+        }
+
+        #endregion
         public BaseAPIService()
         {
         }
@@ -30,9 +43,24 @@ namespace ProjectC.Business.APIService
                 .Where(m => m.Id == id);
         }
 
+        public Boolean ApiIsAvailable()
+        {
+            String baseUrl = "https://145.137.57.54:44353/api/testconnection";
+            try
+            {
+                WebClient client = new WebClient();
+                String result = client.DownloadString(baseUrl);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         private IEnumerable<TModel> GetModelFromApi<TModel>() where TModel : new()
         {
-            String baseUrl = $"https://145.137.57.188:44353/api/{typeof(T).Name.ToLower()}";
+            String baseUrl = $"https://145.137.57.54:44353/api/{typeof(T).Name.ToLower()}";
 
             WebClient client = new WebClient();
             String result = client.DownloadString(baseUrl);

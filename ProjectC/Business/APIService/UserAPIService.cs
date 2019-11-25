@@ -7,6 +7,7 @@ using SQLite;
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 using ProjectC.Business.Service;
+using Plugin.Connectivity;
 
 namespace ProjectC.Business.APIService
 {
@@ -17,7 +18,14 @@ namespace ProjectC.Business.APIService
         }
         public List<User> Get()
         {
-            return base.Get<User>().ToList();
+            if (CrossConnectivity.Current.IsConnected && base.ApiIsAvailable())
+            {
+                return base.Get<User>().ToList();
+            }
+            else
+            {
+                return base.UserService.Get();
+            }
         }
 
         public User Get(Guid id)
