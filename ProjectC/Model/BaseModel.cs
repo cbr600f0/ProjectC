@@ -11,5 +11,9 @@ namespace ProjectC.Model
         DateTimeOffset CreatedAt { get; set; }
 
         DateTimeOffset? ModifiedAt { get; set; }
+
+        DateTimeOffset? LastSynchronized { get; set; }
+
+        Boolean Active { get; set; }
     }
 }
