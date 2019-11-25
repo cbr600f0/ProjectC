@@ -78,6 +78,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CarouselView">
+      <Version>7.0.3.1</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.6.292</Version>
     </PackageReference>
@@ -158,6 +161,16 @@
     <AndroidResource Include="Resources\drawable\Background4k.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Emoji_Easy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Emoji_Hard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Emoji_Medium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Emoji_Legendary.png" />
     <AndroidResource Include="Resources\drawable\splash_logo.png" />
   </ItemGroup>
   <ItemGroup>
