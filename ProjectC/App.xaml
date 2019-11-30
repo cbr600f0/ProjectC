@@ -65,10 +65,23 @@
 
             <Style x:Key="DifficultyButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource BluePage}"/>
-                <Setter Property="WidthRequest" Value="500"/>
+                <Setter Property="WidthRequest" Value="350"/>
                 <Setter Property="HorizontalOptions" Value="Fill"/>
             </Style>
 
+            <Style x:Key="KeyboardButton" TargetType="Button">
+                <Setter Property="Margin" Value="10, 0"/>
+                <Setter Property="Padding" Value="0,0,0,0"/>
+                <Setter Property="CornerRadius" Value="4"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BorderColor" Value="{StaticResource GreenBorder}"/>
+                <Setter Property="TextColor" Value="{StaticResource GreenText}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Fill"/>
+            </Style>
+            
             <ControlTemplate x:Key="BackgroundTemplate">
                         <ScrollView>
                             <RelativeLayout>

@@ -10,41 +10,48 @@
     <ContentPage.BindingContext>
         <model:DifficultyViewModel />
     </ContentPage.BindingContext>
+    <!--Templates for the difficulties-->
     <ContentPage.Resources>
         <DataTemplate x:Key="easy">
             <StackLayout>
-                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="EasyButton_Clicked"></Button>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" x:Name="easyButton" Clicked="EasyButton_Clicked"></Button>
                 <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="med">
             <StackLayout>
-                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="MediumButton_Clicked"></Button>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" x:Name="mediumButton" Clicked="MediumButton_Clicked"></Button>
                 <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="hard">
             <StackLayout HorizontalOptions="Fill">
-                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="HardButton_Clicked"></Button>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" x:Name="hardButton" Clicked="HardButton_Clicked"></Button>
                 <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="legend">
             <StackLayout>
-                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" Clicked="LegendButton_Clicked"></Button>
+                <Button ImageSource="{Binding Image}" Style="{StaticResource DifficultyButton}" x:Name="legendaryButton" Clicked="LegendButton_Clicked"></Button>
                 <Label Text="{Binding Name}" FontSize="Large" HorizontalTextAlignment="Center" TextColor="#398300"></Label>
             </StackLayout>
         </DataTemplate>
-
+        
+        <!--Picks the template for each difficulty-->
         <model:DifficultDataTemplateSelector x:Key="DifficultySelector" Easy="{StaticResource easy}" Med="{StaticResource med}" Hard="{StaticResource hard}" Legend="{StaticResource legend}"/>
-
     </ContentPage.Resources>
+    
+    <!--The actual content-->
     <ContentPage.Content>
         <StackLayout>
             <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"></Button>
             <Label Text="Moeilijkheidsgraad" FontSize="30"  FontAttributes="Bold"  HorizontalTextAlignment="Center" TextColor="#005D4E"></Label>
             <CarouselView ItemsSource="{Binding Difficulties}" ItemTemplate="{StaticResource DifficultySelector}" VerticalOptions="Center"></CarouselView>
-            
+            <Label x:Name="lblWarning" Text="Kies hoeveelheid letters" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,5,5,5" IsVisible="False" TextColor="Red" FontSize="15" BackgroundColor="Transparent" FlexLayout.AlignSelf="End"/>
+            <Grid>
+                <Button Grid.Column="0" Style="{StaticResource KeyboardButton}" x:Name="easyLettersButton" Clicked="EasyDifficultySelector" Text="Veel letters (makkelijk)"/>
+                <Button Grid.Column="1" Style="{StaticResource KeyboardButton}" x:Name="hardLettersButton" Clicked="HardDifficultySelector" Text="Weinig letters (moeilijk)"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
