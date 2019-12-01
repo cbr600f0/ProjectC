@@ -9,21 +9,37 @@
              ControlTemplate="{StaticResource BackgroundTemplate}"
              NavigationPage.HasNavigationBar="True">
     <ContentPage.Content>
+        <ScrollView>
         <TableView Intent="Settings">
             <TableRoot>
-                <TableSection Title="Gebruikersinstellingen: " TextColor="Black">
-                    <TextCell Text="Gebruikersnaam" TextColor="Black"/>
-                </TableSection>
-                
-                <TableSection Title="Wachtwoord aanpassen: " TextColor="Black">
-                    <EntryCell Label="Huidig Wachtwoord: " Placeholder="Wachtwoord"/>
-                    <EntryCell Label="Nieuw Wachtwoord: " Placeholder="Wachtwoord"/>
+                    <TableSection Title="Geluid" TextColor="#398300">
+                    <SwitchCell Text="Mute"/>
+                    <!--Slider-->
+                    <ViewCell>
+                        <StackLayout>
+                            <Label x:Name="rotatingLabel"
+                                   Text="Spelgeluid"/>
+
+                            <Slider Maximum="100"
+                                    ValueChanged="OnSliderValueChanged"/>
+                        </StackLayout>
+                    </ViewCell>
+
+                    <SwitchCell Text="Keyboardgeluid"/>
+                    <SwitchCell Text="Overige geluiden"/>
                 </TableSection>
 
-                <TableSection Title="geluidsinstellingen: " TextColor="Black">
-                    <SwitchCell Text="Zet hele app op stil "/>
+                <TableSection Title="wachtwoord veranderen" TextColor="#398300">
+                    <EntryCell Placeholder="Huidig Wachtwoord"/>
+                    <EntryCell Placeholder="Nieuw Wachtwoord"/>
+                    <ViewCell>
+                        <StackLayout>
+                            <Button Text="Opslaan"/>
+                        </StackLayout>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

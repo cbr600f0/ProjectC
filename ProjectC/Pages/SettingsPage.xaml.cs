@@ -16,5 +16,10 @@ namespace ProjectC.Pages
         {
             InitializeComponent();
         }
+
+        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
+        {
+
+        }
     }
 }
