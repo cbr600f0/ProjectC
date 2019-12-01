@@ -61,6 +61,7 @@ namespace ProjectC.Business.Service
                 _SQLiteConnection.Update(model);
             }
         }
+
         internal void SetBaseProperties<TModel>(ref TModel model) where TModel : BaseModel, new()
         {
             if (model.CreatedAt != DateTimeOffset.MinValue)
