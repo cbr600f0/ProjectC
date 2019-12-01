@@ -7,23 +7,48 @@
              x:Class="ProjectC.Pages.SettingsPage"
              Title="Instellingen"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <TableView Intent="Settings">
+        <ScrollView>
+        <TableView Intent="Settings" HasUnevenRows="True">
             <TableRoot>
-                <TableSection Title="Gebruikersinstellingen: " TextColor="Black">
-                    <TextCell Text="Gebruikersnaam" TextColor="Black"/>
-                </TableSection>
-                
-                <TableSection Title="Wachtwoord aanpassen: " TextColor="Black">
-                    <EntryCell Label="Huidig Wachtwoord: " Placeholder="Wachtwoord"/>
-                    <EntryCell Label="Nieuw Wachtwoord: " Placeholder="Wachtwoord"/>
-                </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="Geluid" TextColor="#398300">
+                    <SwitchCell Text="Mute"/>
+                    <!--Slider-->
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="-   Spelgeluid   +" HorizontalTextAlignment="Center" FontSize="Large"/>
 
-                <TableSection Title="geluidsinstellingen: " TextColor="Black">
-                    <SwitchCell Text="Zet hele app op stil "/>
+                            <Slider Maximum="100"
+                                ValueChanged="OnSliderValueChanged" />
+                        </StackLayout>
+                    </ViewCell>
+
+                    <SwitchCell Text="Keyboardgeluid"/>
+                    <SwitchCell Text="Overige geluiden"/>
+                        <ViewCell>
+                            <StackLayout>
+                                <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+
+                <TableSection Title="wachtwoord veranderen" TextColor="#398300">
+                    <EntryCell Placeholder="Huidig Wachtwoord"/>
+                    <EntryCell Placeholder="Nieuw Wachtwoord"/>
+                    <ViewCell>
+                        <StackLayout>
+                            <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
+                        </StackLayout>
+                    </ViewCell>
                 </TableSection>
             </TableRoot>
         </TableView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

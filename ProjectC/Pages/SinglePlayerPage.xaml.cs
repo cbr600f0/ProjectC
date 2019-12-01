@@ -608,18 +608,6 @@ namespace ProjectC.Pages
 
             return totalPoints;
         }
-        //Tijdelijke functie
-        private void PushPointsToDatabase(Int32 points)
-        {
-            //Gebruiker moet ingelogd zijn!!!
-            if (!BasePage.CurrentUserId.HasValue)
-            {
-                return;
-            }
-            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now, difficultyMultiplier == 3);
-            BasePage.ScoreService.AddOrUpdate(score);
-        }
-
 
         protected void UIPushBarCreation()
         {
