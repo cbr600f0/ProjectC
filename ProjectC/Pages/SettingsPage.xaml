@@ -33,7 +33,7 @@
                     <SwitchCell Text="Overige geluiden"/>
                         <ViewCell>
                             <StackLayout>
-                                <Button Text="Opslaan" BorderColor="{StaticResource GreenBorder}" TextColor="{StaticResource GreenText}" BackgroundColor="{StaticResource GreenBack}" BorderWidth="0"/>
+                                <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
@@ -43,7 +43,7 @@
                     <EntryCell Placeholder="Nieuw Wachtwoord"/>
                     <ViewCell>
                         <StackLayout>
-                                <Button Text="Opslaan" BorderColor="{StaticResource GreenBorder}" TextColor="{StaticResource GreenText}" BackgroundColor="{StaticResource GreenBack}" BorderWidth="0"/>
+                            <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>

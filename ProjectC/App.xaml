@@ -48,6 +48,7 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="FontSize" Value="Large"/>
             </Style>
 
             <Style x:Key="BackButton" TargetType="Button">
