@@ -21,5 +21,10 @@ namespace ProjectC.Pages
         {
 
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync(true);
+        }
     }
 }

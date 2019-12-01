@@ -7,34 +7,43 @@
              x:Class="ProjectC.Pages.SettingsPage"
              Title="Instellingen"
              ControlTemplate="{StaticResource BackgroundTemplate}"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <ScrollView>
         <TableView Intent="Settings">
             <TableRoot>
+                    <TableSection>
+                        <ViewCell>
+                            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
+                        </ViewCell>
+                    </TableSection>
                     <TableSection Title="Geluid" TextColor="#398300">
                     <SwitchCell Text="Mute"/>
                     <!--Slider-->
                     <ViewCell>
                         <StackLayout>
-                            <Label x:Name="rotatingLabel"
-                                   Text="Spelgeluid"/>
+                            <Label Text="-   Spelgeluid   +" HorizontalTextAlignment="Center" FontSize="Large"/>
 
                             <Slider Maximum="100"
-                                    ValueChanged="OnSliderValueChanged"/>
+                                ValueChanged="OnSliderValueChanged" />
                         </StackLayout>
                     </ViewCell>
 
                     <SwitchCell Text="Keyboardgeluid"/>
                     <SwitchCell Text="Overige geluiden"/>
-                </TableSection>
+                        <ViewCell>
+                            <StackLayout>
+                                <Button Text="Opslaan" BorderColor="{StaticResource GreenBorder}" TextColor="{StaticResource GreenText}" BackgroundColor="{StaticResource GreenBack}" BorderWidth="0"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
 
                 <TableSection Title="wachtwoord veranderen" TextColor="#398300">
                     <EntryCell Placeholder="Huidig Wachtwoord"/>
                     <EntryCell Placeholder="Nieuw Wachtwoord"/>
                     <ViewCell>
                         <StackLayout>
-                            <Button Text="Opslaan"/>
+                                <Button Text="Opslaan" BorderColor="{StaticResource GreenBorder}" TextColor="{StaticResource GreenText}" BackgroundColor="{StaticResource GreenBack}" BorderWidth="0"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
