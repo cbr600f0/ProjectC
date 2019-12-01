@@ -7,6 +7,7 @@ using SQLite;
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 using ProjectC.Business.Service;
+using Plugin.Connectivity;
 
 namespace ProjectC.Business.APIService
 {
@@ -17,12 +18,29 @@ namespace ProjectC.Business.APIService
         }
         public List<User> Get()
         {
-            return base.Get<User>().ToList();
+            if (base.ApiIsAvailable())
+            {
+                return base.Get<User>().ToList();
+            }
+            else
+            {
+                return base.UserService.Get();
+            }
         }
 
         public User Get(Guid id)
         {
             return base.Get<User>(id).SingleOrDefault();
+        }
+
+        public void AddOrUpdate(User user)
+        {
+            if (base.ApiIsAvailable())
+            {
+                base.AddOrUpdate<User>(ref user);
+                user.LastSynchronized = DateTimeOffset.Now;
+            }
+            base.UserService.AddOrUpdate(user);
         }
     }
 }

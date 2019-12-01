@@ -27,13 +27,6 @@ namespace ProjectC
         public MainPage()
         {
             this.InitializeComponent();
-            if(!BasePage.UserService.Get().Any())
-            {
-                User user = new User("martijn", "wachtwoord", SecurityQuestionEnum.PetQuestion, "kat");
-                user.Id = new Guid("8787108A-DD83-4248-880F-EDD450405C69");
-                BasePage.UserService.AddOrUpdate(user);
-            }
-
 
             if (this.CurrentUserId.HasValue)
             {
@@ -65,6 +58,7 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
+            //await Navigation.PushAsync(new TestPageToBeDeleted());
             await Navigation.PushAsync(new DifficultySelectScreen());
         }
 

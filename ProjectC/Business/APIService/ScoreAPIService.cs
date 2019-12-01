@@ -7,32 +7,41 @@ using SQLite;
 using Xamarin.Forms;
 using ProjectC.Business.Interface;
 using ProjectC.Business.Service;
+using Plugin.Connectivity;
 
 namespace ProjectC.Business.APIService
 {
     public class ScoreAPIService : BaseAPIService<Score>
     {
-        private UserService _userService;
-        protected UserService UserService
-        {
-            get
-            {
-                return this._userService = this._userService ?? new UserService();
-            }
-        }
-
         public ScoreAPIService() : base()
         {
         }
 
         public List<Score> Get()
         {
-            return base.Get<Score>().ToList();
+            if(base.ApiIsAvailable())
+            {
+                return base.Get<Score>().ToList();
+            }
+            else
+            {
+                return base.ScoreService.Get();
+            }
         }
 
         public Score Get(Guid id)
         {
             return base.Get<Score>(id).SingleOrDefault();
+        }
+
+        public void AddOrUpdate(Score score)
+        {
+            if (base.ApiIsAvailable())
+            {
+                base.AddOrUpdate<Score>(ref score);
+                score.LastSynchronized = DateTimeOffset.Now;
+            }
+            base.ScoreService.AddOrUpdate(score);
         }
 
         public List<VMScore> GetRankedScores()
@@ -45,7 +54,7 @@ namespace ProjectC.Business.APIService
 
             foreach (Score score in scores)
             {
-                vmScores.Add(new VMScore(this.UserService.Get(score.UserId).UserName, rank, score.Points, score.Date));
+                vmScores.Add(new VMScore(base.UserService.Get(score.UserId).UserName, rank, score.Points, score.Date));
                 rank++;
             }
             return vmScores;
