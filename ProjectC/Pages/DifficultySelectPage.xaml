@@ -44,34 +44,23 @@
 <!--The actual content-->
     <ContentPage.Content>
         <StackLayout>
-            <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
-            <Label Grid.Row="0" Grid.Column="1" Text="Moeilijkheidsgraad" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#005D4E"/>
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+            <Label Text="Moeilijkheidsgraad" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center" TextColor="#005D4E"/>
             <Grid VerticalOptions="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Image Grid.Row="1" Grid.Column="0" Source="Swipe_L.png" VerticalOptions="Center" BackgroundColor="Green"/>
-                <CarouselView Grid.Row="1" Grid.Column="1" x:Name="DifficultyPicker" Opacity="0.5" VerticalOptions="Center" ItemsSource="{Binding Difficulties}" ItemTemplate="{StaticResource DifficultySelector}"/>
-                <Image Grid.Row="1" Grid.Column="2" Source="Swipe_R.png" VerticalOptions="Center" BackgroundColor="Green"/>
-                <Label Grid.Row="2" Grid.Column="1" x:Name="lblWarning" Text="Kies hoeveelheid letters" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,5,5,5" IsVisible="False" TextColor="Red" FontSize="15"/>
+                <Image        Grid.Row="0" Grid.Column="0" Source="swipe_L.png" VerticalOptions="StartAndExpand" HeightRequest="200"/>
+                <CarouselView Grid.Row="0" Grid.Column="1" x:Name="DifficultyPicker" Opacity="0.5" VerticalOptions="Center" ItemsSource="{Binding Difficulties}" ItemTemplate="{StaticResource DifficultySelector}"/>
+                <Image        Grid.Row="0" Grid.Column="2" Source="swipe_R.png" VerticalOptions="StartAndExpand" HeightRequest="200"/>
             </Grid>
-            <Grid VerticalOptions="EndAndExpand">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Column="0" Style="{StaticResource KeyboardButton}" x:Name="easyLettersButton" Clicked="EasyDifficultySelector" Text="Veel letters (makkelijk)"/>
-                <Button Grid.Column="1" Style="{StaticResource KeyboardButton}" x:Name="hardLettersButton" Clicked="HardDifficultySelector" Text="Weinig letters (moeilijk)"/>
+            <Label  Grid.Row="0" x:Name="lblWarning" Text="Kies hoeveelheid letters" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,5,5,5" IsVisible="False" TextColor="Red" FontSize="15"/>
+            <Grid> <!--If anyone has any suggestions how to fix the height in a more practical way, please let me know-->
+                <Grid.RowDefinitions> <RowDefinition Height="130"/> </Grid.RowDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource KeyboardButton}" x:Name="easyLettersButton" Clicked="EasyDifficultySelector" Text="Veel letters (makkelijk)" />
+                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource KeyboardButton}" x:Name="hardLettersButton" Clicked="HardDifficultySelector" Text="Weinig letters (moeilijk)"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>
