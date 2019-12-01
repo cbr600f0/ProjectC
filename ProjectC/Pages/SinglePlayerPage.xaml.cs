@@ -40,6 +40,7 @@ namespace ProjectC.Pages
         public string currentUser = "";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
+
         public Score score;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {

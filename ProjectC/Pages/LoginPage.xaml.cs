@@ -18,7 +18,6 @@ namespace ProjectC.Pages
     {
         public LoginPage()
         {
-            List<User> users = BasePage.UserService.Get();
             this.InitializeComponent();
             eUserName.ReturnCommand = new Command(() => ePassword.Focus());
         }

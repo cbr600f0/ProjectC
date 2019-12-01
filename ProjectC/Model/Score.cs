@@ -14,6 +14,8 @@ namespace ProjectC.Model
 
         public DateTimeOffset? ModifiedAt { get; set; }
 
+        public Boolean Active { get; set; }
+
         public DateTimeOffset? LastSynchronized { get; set; }
 
         public Guid UserId { get; set; }
