@@ -16,15 +16,5 @@ namespace ProjectC.Pages
         {
             InitializeComponent();
         }
-
-        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
-        {
-
-        }
-
-        private async void BackButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync(true);
-        }
     }
 }

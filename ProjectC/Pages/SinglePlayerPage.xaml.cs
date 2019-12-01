@@ -609,6 +609,18 @@ namespace ProjectC.Pages
 
             return totalPoints;
         }
+        //Tijdelijke functie
+        private void PushPointsToDatabase(Int32 points)
+        {
+            //Gebruiker moet ingelogd zijn!!!
+            if (!BasePage.CurrentUserId.HasValue)
+            {
+                return;
+            }
+            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
+            BasePage.ScoreService.AddOrUpdate(score);
+        }
+
 
         protected void UIPushBarCreation()
         {
@@ -668,7 +680,7 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {   
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
             }
             await Navigation.PushAsync(new MainPage());
         }

@@ -52,7 +52,7 @@ namespace ProjectC.Pages
                 user.Password = this.HashPassword(ePassword.Text);
                 try
                 {
-                    BasePage.UserAPIService.AddOrUpdate(user);
+                    BasePage.UserService.AddOrUpdate(user);
                     await DisplayAlert(String.Empty, ChangePassWordPageResource.UpdateSuccessful, ChangePassWordPageResource.OK);
                     await Navigation.PushAsync(new LoginPage());
                 }

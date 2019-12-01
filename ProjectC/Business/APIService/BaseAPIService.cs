@@ -11,8 +11,6 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using ProjectC.Business.Service;
-using System.Collections.Specialized;
-using ProjectC.Helper;
 
 namespace ProjectC.Business.APIService
 {
@@ -53,87 +51,29 @@ namespace ProjectC.Business.APIService
                 .Where(m => m.Id == id);
         }
 
-        public void Delete<TModel>(Guid id) where TModel : class, BaseModel
-        {
-            this.DeleteModel<TModel>(id);
-        }
-
-        public void AddOrUpdate<TModel>(ref TModel model) where TModel : BaseModel, new()
-        {
-            this.SetBaseProperties(ref model);
-            this.UpdateModel<TModel>(ref model);
-        }
-
-        internal void SetBaseProperties<TModel>(ref TModel model) where TModel : BaseModel, new()
-        {
-            if (model.CreatedAt != DateTimeOffset.MinValue)
-            {
-                model.ModifiedAt = DateTimeOffset.Now;
-            }
-            else
-            {
-                model.CreatedAt = DateTimeOffset.Now;
-                model.Active = true;
-            }
-        }
-
         public Boolean ApiIsAvailable()
         {
-            String url = $"{App.BaseUrl}testconnection";
-
-            using (WebClient webClient = new WebCientTimeOut())
+            String baseUrl = "https://145.137.57.54:44353/api/testconnection";
+            try
             {
-                webClient.Encoding = Encoding.UTF8;
-                webClient.Proxy = new WebProxy();
-                try
-                {
-                    String response = webClient.DownloadString(url);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
+                WebClient client = new WebClient();
+                String result = client.DownloadString(baseUrl);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
         private IEnumerable<TModel> GetModelFromApi<TModel>() where TModel : new()
         {
-            String baseUrl = $"{App.BaseUrl}{typeof(T).Name.ToLower()}";
+            String baseUrl = $"https://145.137.57.54:44353/api/{typeof(T).Name.ToLower()}";
 
             WebClient client = new WebClient();
             String result = client.DownloadString(baseUrl);
 
             return JsonConvert.DeserializeObject<List<TModel>>(result);
-        }
-
-        private void UpdateModel<TModel>(ref TModel model) where TModel : new()
-        {
-            String url = $"{App.BaseUrl}{typeof(TModel).Name.ToLower()}";
-            String jsonData = JsonConvert.SerializeObject(model);
-
-            Dictionary<String, String> dict = JsonConvert.DeserializeObject<Dictionary<String, String>>(jsonData);
-
-            NameValueCollection nvc = null;
-            if (dict != null)
-            {
-                nvc = new NameValueCollection(dict.Count);
-                foreach (var k in dict)
-                {
-                    nvc.Add(k.Key, k.Value);
-                }
-            }
-
-            App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadValuesAsync(new Uri(url), "POST", nvc);
-        }
-
-        private void DeleteModel<TModel>(Guid id) where TModel : class, BaseModel
-        {
-            String url = $"{App.BaseUrl}{typeof(TModel).Name.ToLower()}";
-
-            App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadStringAsync(new Uri(url), "Delete", id.ToString());
         }
     }
 }

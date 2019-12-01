@@ -70,7 +70,7 @@ namespace ProjectC.Pages
                 User user = new User(eUserName.Text, this.HashPassword(ePassword.Text), (SecurityQuestionEnum)pSecurityQuestion.SelectedIndex, eSecurityQuestion.Text);
                 try
                 {
-                    BasePage.UserAPIService.AddOrUpdate(user);
+                    BasePage.UserService.AddOrUpdate(user);
                     await DisplayAlert(String.Empty, RegisterPageResource.RegisterSuccessful, RegisterPageResource.OK);
                     await Navigation.PushAsync(new LoginPage());
                 }

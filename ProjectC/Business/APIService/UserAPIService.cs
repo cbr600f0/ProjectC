@@ -18,7 +18,7 @@ namespace ProjectC.Business.APIService
         }
         public List<User> Get()
         {
-            if (base.ApiIsAvailable())
+            if (CrossConnectivity.Current.IsConnected && base.ApiIsAvailable())
             {
                 return base.Get<User>().ToList();
             }
@@ -31,16 +31,6 @@ namespace ProjectC.Business.APIService
         public User Get(Guid id)
         {
             return base.Get<User>(id).SingleOrDefault();
-        }
-
-        public void AddOrUpdate(User user)
-        {
-            if (base.ApiIsAvailable())
-            {
-                base.AddOrUpdate<User>(ref user);
-                user.LastSynchronized = DateTimeOffset.Now;
-            }
-            base.UserService.AddOrUpdate(user);
         }
     }
 }

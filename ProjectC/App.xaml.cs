@@ -2,7 +2,6 @@
 using Plugin.Connectivity;
 using ProjectC.Business.Interface;
 using ProjectC.Business.Service;
-using ProjectC.Helper;
 using ProjectC.Model;
 using ProjectC.Pages;
 using SQLite;
@@ -13,9 +12,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,23 +19,20 @@ namespace ProjectC
 {
     public partial class App : Application
     {
-        public static readonly WebClient client = new WebClient();
+        private static readonly WebClient client = new WebClient();
 
-        public static readonly NetworkAccess connectivity = Connectivity.NetworkAccess;  
-
-        public static readonly String BaseUrl = "https://192.168.0.156:44353/api/";
+        private SQLiteConnection _SQLiteConnection;
 
         public App()
         {
             Application.Current.Properties["IsLoggedIn"] = false;
-
-            if (App.connectivity == NetworkAccess.Internet && this.ApiIsAvailable())
-            {
-                this.SynchronizeUsers();
-                this.SynchronizeScores();
-            }
-
             InitializeComponent();
+
+            _SQLiteConnection = DependencyService.Get<ISQLiteInterface>().GetConnection();
+
+            this.SynchronizeUsers();
+            this.SynchronizeScores();
+
             var splashPage = new NavigationPage(new SplashScreen());
             MainPage = splashPage;
         }
@@ -61,10 +54,13 @@ namespace ProjectC
 
         private void SynchronizeUsers()
         {
-            List<User> usersFromAPI = BasePage.UserAPIService.Get();
-            List<User> usersFromDataBase = BasePage.UserService.Get();
+            if(CrossConnectivity.Current.IsConnected && this.ApiIsAvailable())
+            {
+                List<User> usersFromAPI = BasePage.UserAPIService.Get();
+                List<User> usersFromDataBase = BasePage.UserService.Get();
 
-            this.Synchronize<User>(usersFromAPI, usersFromDataBase, new User());
+                this.Synchronize<User>(usersFromAPI, usersFromDataBase, new User());
+            }
         }
 
         private void SynchronizeScores()
@@ -85,7 +81,8 @@ namespace ProjectC
             List<T> modelsToAdd = new List<T>();
             foreach(T item in addedItemsLocally)
             {
-                this.Delete<T>(item.Id);
+                T modelToUpdate = item;
+                this.UpdateModel<T>(ref modelToUpdate, "POST");
             }
 
             // Items updated
@@ -93,14 +90,15 @@ namespace ProjectC
             foreach(T item in updatedItemsLocally)
             {
                 T modelToUpdate = item;
-                this.UpdateModel<T>(ref modelToUpdate);
+                this.UpdateModel<T>(ref modelToUpdate, "POST");
             }
 
             // Items deleted
             List<T> deletedItemsLocally = modelsFromDatabase.Where(m => m.ModifiedAt > m.LastSynchronized && !m.Active).ToList();
             foreach (T item in deletedItemsLocally)
             {
-                this.Delete<T>(item.Id);
+                T modelToUpdate = item;
+                this.UpdateModel<T>(ref modelToUpdate, "Delete");
             }
 
             #endregion
@@ -131,9 +129,9 @@ namespace ProjectC
             }
         }
 
-        private void UpdateModel<TModel>(ref TModel model) where TModel : new()
+        private void UpdateModel<TModel>(ref TModel model, String method) where TModel : new()
         {
-            String url = $"{App.BaseUrl}{typeof(TModel).Name.ToLower()}";
+            String baseUrl = $"https://145.137.57.54:44353/api/{typeof(TModel).Name.ToLower()}";
             String jsonData = JsonConvert.SerializeObject(model);
 
             Dictionary<String, String> dict = JsonConvert.DeserializeObject<Dictionary<String, String>>(jsonData);
@@ -149,34 +147,21 @@ namespace ProjectC
             }
 
             App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadValuesAsync(new Uri(url), "POST", nvc);
-        }
-
-        private void Delete<TModel>(Guid id) where TModel : new()
-        {
-            String url = $"{App.BaseUrl}{typeof(TModel).Name.ToLower()}";
-
-            App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadStringAsync(new Uri(url), "Delete", id.ToString());
+            App.client.UploadValuesAsync(new Uri(baseUrl), method, nvc);
         }
 
         private Boolean ApiIsAvailable()
         {
-            String url = $"{App.BaseUrl}testconnection";
-
-            using (WebClient webClient = new WebCientTimeOut())
+            String baseUrl = "https://145.137.57.54:44353/api/testconnection";
+            try
             {
-                webClient.Encoding = Encoding.UTF8;
-                webClient.Proxy = new WebProxy();
-                try
-                {
-                    String response = webClient.DownloadString(url);
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
+                WebClient client = new WebClient();
+                String result = client.DownloadString(baseUrl);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

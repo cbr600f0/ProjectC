@@ -19,7 +19,7 @@ namespace ProjectC.Business.APIService
 
         public List<Score> Get()
         {
-            if(base.ApiIsAvailable())
+            if(CrossConnectivity.Current.IsConnected && base.ApiIsAvailable())
             {
                 return base.Get<Score>().ToList();
             }
@@ -32,16 +32,6 @@ namespace ProjectC.Business.APIService
         public Score Get(Guid id)
         {
             return base.Get<Score>(id).SingleOrDefault();
-        }
-
-        public void AddOrUpdate(Score score)
-        {
-            if (base.ApiIsAvailable())
-            {
-                base.AddOrUpdate<Score>(ref score);
-                score.LastSynchronized = DateTimeOffset.Now;
-            }
-            base.ScoreService.AddOrUpdate(score);
         }
 
         public List<VMScore> GetRankedScores()
