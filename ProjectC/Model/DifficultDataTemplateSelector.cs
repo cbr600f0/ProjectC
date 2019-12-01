@@ -16,7 +16,11 @@ namespace ProjectC.Model
         public DataTemplate Legend { get; set; }
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            return ((Difficulty)item).Clicked.Contains("easy") ? Easy : ((Difficulty)item).Clicked.Contains("med") ? Med : ((Difficulty)item).Clicked.Contains("hard") ? Hard : ((Difficulty)item).Clicked.Contains("legend") ? Legend : Med;
+            return  ((Difficulty)item).Clicked.Contains("easy") ? Easy : 
+                    ((Difficulty)item).Clicked.Contains("med") ? Med : 
+                    ((Difficulty)item).Clicked.Contains("hard") ? Hard : 
+                    ((Difficulty)item).Clicked.Contains("legend") ? Legend : 
+                    Med;
         }
     }
 }
