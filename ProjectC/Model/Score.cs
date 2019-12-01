@@ -24,15 +24,18 @@ namespace ProjectC.Model
 
         public DateTimeOffset Date { get; set; }
 
+        public Boolean manyLetters { get; set; }
+
         public Score()
         {
         }
 
-        public Score(Guid userId, Int32 points, DateTimeOffset date)
+        public Score(Guid userId, Int32 points, DateTimeOffset date, bool manyLetters)
         {
             this.UserId = userId;
             this.Points = points;
             this.Date = date;
+            this.manyLetters = manyLetters;
         }
     }
 }

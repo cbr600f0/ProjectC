@@ -40,7 +40,6 @@ namespace ProjectC.Pages
         public string currentUser = "";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
-
         public Score score;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
@@ -617,7 +616,7 @@ namespace ProjectC.Pages
             {
                 return;
             }
-            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now);
+            Score score = new Score(BasePage.CurrentUserId.Value, points, DateTimeOffset.Now, difficultyMultiplier == 3);
             BasePage.ScoreService.AddOrUpdate(score);
         }
 
@@ -680,7 +679,7 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {   
-            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3));
             }
             await Navigation.PushAsync(new MainPage());
         }
