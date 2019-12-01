@@ -58,7 +58,6 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new TestPageToBeDeleted());
             await Navigation.PushAsync(new DifficultySelectPage());
         }
 

@@ -68,8 +68,17 @@ namespace ProjectC.Pages
             DifficultyHasBeenPicked = true;
             WordRowsDifficultymultiplier = 3;
             lblWarning.IsVisible = false;
-            easyLettersButton.BackgroundColor = Color.Green;
-            hardLettersButton.BackgroundColor = Color.Gray;
+
+            hardLettersButton.BorderColor = Color.FromHex("8FE64D");
+            hardLettersButton.TextColor = Color.FromHex("398300");
+            hardLettersButton.BackgroundColor = Color.FromHex("B6F287");
+
+            easyLettersButton.BorderColor = Color.FromHex("B6F287");
+            easyLettersButton.TextColor = Color.FromHex("67D314");
+            easyLettersButton.BackgroundColor = Color.FromHex("EAFDDC");
+
+
+            DifficultyPicker.Opacity = 1;
         }
 
         private void HardDifficultySelector(object sender, EventArgs e)
@@ -77,8 +86,16 @@ namespace ProjectC.Pages
             DifficultyHasBeenPicked = true;
             WordRowsDifficultymultiplier = 2;
             lblWarning.IsVisible = false;
-            easyLettersButton.BackgroundColor = Color.Gray;
-            hardLettersButton.BackgroundColor = Color.Green;
+
+            easyLettersButton.BorderColor = Color.FromHex("8FE64D");
+            easyLettersButton.TextColor = Color.FromHex("398300");
+            easyLettersButton.BackgroundColor = Color.FromHex("B6F287");
+
+            hardLettersButton.BorderColor = Color.FromHex("B6F287");
+            hardLettersButton.TextColor = Color.FromHex("67D314");
+            hardLettersButton.BackgroundColor = Color.FromHex("EAFDDC");
+
+            DifficultyPicker.Opacity = 1;
         }
     }
 }
