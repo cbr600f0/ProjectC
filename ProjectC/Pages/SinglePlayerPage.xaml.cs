@@ -34,7 +34,7 @@ namespace ProjectC.Pages
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
         private bool pushWordDebug = false;
         private Int32 totalPoints = 0;
-        private Int32 turn = 10;
+        private Int32 turn = 1;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
         public string currentUser = "";
@@ -667,9 +667,9 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {   
-            BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3));
+                BasePage.ScoreService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3));
             }
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new GameOverPage("Mark", 40, true, "Easy"));
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
