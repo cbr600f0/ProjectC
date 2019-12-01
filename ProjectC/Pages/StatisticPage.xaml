@@ -4,16 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.GameOverPage">
+             ControlTemplate="{StaticResource BackgroundTemplate}"
+             x:Class="ProjectC.Pages.StatisticPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="Name"/>
-            <Label x:Name="Points"/>
-            <Label x:Name="highscoreWordLabel"/>
-            <Label x:Name="highscoreWordPointsLabel"/>
-            <Label x:Name="Letters"/>
-            <Label x:Name="Difficulty"/>
-            <Button Clicked="HomeButton_Clicked" Text="Klik hier om terug te gaan naar de hoofdpagina" />
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+            <Label Text="This page has not been implimented yet!" VerticalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

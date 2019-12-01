@@ -84,5 +84,10 @@ namespace ProjectC
         {
             await Navigation.PushAsync(new HighScoresPage());
         }
+
+        private async void StatisticsPageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new StatisticPage());
+        }
     }
 }
