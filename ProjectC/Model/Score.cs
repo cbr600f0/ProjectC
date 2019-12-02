@@ -24,15 +24,24 @@ namespace ProjectC.Model
 
         public DateTimeOffset Date { get; set; }
 
+        public Boolean ManyLetters { get; set; }
+
+        public String BestWord { get; set; }
+
+        public Int32 BestWordValue { get; set; }
+
         public Score()
         {
         }
 
-        public Score(Guid userId, Int32 points, DateTimeOffset date)
+        public Score(Guid userId, Int32 points, DateTimeOffset date, Boolean manyLetters, String bestWord, Int32 bestWordValue)
         {
             this.UserId = userId;
             this.Points = points;
             this.Date = date;
+            this.ManyLetters = manyLetters;
+            this.BestWord = bestWord;
+            this.BestWordValue = bestWordValue;
         }
     }
 }

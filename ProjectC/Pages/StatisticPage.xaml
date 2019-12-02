@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             ControlTemplate="{StaticResource BackgroundTemplate}"
+             x:Class="ProjectC.Pages.StatisticPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand">
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+            <Label x:Name="lblName" Text="Naam" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblNoScore" IsVisible="False" Text="Geen scores" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblAmountPlayed" IsVisible="False" Text="Aantal keer gespeeld" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblHighScore" IsVisible="False" Text="Higscore" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblHighScoreManyLetters" IsVisible="False" Text="Highscore met veel letters" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblHighScoreLittleLetters" IsVisible="False" Text="Higscore met weinig letters" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblLastScore" IsVisible="False" Text="Laatst behaalde score" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblBestWord" IsVisible="False" Text="Woord met meeste punten" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblAverageScore" IsVisible="False" Text="Gemiddelde score" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

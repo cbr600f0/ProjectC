@@ -34,16 +34,19 @@ namespace ProjectC.Pages
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
         private bool pushWordDebug = false;
         private Int32 totalPoints = 0;
-        private Int32 turn = 10;
+        private Int32 turn = 3;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public string currentUser = "";
+        public string currentUser = "You are not logged in.";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
-
         public Score score;
+        string difficultySelected;
+        string highscoreWord = "";
+        int highscoreWordPoints = 0;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
+            difficultySelected = difficulty;
             switch (difficulty)
             {
                 case "easy":
@@ -395,6 +398,26 @@ namespace ProjectC.Pages
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
             turn--;
+            if (highscoreWordPoints < WordPointsCalculator(wordCreationBar))
+            {
+                highscoreWord = "";
+                highscoreWordPoints = WordPointsCalculator(wordCreationBar);
+                Label localLabel;
+                foreach (Frame frame in wordCreationBar)
+                {
+                    try
+                    {
+                        Grid mark = (Grid)frame.Content;
+                        localLabel = (Label)mark.Children[0];
+                    }
+                    catch (Exception)
+                    {
+                        localLabel = (Label)frame.Content;
+                    }
+                    highscoreWord += localLabel.Text;
+                }
+            }
+
             totalPoints += WordPointsCalculator(wordCreationBar);
             viewPointCounter.Text = "totale score: " + totalPoints;
             viewTurnCounter.Text = "beurten over: " + turn;
@@ -668,9 +691,9 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {   
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now));
+                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints));
             }
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
