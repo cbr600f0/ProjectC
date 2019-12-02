@@ -10,21 +10,16 @@ using Xamarin.Forms.Xaml;
 namespace ProjectC.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
+    public partial class StatisticPage : ContentPage
     {
-        public SettingsPage()
+        public StatisticPage()
         {
             InitializeComponent();
         }
 
-        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
-        {
-
-        }
-
         private async void BackButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync(true);
+            await Navigation.PopAsync();
         }
     }
 }

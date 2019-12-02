@@ -47,7 +47,7 @@
                 <Setter Property="TextColor" Value="{StaticResource GreenText}"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="FontSize" Value="Large"/>
             </Style>
 
             <Style x:Key="BackButton" TargetType="Button">
@@ -65,10 +65,23 @@
 
             <Style x:Key="DifficultyButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource BluePage}"/>
-                <Setter Property="WidthRequest" Value="500"/>
-                <Setter Property="HorizontalOptions" Value="Fill"/>
+                <Setter Property="WidthRequest" Value="300"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
+            <Style x:Key="KeyboardButton" TargetType="Button">
+                <Setter Property="MinimumHeightRequest" Value="100"/>
+                <Setter Property="Margin" Value="5,5,5,5"/>
+                <Setter Property="CornerRadius" Value="4"/>
+                <Setter Property="BorderWidth" Value="3"/>
+                <Setter Property="BorderColor" Value="{StaticResource GreenBorder}"/>
+                <Setter Property="TextColor" Value="{StaticResource GreenText}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenBack}"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            
             <ControlTemplate x:Key="BackgroundTemplate">
                         <ScrollView>
                             <RelativeLayout>
