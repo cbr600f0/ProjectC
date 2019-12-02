@@ -38,7 +38,7 @@ namespace ProjectC.Business.APIService
         {
             if (base.ApiIsAvailable())
             {
-                base.AddOrUpdate<Score>(ref score);
+                score.Id = base.AddOrUpdate<Score>(ref score);
                 score.LastSynchronized = DateTimeOffset.Now;
             }
             base.ScoreService.AddOrUpdate(score);

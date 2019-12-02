@@ -27,7 +27,7 @@ namespace ProjectC
 
         public static readonly NetworkAccess connectivity = Connectivity.NetworkAccess;  
 
-        public static readonly String BaseUrl = "https://192.168.0.156:44353/api/";
+        public static readonly String BaseUrl = "https://145.137.57.69:44353/api/";
 
         public App()
         {
@@ -148,8 +148,7 @@ namespace ProjectC
                 }
             }
 
-            App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadValuesAsync(new Uri(url), "POST", nvc);
+            App.client.UploadValues(new Uri(url), nvc);
         }
 
         private void Delete<TModel>(Guid id) where TModel : new()
