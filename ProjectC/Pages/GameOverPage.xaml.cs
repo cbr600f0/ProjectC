@@ -13,6 +13,7 @@ namespace ProjectC.Pages
     public partial class GameOverPage : ContentPage
     {
         string difficulty;
+        string name;
         public GameOverPage(string name, int points, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints)
         {
             switch (difficulty)
@@ -36,13 +37,22 @@ namespace ProjectC.Pages
                 default:
                     break;
             }
+            switch (name)
+            {
+                case "Je bent niet ingelogd":
+                    this.name = "Log in om je highscore op te slaan";
+                    break;
+
+                default:
+                    this.name = name;
+                    break;
+            }
             InitializeComponent();
             Name.Text = name;
-            Points.Text = "Je totale aantal punten is: " + points.ToString();
-            highscoreWordLabel.Text = "Je hoogste woord is: " + highscoreWord;
-            highscoreWordPointsLabel.Text = "De punten van je hoogste woord is: " + highscoreWordPoints.ToString();
-            Letters.Text = manyLetters ? "beschikbare letters: veel" : "beschikbare letters: weinig";
-            Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
+            Points.Text = points.ToString();
+            highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
+            Difficulty.Text = "Je speelde op " + this.difficulty;
+            Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";
         }
 
         private async void HomeButton_Clicked(object sender, EventArgs e)

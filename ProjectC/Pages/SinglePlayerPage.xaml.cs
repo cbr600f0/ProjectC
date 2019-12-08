@@ -37,7 +37,7 @@ namespace ProjectC.Pages
         private Int32 turn = 3;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public string currentUser = "You are not logged in.";
+        public string currentUser = "Je bent niet ingelogd";
         public int difficultyMultiplier = 2;
         public int currentLetterValue;
         public Score score;
