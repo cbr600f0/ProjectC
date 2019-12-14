@@ -10,15 +10,92 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand">
             <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
-            <Label x:Name="lblName" Text="Naam" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblNoScore" IsVisible="False" Text="Geen scores" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblAmountPlayed" IsVisible="False" Text="Aantal keer gespeeld" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblHighScore" IsVisible="False" Text="Higscore" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblHighScoreManyLetters" IsVisible="False" Text="Highscore met veel letters" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblHighScoreLittleLetters" IsVisible="False" Text="Higscore met weinig letters" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblLastScore" IsVisible="False" Text="Laatst behaalde score" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblBestWord" IsVisible="False" Text="Woord met meeste punten" VerticalOptions="CenterAndExpand" />
-            <Label x:Name="lblAverageScore" IsVisible="False" Text="Gemiddelde score" VerticalOptions="CenterAndExpand" />
+            <Label x:Name="lblName" Text="Naam"
+                   FontSize="Large" FontAttributes="Bold" 
+                   BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}"
+                   HorizontalTextAlignment="Center"/>
+            <Label x:Name="lblNoScore" IsVisible="False" Text="Geen scores"
+                   TextColor="Red"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblBestWordtext" IsVisible="False" Text="Beste woord:"
+                   FontSize="Large"
+                   TextColor="{StaticResource YellowText}"
+                   Grid.Row="0" Grid.Column="0"/>
+                <Label x:Name="lblBestWord" IsVisible="False"
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="{StaticResource YellowText}"
+                   Grid.Row="0" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+
+                <Label x:Name="lblHighScoretext" IsVisible="False" Text="Highscore:"
+                   FontSize="Large"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="2" Grid.Column="0"/>
+                <Label x:Name="lblHighScore" IsVisible="False"
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="2" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="lblHighScoreManyLetterstext" IsVisible="False" Text="veel letters:"
+                   FontSize="Medium"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="3" Grid.Column="0" Margin="80,0"/>
+                <Label x:Name="lblHighScoreManyLetters" IsVisible="False"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="3" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="lblHighScoreLittleLetterstext" IsVisible="False" Text="weinig letters:"
+                   FontSize="Medium"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="4" Grid.Column="0" Margin="80,0"/>
+                <Label x:Name="lblHighScoreLittleLetters" IsVisible="False"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource GreenText}"
+                   Grid.Row="4" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+
+                <Label x:Name="lblLastScoretext" IsVisible="False" Text="Laatst behaalde score:"
+                   FontSize="Medium"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="6" Grid.Column="0"/>
+                <Label x:Name="lblLastScore" IsVisible="False"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="6" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="lblAmountPlayedtext" IsVisible="False" Text="Aantal keer gespeeld:"
+                   FontSize="Medium"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="7" Grid.Column="0"/>
+                <Label x:Name="lblAmountPlayed" IsVisible="False" Text="Aantal keer gespeeld"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="7" Grid.Column="1" HorizontalTextAlignment="Center"/>
+
+                <Label x:Name="lblAverageScoretext" IsVisible="False" Text="Gemiddelde:"
+                   FontSize="Medium"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="8" Grid.Column="0"/>
+                <Label x:Name="lblAverageScore" IsVisible="False"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}"
+                   Grid.Row="8" Grid.Column="1" HorizontalTextAlignment="Center"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

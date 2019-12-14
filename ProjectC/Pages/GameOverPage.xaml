@@ -9,16 +9,40 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="Name" FontSize="Large" FontAttributes="Bold" BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
+            <Label x:Name="Name" 
+                   FontSize="Large" FontAttributes="Bold" 
+                   BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" 
+                   HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
             
-            <Label Text="Totale punten" FontSize="Large"  TextColor="{StaticResource BlueText}" HorizontalTextAlignment="Center"/>
-            <Label x:Name="Points" FontSize="Large" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="{StaticResource BlueText}" Margin="0,0,0,80"/>
+            <Label Text="Totale punten" 
+                   FontSize="Large"  
+                   TextColor="{StaticResource BlueText}" 
+                   HorizontalTextAlignment="Center"/>
+            <Label x:Name="Points" 
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}"
+                   HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
 
-            <Label Text="Hoogst gespeelde woord:" FontSize="Large" TextColor="{StaticResource BlueText}" HorizontalTextAlignment="Center"/>
-            <Label x:Name="highscoreWordLabel" FontSize="Large" TextColor="{StaticResource BlueText}" FontAttributes="Bold" Margin="0,0,0,80" HorizontalTextAlignment="Center"/>
+            <!-- (Oude) Highscore + melding of je die verslagen hebt -->
+            <!-- Melding als je niet bent ingelogd -->
+            
+            <Label Text="Hoogst gespeelde woord:" 
+                   FontSize="Large" 
+                   TextColor="{StaticResource BlueText}"
+                   HorizontalTextAlignment="Center"/>
+            <Label x:Name="highscoreWordLabel" 
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}" 
+                   HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
 
-            <Label x:Name="Difficulty" FontSize="Medium" TextColor="{StaticResource BlueText}" HorizontalTextAlignment="Center"/>
-            <Label x:Name="Letters" FontSize="Medium" TextColor="{StaticResource BlueText}" Margin="0,0,0,80" HorizontalTextAlignment="Center"/>
+            <Label x:Name="Difficulty" 
+                   FontSize="Medium" 
+                   TextColor="{StaticResource BlueText}" 
+                   HorizontalTextAlignment="Center"/>
+            <Label x:Name="Letters" 
+                   FontSize="Medium" 
+                   TextColor="{StaticResource BlueText}"
+                   HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
             
             <Button Clicked="HomeButton_Clicked" Style="{StaticResource TitleButtons}" Text="Klik hier om terug te gaan naar de hoofdpagina" VerticalOptions="End"/>
         </StackLayout>
