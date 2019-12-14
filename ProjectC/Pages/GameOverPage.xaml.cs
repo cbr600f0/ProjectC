@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ProjectC.Model;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,7 +13,6 @@ namespace ProjectC.Pages
     public partial class GameOverPage : ContentPage
     {
         string difficulty;
-        string name;
         public GameOverPage(string name, int points, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints)
         {
             switch (difficulty)
@@ -37,18 +36,19 @@ namespace ProjectC.Pages
                 default:
                     break;
             }
-            switch (name)
-            {
-                case "Je bent niet ingelogd":
-                    this.name = "Log in om je highscore op te slaan";
-                    break;
-
-                default:
-                    this.name = name;
-                    break;
-            }
             InitializeComponent();
-            Name.Text = name;
+            if (!BasePage.CurrentUserId.HasValue)
+            {
+                Name.Text = "Login om je statistieken te zien!";
+            }
+            else
+            {
+                Name.Text = $"{BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName}";
+                List<Score> currentScores = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value);
+                Highscore.IsVisible = true;
+                HighscoreText.IsVisible = true;
+                Highscore.Text = $"{currentScores.Max(s => s.Points)}";
+            }
             Points.Text = points.ToString();
             highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
             Difficulty.Text = "Je speelde op " + this.difficulty;

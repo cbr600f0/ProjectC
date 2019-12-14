@@ -15,7 +15,9 @@
                    BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}"
                    HorizontalTextAlignment="Center"/>
             <Label x:Name="lblNoScore" IsVisible="False" Text="Geen scores"
-                   TextColor="Red"/>
+                   TextColor="Red" 
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

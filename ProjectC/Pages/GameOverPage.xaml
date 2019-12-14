@@ -9,7 +9,7 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="Name" 
+            <Label x:Name="Name" Text=""
                    FontSize="Large" FontAttributes="Bold" 
                    BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" 
                    HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
@@ -21,11 +21,19 @@
             <Label x:Name="Points" 
                    FontSize="Large" FontAttributes="Bold"
                    TextColor="{StaticResource BlueText}"
-                   HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
+                   HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
 
             <!-- (Oude) Highscore + melding of je die verslagen hebt -->
             <!-- Melding als je niet bent ingelogd -->
-            
+            <Label x:Name="HighscoreText" Text="Highscore"  IsVisible="False"
+                   FontSize="Medium"  
+                   TextColor="{StaticResource BlueText}" 
+                   HorizontalTextAlignment="Center"/>
+            <Label x:Name="Highscore"  IsVisible="False"
+                   FontSize="Medium" FontAttributes="Bold"
+                   TextColor="{StaticResource BlueText}"
+                   HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
+
             <Label Text="Hoogst gespeelde woord:" 
                    FontSize="Large" 
                    TextColor="{StaticResource BlueText}"
@@ -33,7 +41,7 @@
             <Label x:Name="highscoreWordLabel" 
                    FontSize="Large" FontAttributes="Bold"
                    TextColor="{StaticResource BlueText}" 
-                   HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
+                   HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
 
             <Label x:Name="Difficulty" 
                    FontSize="Medium" 
