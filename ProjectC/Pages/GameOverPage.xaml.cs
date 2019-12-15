@@ -53,6 +53,11 @@ namespace ProjectC.Pages
             highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
             Difficulty.Text = "Je speelde op " + this.difficulty;
             Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";
+            Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
+            // GameOver Geluid
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Win.wav");
+            player.Play();
         }
 
         private async void HomeButton_Clicked(object sender, EventArgs e)
