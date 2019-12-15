@@ -244,6 +244,10 @@ namespace ProjectC.Pages
                 gridFrame.BackgroundColor = Color.Transparent;
             }
             frame.BackgroundColor = Color.Red;
+            // Toetsenbord Geluid
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
         }
 
         public void AddLetersToList(Frame frame)
@@ -279,6 +283,10 @@ namespace ProjectC.Pages
                     viewCurrentPushwordValue.Text = "Dit woord: " + WordPointsCalculator(wordCreationBar) + " punten";
 
                     gridFrame.BackgroundColor = Color.Transparent;
+                    // Pushbar Geluid
+                    var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player2.Load("Pop.wav");
+                    player2.Play();
                     return;
                 }
             }
@@ -299,6 +307,10 @@ namespace ProjectC.Pages
                         pointsLabel.Text = "";
                     }
                 }
+                // Pushbar Geluid
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load("Pop.wav");
+                player.Play();
             }
         }
 
@@ -312,6 +324,11 @@ namespace ProjectC.Pages
                 Label currentLabel = (Label)frameGrid.Children[0];
                 if (currentLabel.Text == "")
                 {
+                    // Geluid voor als je woord niet compleet is
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Load("Incorrect.mp3");
+                    player.Play();
+
                     await this.DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
                     return;
                 }
@@ -322,6 +339,11 @@ namespace ProjectC.Pages
             {
                 if (!await CheckWord(pushingWord))
                 {
+                    // Geluid voor fout antwoord
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Load("Incorrect.mp3");
+                    player.Play();
+
                     await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
                     return;
                 }
@@ -421,6 +443,10 @@ namespace ProjectC.Pages
             totalPoints += WordPointsCalculator(wordCreationBar);
             viewPointCounter.Text = "totale score: " + totalPoints;
             viewTurnCounter.Text = "beurten over: " + turn;
+            // PushButton Geluid
+            var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player2.Load("Correct.wav");
+            player2.Play();
             if (turn <= 0)
             {
                 GameOverHandler();
@@ -432,6 +458,11 @@ namespace ProjectC.Pages
 
         private void PushButton_Clicked(object sender, EventArgs e)
         {
+            // geluid voor pushbutton (sorry dat t hardcoded is)
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
+
             PushCurrentWord();
         }
 
@@ -485,6 +516,11 @@ namespace ProjectC.Pages
 
         private void ShuffleUsableLetterBord(object sender, EventArgs e)
         {
+            //geluid voor de Shuffleknop
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
+
             if (remainingShuffles <= 0)
             {
                 return;

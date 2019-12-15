@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -43,6 +44,11 @@ namespace ProjectC.Pages
             highscoreWordPointsLabel.Text = "De punten van je hoogste woord is: " + highscoreWordPoints.ToString();
             Letters.Text = manyLetters ? "beschikbare letters: veel" : "beschikbare letters: weinig";
             Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
+            // GameOver Geluid
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Win.wav");
+            player.Play();
+
         }
 
         private async void HomeButton_Clicked(object sender, EventArgs e)
