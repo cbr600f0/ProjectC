@@ -37,7 +37,7 @@ namespace ProjectC.Pages
             this.ValidateData();
         }
 
-        private async void ValidateData()
+        public async void ValidateData()
         {
             List<User> users = BasePage.UserService.Get();
 
