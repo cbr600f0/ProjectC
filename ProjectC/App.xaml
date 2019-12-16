@@ -65,7 +65,7 @@
 
             <Style x:Key="DifficultyButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource BluePage}"/>
-                <Setter Property="WidthRequest" Value="300"/>
+                <Setter Property="WidthRequest" Value="350"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
