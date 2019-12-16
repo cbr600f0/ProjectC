@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ProjectC.Model;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -37,12 +37,27 @@ namespace ProjectC.Pages
                     break;
             }
             InitializeComponent();
-            Name.Text = name;
-            Points.Text = "Je totale aantal punten is: " + points.ToString();
-            highscoreWordLabel.Text = "Je hoogste woord is: " + highscoreWord;
-            highscoreWordPointsLabel.Text = "De punten van je hoogste woord is: " + highscoreWordPoints.ToString();
-            Letters.Text = manyLetters ? "beschikbare letters: veel" : "beschikbare letters: weinig";
+            if (!BasePage.CurrentUserId.HasValue)
+            {
+                Name.Text = "Login om je statistieken te zien!";
+            }
+            else
+            {
+                Name.Text = $"{BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName}";
+                List<Score> currentScores = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value);
+                Highscore.IsVisible = true;
+                HighscoreText.IsVisible = true;
+                Highscore.Text = $"{currentScores.Max(s => s.Points)}";
+            }
+            Points.Text = points.ToString();
+            highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
+            Difficulty.Text = "Je speelde op " + this.difficulty;
+            Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";
             Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
+            // GameOver Geluid
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Win.wav");
+            player.Play();
         }
 
         private async void HomeButton_Clicked(object sender, EventArgs e)
