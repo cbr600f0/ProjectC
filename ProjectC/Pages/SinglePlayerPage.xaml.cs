@@ -18,16 +18,18 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SinglePlayerPage : ContentPage
     {
+        //Kado
         public List<Frame> wordCreationBar = new List<Frame>();
         public GetValues getValues = new GetValues();
-        public int currentLetterValue;
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
         private bool pushWordDebug = false;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public string currentUser = "You are not logged in.";
+        public string currentUser = "Je bent niet ingelogd";
         public int difficultyMultiplier = 2;
+        public DifficultyEnum difficultyEnum;
+        public int currentLetterValue;
         public Score score;
         string difficultySelected;
         string highscoreWord = "";
@@ -39,15 +41,19 @@ namespace ProjectC.Pages
             {
                 case "easy":
                     ConfigFile.wordLength = 3;
+                    difficultyEnum = DifficultyEnum.Easy;
                     break;
                 case "medium":
                     ConfigFile.wordLength = 5;
+                    difficultyEnum = DifficultyEnum.Medium;
                     break;
                 case "hard":
                     ConfigFile.wordLength = 7;
+                    difficultyEnum = DifficultyEnum.Hard;
                     break;
                 case "legendary":
                     ConfigFile.wordLength = 10;
+                    difficultyEnum = DifficultyEnum.Legendary;
                     break;
                 default:
                     break;
@@ -232,6 +238,10 @@ namespace ProjectC.Pages
                 gridFrame.BackgroundColor = Color.Transparent;
             }
             frame.BackgroundColor = Color.Red;
+            // Toetsenbord Geluid
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
         }
 
         public void AddLetersToList(Frame frame)
@@ -267,6 +277,10 @@ namespace ProjectC.Pages
                     viewCurrentPushwordValue.Text = "Dit woord: " + getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)) + " punten";
 
                     gridFrame.BackgroundColor = Color.Transparent;
+                    // Pushbar Geluid
+                    var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player2.Load("Pop.wav");
+                    player2.Play();
                     return;
                 }
             }
@@ -287,6 +301,10 @@ namespace ProjectC.Pages
                         pointsLabel.Text = "";
                     }
                 }
+                // Pushbar Geluid
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load("Pop.wav");
+                player.Play();
             }
         }
 
@@ -300,6 +318,11 @@ namespace ProjectC.Pages
                 Label currentLabel = (Label)frameGrid.Children[0];
                 if (currentLabel.Text == "")
                 {
+                    // Geluid voor als je woord niet compleet is
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Load("Incorrect.mp3");
+                    player.Play();
+
                     await this.DisplayAlert("Alert", "Je woord is nog niet af. Vul alle letters in", "OK");
                     return;
                 }
@@ -310,6 +333,11 @@ namespace ProjectC.Pages
             {
                 if (!await CheckWord(pushingWord))
                 {
+                    // Geluid voor fout antwoord
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Load("Incorrect.mp3");
+                    player.Play();
+
                     await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
                     return;
                 }
@@ -409,6 +437,10 @@ namespace ProjectC.Pages
             ConfigFile.totalPoints += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
             viewPointCounter.Text = "totale score: " + ConfigFile.totalPoints;
             viewTurnCounter.Text = "beurten over: " + ConfigFile.turn;
+            // PushButton Geluid
+            var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player2.Load("Correct.wav");
+            player2.Play();
             if (ConfigFile.turn <= 0)
             {
                 GameOverHandler();
@@ -420,6 +452,11 @@ namespace ProjectC.Pages
 
         private void PushButton_Clicked(object sender, EventArgs e)
         {
+            // geluid voor pushbutton (sorry dat t hardcoded is)
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
+
             PushCurrentWord();
         }
 
@@ -473,6 +510,11 @@ namespace ProjectC.Pages
 
         private void ShuffleUsableLetterBord(object sender, EventArgs e)
         {
+            //geluid voor de Shuffleknop
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("Click.wav");
+            player.Play();
+
             if (remainingShuffles <= 0)
             {
                 return;
@@ -547,8 +589,8 @@ namespace ProjectC.Pages
         public async void GameOverHandler()
         {
             if (BasePage.CurrentUserId.HasValue)
-            {   
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, ConfigFile.totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints));
+            {
+                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, ConfigFile.totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
             await Navigation.PushAsync(new GameOverPage(currentUser, ConfigFile.totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
         }

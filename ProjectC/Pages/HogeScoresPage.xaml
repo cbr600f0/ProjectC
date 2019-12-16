@@ -13,6 +13,8 @@
     </TabbedPage.Resources>
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Multi Player">
+        <StackLayout>
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -66,60 +68,64 @@
                 </ListView>
             </StackLayout>
         </Grid>
+            </StackLayout>
     </ContentPage>
     <ContentPage Title="Single Player">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0">
-                <Label x:Name="lblSinglePlayerHeader" Grid.Row="0" Margin="10,10" Text="Singleplayer High Scores"
+        <StackLayout>
+            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
+                    <Label x:Name="lblSinglePlayerHeader" Grid.Row="0" Margin="10,10" Text="Singleplayer High Scores"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
+                </StackLayout>
                 <StackLayout x:Name="slSinglePlayerHighscores" Grid.Row="1" Margin="10,10,0,10" IsVisible="False">
                     <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*" />
-                        <ColumnDefinition Width="30*" />
-                        <ColumnDefinition Width="30*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Text="Rank"/>
-                    <Label Grid.Column="1" Grid.Row="0" Text="Score"/>
-                    <Label Grid.Column="2" Grid.Row="0" Text="Datum"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*" />
+                            <ColumnDefinition Width="30*" />
+                            <ColumnDefinition Width="30*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Rank"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="Score"/>
+                        <Label Grid.Column="2" Grid.Row="0" Text="Datum"/>
 
-                </Grid>
+                    </Grid>
 
-                <ListView x:Name="singlePlayerHighScoresListView">
-                    <ListView.ItemTemplate>
+                    <ListView x:Name="singlePlayerHighScoresListView">
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="30*" />
-                                        <ColumnDefinition Width="30*" />
-                                        <ColumnDefinition Width="30*" />
-                                    </Grid.ColumnDefinitions>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30*" />
+                                            <ColumnDefinition Width="30*" />
+                                            <ColumnDefinition Width="30*" />
+                                        </Grid.ColumnDefinitions>
 
 
-                                    <Label Grid.Column="0" Text="{Binding Rank}"/>
-                                    <Label Grid.Column="1" Text="{Binding Points}"/>
-                                    <Label Grid.Column="2" Text="{Binding Date, StringFormat='{0:MM-dd-yyyy}'}" />
-                                </Grid>
+                                        <Label Grid.Column="0" Text="{Binding Rank}"/>
+                                        <Label Grid.Column="1" Text="{Binding Points}"/>
+                                        <Label Grid.Column="2" Text="{Binding Date, StringFormat='{0:MM-dd-yyyy}'}" />
+                                    </Grid>
 
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-                </ListView>
-            </StackLayout>
-        </Grid>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
     </ContentPage>
 </TabbedPage>

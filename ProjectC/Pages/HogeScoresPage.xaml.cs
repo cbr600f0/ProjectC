@@ -60,5 +60,10 @@ namespace ProjectC.Pages
                 lblSinglePlayerHeader.Text = "Login om highscores te zien!";
             }
         }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
     }
 }

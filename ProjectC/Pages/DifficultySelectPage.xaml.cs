@@ -77,7 +77,6 @@ namespace ProjectC.Pages
             easyLettersButton.TextColor = Color.FromHex("67D314");
             easyLettersButton.BackgroundColor = Color.FromHex("EAFDDC");
 
-
             DifficultyPicker.Opacity = 1;
         }
 
