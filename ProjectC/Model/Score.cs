@@ -30,11 +30,13 @@ namespace ProjectC.Model
 
         public Int32 BestWordValue { get; set; }
 
+        public DifficultyEnum Difficulty { get; set; }
+
         public Score()
         {
         }
 
-        public Score(Guid userId, Int32 points, DateTimeOffset date, Boolean manyLetters, String bestWord, Int32 bestWordValue)
+        public Score(Guid userId, Int32 points, DateTimeOffset date, Boolean manyLetters, String bestWord, Int32 bestWordValue, DifficultyEnum difficulty)
         {
             this.UserId = userId;
             this.Points = points;
@@ -42,6 +44,7 @@ namespace ProjectC.Model
             this.ManyLetters = manyLetters;
             this.BestWord = bestWord;
             this.BestWordValue = bestWordValue;
+            this.Difficulty = difficulty;
         }
     }
 }

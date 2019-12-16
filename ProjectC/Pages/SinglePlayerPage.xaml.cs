@@ -40,6 +40,7 @@ namespace ProjectC.Pages
         public List<Frame> UsableLetterList = new List<Frame>();
         public string currentUser = "You are not logged in.";
         public int difficultyMultiplier = 2;
+        public DifficultyEnum difficultyEnum;
         public int currentLetterValue;
         public Score score;
         string difficultySelected;
@@ -52,15 +53,19 @@ namespace ProjectC.Pages
             {
                 case "easy":
                     wordLength = 3;
+                    difficultyEnum = DifficultyEnum.Easy;
                     break;
                 case "medium":
                     wordLength = 5;
+                    difficultyEnum = DifficultyEnum.Medium;
                     break;
                 case "hard":
                     wordLength = 7;
+                    difficultyEnum = DifficultyEnum.Hard;
                     break;
                 case "legendary":
                     wordLength = 10;
+                    difficultyEnum = DifficultyEnum.Legendary;
                     break;
                 default:
                     break;
@@ -692,7 +697,7 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {   
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints));
+                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
             await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
         }
