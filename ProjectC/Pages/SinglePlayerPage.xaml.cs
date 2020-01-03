@@ -190,6 +190,7 @@ namespace ProjectC.Pages
                     Frame frame = new Frame()
                     {
                         BorderColor = Color.Black,
+                        BackgroundColor = Color.Transparent,
                         Content = gridForLabels,
                         HeightRequest = ConfigFile.unrealHighNumber,
                         HorizontalOptions = LayoutOptions.FillAndExpand,

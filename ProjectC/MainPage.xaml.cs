@@ -58,12 +58,12 @@ namespace ProjectC
 
         private async void SinglePlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new DifficultySelectPage());
+            await Navigation.PushAsync(new DifficultySelectPage("solo"));
         }
 
         private async void MultiPlayerButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MultiPlayerPage());
+            await Navigation.PushAsync(new DifficultySelectPage("duo"));
         }
 
         private async void RegisterButton_Clicked(object sender, EventArgs e)

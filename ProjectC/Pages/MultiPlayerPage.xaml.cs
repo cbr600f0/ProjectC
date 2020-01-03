@@ -18,23 +18,18 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MultiPlayerPage : ContentPage
     {
-        public MultiPlayerPage()
-        {
-            InitializeComponent();
-        }
-        private async void BackButton_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync(true);
-        }
-        //Kado
+        public int currentPlayerTurn = 1;
+        public Color player1Color = Color.DeepSkyBlue;
+        public Color player2Color = Color.Yellow;
+        public Color currentPlayerColor;
         public List<Frame> wordCreationBar = new List<Frame>();
         public GetValues getValues = new GetValues();
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
         private bool pushWordDebug = false;
-        private int remainingShuffles = 3;
+        private int remainingShufflesP1 = 3;
+        private int remainingShufflesP2 = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
-        public string currentUser = "Je bent niet ingelogd";
         public int difficultyMultiplier = 2;
         public DifficultyEnum difficultyEnum;
         public int currentLetterValue;
@@ -42,10 +37,12 @@ namespace ProjectC.Pages
         string difficultySelected;
         string highscoreWord = "";
         int highscoreWordPoints = 0;
-        public int totalPoints = 0;
+        public int totalPointsP1 = 0;
+        public int totalPointsP2 = 0;
         public int turn = 3;
         public MultiPlayerPage(string difficulty, int difficultyMultiplier)
         {
+            currentPlayerColor = player1Color;
             difficultySelected = difficulty;
             switch (difficulty)
             {
@@ -73,19 +70,6 @@ namespace ProjectC.Pages
             this.PlayedWordsUICreator();
             this.UsableLettersUICreator();
             this.UIPushBarCreation();
-
-            try
-            {
-                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
-                viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
-            }
-            catch { }
-            try
-            {
-                currentUser = BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName;
-                viewCurrentPlayer.Text = currentUser;
-            }
-            catch { }
         }
 
         public void PlayedWordsUICreator()
@@ -108,7 +92,7 @@ namespace ProjectC.Pages
             {
                 wordContainer.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 // Adds the label (name of the person who played the word) to the left of the word
-                grid.Children.Add(new Label() { Text = "Word " + (row + 1), HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, row);
+                grid.Children.Add(new Label() { Text = "speler " + currentPlayerTurn, HorizontalOptions = LayoutOptions.CenterAndExpand }, 0, row);
 
                 for (Int32 i = 0; i < ConfigFile.wordLength; i++)
                 {
@@ -198,6 +182,7 @@ namespace ProjectC.Pages
                     Frame frame = new Frame()
                     {
                         BorderColor = Color.Black,
+                        BackgroundColor = currentPlayerColor,
                         Content = gridForLabels,
                         HeightRequest = ConfigFile.unrealHighNumber,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -245,7 +230,7 @@ namespace ProjectC.Pages
 
             foreach (View gridFrame in grid.Children)
             {
-                gridFrame.BackgroundColor = Color.Transparent;
+                gridFrame.BackgroundColor = currentPlayerColor;
             }
             frame.BackgroundColor = Color.Red;
             // Toetsenbord Geluid
@@ -284,9 +269,9 @@ namespace ProjectC.Pages
                     pointsLabel.Text = currentPointsLabel.Text;
                     currentPointsLabel.Text = placeHolder;
 
-                    viewCurrentPushwordValue.Text = "Dit woord: " + getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)) + " punten";
+                    viewCurrentPushwordValueLabel.Text = "woordwaarde: " + getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
 
-                    gridFrame.BackgroundColor = Color.Transparent;
+                    gridFrame.BackgroundColor = currentPlayerColor;
                     // Pushbar Geluid
                     var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                     player2.Load("Pop.wav");
@@ -361,7 +346,7 @@ namespace ProjectC.Pages
             grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
             leftsideGrid.Children.Add(new Label()
             {
-                Text = "Word " + (grid.RowDefinitions.Count),
+                Text = "speler " + currentPlayerTurn,
                 HorizontalOptions = LayoutOptions.CenterAndExpand
             }, 0, 0);
 
@@ -370,7 +355,7 @@ namespace ProjectC.Pages
                 Text = getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)).ToString()
             }, 1, 0);
 
-            Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
+            Grid insideGrid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand};
             for (Int32 i = 0; i < ConfigFile.wordLength; i++)
             {
                 //Creates gridcolumns equal to the amount of letters needed for the word. (1 column equals 1 letter)
@@ -412,6 +397,7 @@ namespace ProjectC.Pages
                 insideGrid.Children.Add(new Frame()
                 {
                     BorderColor = Color.Black,
+                    BackgroundColor = currentPlayerColor,
                     Content = gridForLabels,
                     HeightRequest = 40,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -423,7 +409,8 @@ namespace ProjectC.Pages
 
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
-            turn--;
+            if(currentPlayerTurn == 2)
+                turn--;
             if (highscoreWordPoints < getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)))
             {
                 highscoreWord = "";
@@ -444,9 +431,12 @@ namespace ProjectC.Pages
                 }
             }
 
-            totalPoints += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
-            viewPointCounter.Text = "totale score: " + totalPoints;
-            viewTurnCounter.Text = "beurten over: " + turn;
+            if (currentPlayerTurn == 1)
+                totalPointsP1 += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
+            else
+                totalPointsP2 += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
+            //viewPointCounter.Text = "totale score: " + totalPoints;
+            viewTurnCounterLabel.Text = "beurten over: " + turn;
             // PushButton Geluid
             var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
             player2.Load("Correct.wav");
@@ -455,9 +445,12 @@ namespace ProjectC.Pages
             {
                 GameOverHandler();
             }
+            currentPlayerColor = currentPlayerColor == player1Color ? player2Color : player1Color;
+            currentPlayerTurn = currentPlayerTurn == 1 ? 2 : 1;
+            currentPlayersTurnLabel.Text = "beurt: speler " + currentPlayerTurn;
             EmptyPushwordBar();
             FillUsableLetterBord();
-            viewCurrentPushwordValue.Text = "Dit woord: " + getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)) + " punten";
+            viewCurrentPushwordValueLabel.Text = "Dit woord: " + getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)) + " punten";
         }
 
         private void PushButton_Clicked(object sender, EventArgs e)
@@ -507,6 +500,7 @@ namespace ProjectC.Pages
         {
             foreach (Frame frame in UsableLetterList)
             {
+                frame.BackgroundColor = currentPlayerColor;
                 Grid grid = (Grid)frame.Content;
                 Label label = (Label)grid.Children[0];
                 Label labelPoints = (Label)grid.Children[1];
@@ -525,21 +519,42 @@ namespace ProjectC.Pages
             player.Load("Click.wav");
             player.Play();
 
-            if (remainingShuffles <= 0)
+            if (currentPlayerTurn == 1)
             {
-                return;
+                if (remainingShufflesP1 <= 0)
+                {
+                    return;
+                }
+                foreach (Frame frame in UsableLetterList)
+                {
+                    Grid grid = (Grid)frame.Content;
+                    Label label = (Label)grid.Children[0];
+                    label.Text = RandomLetterGenerator().ToString();
+                    Label labelPoints = (Label)grid.Children[1];
+                    labelPoints.Text = currentLetterValue.ToString();
+                }
+                EmptyPushwordBar();
+                remainingShufflesP1--;
+                shuffleCounterP1Label.Text = "Shuffles: " + remainingShufflesP1;
             }
-            foreach (Frame frame in UsableLetterList)
+            else
             {
-                Grid grid = (Grid)frame.Content;
-                Label label = (Label)grid.Children[0];
-                label.Text = RandomLetterGenerator().ToString();
-                Label labelPoints = (Label)grid.Children[1];
-                labelPoints.Text = currentLetterValue.ToString();
+                if (remainingShufflesP2 <= 0)
+                {
+                    return;
+                }
+                foreach (Frame frame in UsableLetterList)
+                {
+                    Grid grid = (Grid)frame.Content;
+                    Label label = (Label)grid.Children[0];
+                    label.Text = RandomLetterGenerator().ToString();
+                    Label labelPoints = (Label)grid.Children[1];
+                    labelPoints.Text = currentLetterValue.ToString();
+                }
+                EmptyPushwordBar();
+                remainingShufflesP2--;
+                shuffleCounterP2Label.Text = "Shuffles: " + remainingShufflesP2;
             }
-            EmptyPushwordBar();
-            remainingShuffles--;
-            shuffleCounter.Text = "Shuffles: " + remainingShuffles;
         }
 
         protected void UIPushBarCreation()
@@ -600,9 +615,14 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
+                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPointsP1, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+            await Navigation.PushAsync(new GameOverPage("speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+        }
+
+        private async void BackButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
     }
 }
