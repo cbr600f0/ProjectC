@@ -341,7 +341,7 @@ namespace ProjectC.Pages
             Grid grid = (Grid)MiddlePart.Content;
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             Grid leftsideGrid = new Grid();
-            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) });
             leftsideGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             grid.Children.Add(leftsideGrid, 0, grid.RowDefinitions.Count - 1);
             leftsideGrid.Children.Add(new Label()
