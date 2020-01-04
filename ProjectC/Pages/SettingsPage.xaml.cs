@@ -8,18 +8,20 @@ namespace ProjectC.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
-        bool IsEnabled = true;
+       
         public SettingsPage()
         {
             InitializeComponent();
             muteCell.On = ConfigFile.soundIsOn ? false : true;
             keyboardCell.On = ConfigFile.keyboardSoundOn;
             otherSoundsCell.On = ConfigFile.otherSoundsOn;
+            slider.Value = ConfigFile.Slider;
         }
 
-        void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
+        private void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
-
+            Slider slider1 = (Slider)sender;
+            ConfigFile.Slider = slider1.Value;
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)

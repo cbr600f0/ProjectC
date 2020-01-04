@@ -24,8 +24,7 @@
                         <StackLayout>
                             <Label Text="-   Spelgeluid   +" HorizontalTextAlignment="Center" FontSize="Large"/>
 
-                            <Slider Maximum="100"
-                                ValueChanged="OnSliderValueChanged" />
+                            <Slider Minimum ="0.05" Maximum="1.0" ValueChanged="OnSliderValueChanged" x:Name="slider" />
                         </StackLayout>
                     </ViewCell>
 

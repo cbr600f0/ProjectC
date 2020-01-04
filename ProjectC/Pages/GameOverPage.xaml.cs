@@ -58,6 +58,7 @@ namespace ProjectC.Pages
             if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
                 player.Load("Win.wav");
                 player.Play();
             }

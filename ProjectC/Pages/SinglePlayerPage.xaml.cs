@@ -248,6 +248,7 @@ namespace ProjectC.Pages
             if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
                 player.Load("Click.wav");
                 player.Play();
             }
@@ -290,6 +291,7 @@ namespace ProjectC.Pages
                     if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
                     {
                         var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                        player2.Volume = ConfigFile.Slider;
                         player2.Load("Pop.wav");
                         player2.Play();
                     }
@@ -317,6 +319,7 @@ namespace ProjectC.Pages
                 if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                 {
                     var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Volume = ConfigFile.Slider;
                     player.Load("Pop.wav");
                     player.Play();
                 }
@@ -337,6 +340,7 @@ namespace ProjectC.Pages
                     if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                     {
                         var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                        player.Volume = ConfigFile.Slider;
                         player.Load("Incorrect.mp3");
                         player.Play();
                     }
@@ -355,6 +359,7 @@ namespace ProjectC.Pages
                     if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                     {
                         var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                        player.Volume = ConfigFile.Slider;
                         player.Load("Incorrect.mp3");
                         player.Play();
                     }
@@ -462,6 +467,7 @@ namespace ProjectC.Pages
             if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
             {
                 var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player2.Volume = ConfigFile.Slider;
                 player2.Load("Correct.wav");
                 player2.Play();
             }
@@ -480,6 +486,7 @@ namespace ProjectC.Pages
             {
                 // geluid voor pushbutton 
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
                 player.Load("Click.wav");
                 player.Play();
             }
@@ -541,6 +548,7 @@ namespace ProjectC.Pages
             if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
                 player.Load("Click.wav");
                 player.Play();
             }

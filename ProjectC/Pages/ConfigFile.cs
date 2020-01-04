@@ -8,6 +8,7 @@ namespace ProjectC.Pages
     {
         public static bool soundIsOn = true;
         public static bool keyboardSoundOn = true;
-        public static bool otherSoundsOn = true; 
+        public static bool otherSoundsOn = true;
+        public static double Slider = 1.0;
     }
 }
