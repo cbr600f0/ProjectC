@@ -55,9 +55,12 @@ namespace ProjectC.Pages
             Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";
             Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
             // GameOver Geluid
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player.Load("Win.wav");
-            player.Play();
+            if (ConfigFile.soundIsOn)
+            {
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load("Win.wav");
+                player.Play();
+            }
         }
 
         private async void HomeButton_Clicked(object sender, EventArgs e)

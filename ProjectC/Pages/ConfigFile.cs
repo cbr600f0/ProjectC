@@ -6,5 +6,6 @@ namespace ProjectC.Pages
 {
     static class ConfigFile
     {
+        public static bool soundIsOn = true;
     }
 }
