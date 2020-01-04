@@ -245,7 +245,7 @@ namespace ProjectC.Pages
             }
             frame.BackgroundColor = Color.Red;
             // Toetsenbord Geluid
-            if (ConfigFile.soundIsOn)
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 player.Load("Click.wav");
@@ -287,7 +287,7 @@ namespace ProjectC.Pages
 
                     gridFrame.BackgroundColor = Color.Transparent;
                     // Pushbar Geluid
-                    if (ConfigFile.soundIsOn)
+                    if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
                     {
                         var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                         player2.Load("Pop.wav");
@@ -314,7 +314,7 @@ namespace ProjectC.Pages
                     }
                 }
                 // Pushbar Geluid
-                if (ConfigFile.soundIsOn)
+                if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                 {
                     var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                     player.Load("Pop.wav");
@@ -334,7 +334,7 @@ namespace ProjectC.Pages
                 if (currentLabel.Text == "")
                 {
                     // Geluid voor als je woord niet compleet is
-                    if (ConfigFile.soundIsOn)
+                    if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                     {
                         var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                         player.Load("Incorrect.mp3");
@@ -352,7 +352,7 @@ namespace ProjectC.Pages
                 if (!await CheckWord(pushingWord))
                 {
                     // Geluid voor fout antwoord
-                    if (ConfigFile.soundIsOn)
+                    if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
                     {
                         var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                         player.Load("Incorrect.mp3");
@@ -459,7 +459,7 @@ namespace ProjectC.Pages
             viewPointCounter.Text = "totale score: " + totalPoints;
             viewTurnCounter.Text = "beurten over: " + turn;
             // PushButton Geluid
-            if (ConfigFile.soundIsOn)
+            if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
             {
                 var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 player2.Load("Correct.wav");
@@ -476,7 +476,7 @@ namespace ProjectC.Pages
 
         private void PushButton_Clicked(object sender, EventArgs e)
         {
-            if (ConfigFile.soundIsOn)
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
             {
                 // geluid voor pushbutton 
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
@@ -538,7 +538,7 @@ namespace ProjectC.Pages
         private void ShuffleUsableLetterBord(object sender, EventArgs e)
         {
             //geluid voor de Shuffleknop
-            if (ConfigFile.soundIsOn)
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 player.Load("Click.wav");

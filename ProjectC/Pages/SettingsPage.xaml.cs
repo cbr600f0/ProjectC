@@ -12,8 +12,9 @@ namespace ProjectC.Pages
         public SettingsPage()
         {
             InitializeComponent();
-            // muteCell.On = ConfigFile.soundIsOn;
             muteCell.On = ConfigFile.soundIsOn ? false : true;
+            keyboardCell.On = ConfigFile.keyboardSoundOn;
+            otherSoundsCell.On = ConfigFile.otherSoundsOn;
         }
 
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
@@ -30,6 +31,18 @@ namespace ProjectC.Pages
         {
             SwitchCell muteCell2 = (SwitchCell)sender;
             ConfigFile.soundIsOn = !muteCell2.On;
+        }
+
+        private void keyboardCell_OnChanged(object sender, ToggledEventArgs e)
+        {
+            SwitchCell keyboardCell2 = (SwitchCell)sender;
+            ConfigFile.keyboardSoundOn = keyboardCell2.On;
+        }
+
+        private void otherSoundsCell_OnChanged(object sender, ToggledEventArgs e)
+        {
+            SwitchCell otherSoundsCell2 = (SwitchCell)sender;
+            ConfigFile.otherSoundsOn = otherSoundsCell2.On;
         }
     }
 }

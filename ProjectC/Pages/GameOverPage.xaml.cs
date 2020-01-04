@@ -55,7 +55,7 @@ namespace ProjectC.Pages
             Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";
             Difficulty.Text = "De moeilijkheids graad is: " + this.difficulty;
             // GameOver Geluid
-            if (ConfigFile.soundIsOn)
+            if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
             {
                 var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
                 player.Load("Win.wav");

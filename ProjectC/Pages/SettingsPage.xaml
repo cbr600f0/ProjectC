@@ -18,7 +18,7 @@
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="Geluid" TextColor="#398300">
-                    <SwitchCell Text="Mute" OnChanged="muteCell_OnChanged" On="False" x:Name="muteCell"/>
+                    <SwitchCell Text="Mute" OnChanged="muteCell_OnChanged" x:Name="muteCell"/>
                     <!--Slider-->
                     <ViewCell>
                         <StackLayout>
@@ -29,13 +29,9 @@
                         </StackLayout>
                     </ViewCell>
 
-                    <SwitchCell Text="Keyboardgeluid"/>
-                    <SwitchCell Text="Overige geluiden"/>
-                        <ViewCell>
-                            <StackLayout>
-                                <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
-                            </StackLayout>
-                        </ViewCell>
+                    <SwitchCell Text="Keyboardgeluid" OnChanged="keyboardCell_OnChanged" x:Name="keyboardCell"/>
+                        
+                    <SwitchCell Text="Overige geluiden" OnChanged="otherSoundsCell_OnChanged" x:Name="otherSoundsCell"/>
                     </TableSection>
 
                 <TableSection Title="wachtwoord veranderen" TextColor="#398300">

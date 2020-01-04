@@ -7,5 +7,7 @@ namespace ProjectC.Pages
     static class ConfigFile
     {
         public static bool soundIsOn = true;
+        public static bool keyboardSoundOn = true;
+        public static bool otherSoundsOn = true; 
     }
 }
