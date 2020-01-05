@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="ProjectC.Pages.SettingsPage"
              Title="Instellingen"
-             ControlTemplate="{StaticResource BackgroundTemplate}"
+             ControlTemplate="{StaticResource BackgroundTemplateNoScroll}"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <ScrollView>
