@@ -590,19 +590,17 @@ namespace ProjectC.Pages
                 wordCreationBarStackLayout.Children.Add(grid);
             }
         }
-        public async void GameOverHandler()
+        public void GameOverHandler()
         {
             if (BasePage.CurrentUserId.HasValue)
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-
-            var gesture = new TapGestureRecognizer();
-            gesture.Tapped += (s, e) =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
-            };
-            Content.GestureRecognizers.Add(gesture);
+                return true;
+            });
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
