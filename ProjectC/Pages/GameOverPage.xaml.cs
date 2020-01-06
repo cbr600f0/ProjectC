@@ -47,7 +47,8 @@ namespace ProjectC.Pages
                 List<Score> currentScores = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value);
                 Highscore.IsVisible = true;
                 HighscoreText.IsVisible = true;
-                Highscore.Text = $"{currentScores.Max(s => s.Points)}";
+                Int32 highscore = currentScores.Max(s => s.Points);
+                Highscore.Text = $"{(highscore == points ? "Nieuwe Highscore " : String.Empty )}{highscore}";
             }
             Points.Text = points.ToString();
             highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";

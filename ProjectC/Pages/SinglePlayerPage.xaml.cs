@@ -68,7 +68,7 @@ namespace ProjectC.Pages
 
             try
             {
-                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderByDescending(h => h.Points).FirstOrDefault();
                 viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
