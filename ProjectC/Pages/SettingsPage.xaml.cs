@@ -1,5 +1,9 @@
 ﻿using System;
-
+﻿using ProjectC.Model;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +20,10 @@ namespace ProjectC.Pages
             keyboardCell.On = ConfigFile.keyboardSoundOn;
             otherSoundsCell.On = ConfigFile.otherSoundsOn;
             slider.Value = ConfigFile.Slider;
+            if (BasePage.CurrentUserId.HasValue)
+            {
+                changePasswordButtonContainer.IsVisible = true;
+            }
         }
 
         private void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
@@ -45,6 +53,15 @@ namespace ProjectC.Pages
         {
             SwitchCell otherSoundsCell2 = (SwitchCell)sender;
             ConfigFile.otherSoundsOn = otherSoundsCell2.On;
+        }
+        private void changePasswordButton_Clicked(object sender, EventArgs e)
+        {
+            ValidateData();
+        }
+
+        public async void ValidateData()
+        {
+            await Navigation.PushAsync(new ChangePasswordPage(false, BasePage.UserService.Get(BasePage.CurrentUserId.Value).UserName));
         }
     }
 }

@@ -18,30 +18,28 @@
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="Geluid" TextColor="#398300">
-                    <!--Mute SwitchCell-->
-                    <SwitchCell Text="Mute" OnChanged="muteCell_OnChanged" x:Name="muteCell"/>
-                    <!--Slider-->
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="-   Spelgeluid   +" HorizontalTextAlignment="Center" FontSize="Large"/>
+                        <!--Mute SwitchCell-->
+                        <SwitchCell Text="Mute" OnChanged="muteCell_OnChanged" x:Name="muteCell"/>
+                        <!--Slider-->
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="-   Spelgeluid   +" HorizontalTextAlignment="Center" FontSize="Large"/>
 
-                            <Slider Minimum ="0.05" Maximum="1.0" ValueChanged="OnSliderValueChanged" x:Name="slider" />
-                        </StackLayout>
-                    </ViewCell>
-                    
-                    <!--KeyboardSwitchCell-->
-                    <SwitchCell Text="Keyboardgeluid" OnChanged="keyboardCell_OnChanged" x:Name="keyboardCell"/>
-                    <!--Overige geluiden SwitchCell-->    
-                    <SwitchCell Text="Overige geluiden" OnChanged="otherSoundsCell_OnChanged" x:Name="otherSoundsCell"/>
+                                <Slider Minimum ="0.05" Maximum="1.0" ValueChanged="OnSliderValueChanged" x:Name="slider" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <!--KeyboardSwitchCell-->
+                        <SwitchCell Text="Keyboardgeluid" OnChanged="keyboardCell_OnChanged" x:Name="keyboardCell"/>
+                        <!--Overige geluiden SwitchCell-->
+                        <SwitchCell Text="Overige geluiden" OnChanged="otherSoundsCell_OnChanged" x:Name="otherSoundsCell"/>
                     </TableSection>
-                    <!--Wachtwoord Veranderen-->
-                <TableSection Title="wachtwoord veranderen" TextColor="#398300">
-                    <EntryCell Placeholder="Huidig Wachtwoord"/>
-                    <EntryCell Placeholder="Nieuw Wachtwoord"/>
-                    <ViewCell>
-                        <StackLayout>
-                            <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
-                        </StackLayout>
+
+                    <TableSection Title="wachtwoord veranderen" TextColor="#398300">
+                        <ViewCell>
+                            <StackLayout x:Name="changePasswordButtonContainer" IsVisible="False">
+                                <Button x:Name="changePasswordButton" Style="{StaticResource TitleButtons}" Text="Verander je wachtwoord" Clicked="changePasswordButton_Clicked"/>
+                            </StackLayout>
                     </ViewCell>
                 </TableSection>
             </TableRoot>

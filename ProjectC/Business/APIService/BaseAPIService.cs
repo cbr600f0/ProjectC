@@ -58,10 +58,16 @@ namespace ProjectC.Business.APIService
             this.DeleteModel<TModel>(id);
         }
 
-        public void AddOrUpdate<TModel>(ref TModel model) where TModel : BaseModel, new()
+        public Guid AddOrUpdate<TModel>(ref TModel model) where TModel : BaseModel, new()
         {
             this.SetBaseProperties(ref model);
+            if (model.Id == null || model.Id == Guid.Empty)
+            {
+                model.Id = Guid.NewGuid();
+            }
             this.UpdateModel<TModel>(ref model);
+
+            return model.Id;
         }
 
         internal void SetBaseProperties<TModel>(ref TModel model) where TModel : BaseModel, new()
@@ -124,8 +130,7 @@ namespace ProjectC.Business.APIService
                 }
             }
 
-            App.client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            App.client.UploadValuesAsync(new Uri(url), "POST", nvc);
+            App.client.UploadValues(new Uri(url), nvc);
         }
 
         private void DeleteModel<TModel>(Guid id) where TModel : class, BaseModel

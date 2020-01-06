@@ -37,7 +37,7 @@ namespace ProjectC.Business.APIService
         {
             if (base.ApiIsAvailable())
             {
-                base.AddOrUpdate<User>(ref user);
+                user.Id = base.AddOrUpdate<User>(ref user);
                 user.LastSynchronized = DateTimeOffset.Now;
             }
             base.UserService.AddOrUpdate(user);
