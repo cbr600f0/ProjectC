@@ -469,7 +469,7 @@ namespace ProjectC.Pages
                 player2.Load("Correct.wav");
                 player2.Play();
             }
-            if (ConfigFile.turn <= 0)
+            if (turn <= 0)
             {
                 GameOverHandler();
             }
