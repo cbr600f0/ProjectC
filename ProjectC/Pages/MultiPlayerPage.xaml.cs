@@ -623,6 +623,8 @@ namespace ProjectC.Pages
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPointsP1, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
+
+            Content.IsEnabled = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 Navigation.PushAsync(new GameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2));
