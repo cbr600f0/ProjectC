@@ -11,19 +11,29 @@ namespace ProjectC.Pages
     {
         bool DifficultyHasBeenPicked = false;
         int WordRowsDifficultymultiplier = 2;
-        public DifficultySelectPage()
+        string soloOrDuo;
+        public DifficultySelectPage(string soloOrDuo)
         {
             InitializeComponent();
+            this.soloOrDuo = soloOrDuo;
         }
         private async void BackButton_Clicked(object sender, EventArgs e)
         {
-                await Navigation.PopAsync();
+            await Navigation.PopAsync();
         }
         private async void EasyButton_Clicked(object sender, EventArgs e)
         {
             if (DifficultyHasBeenPicked)
             {
-                await Navigation.PushAsync(new SinglePlayerPage("easy", WordRowsDifficultymultiplier));
+                if (soloOrDuo == "solo")
+                {
+                    await Navigation.PushAsync(new SinglePlayerPage("easy", WordRowsDifficultymultiplier));
+                }
+                else
+                {
+
+                    await Navigation.PushAsync(new MultiPlayerPage("easy", WordRowsDifficultymultiplier));
+                }
             }
             else
             {
@@ -34,7 +44,15 @@ namespace ProjectC.Pages
         {
             if (DifficultyHasBeenPicked)
             {
-                await Navigation.PushAsync(new SinglePlayerPage("medium", WordRowsDifficultymultiplier));
+                if (soloOrDuo == "solo")
+                {
+                    await Navigation.PushAsync(new SinglePlayerPage("medium", WordRowsDifficultymultiplier));
+                }
+                else
+                {
+
+                    await Navigation.PushAsync(new MultiPlayerPage("medium", WordRowsDifficultymultiplier));
+                }
             }
             else
             {
@@ -45,7 +63,15 @@ namespace ProjectC.Pages
         {
             if (DifficultyHasBeenPicked)
             {
-                await Navigation.PushAsync(new SinglePlayerPage("hard", WordRowsDifficultymultiplier));
+                if (soloOrDuo == "solo")
+                {
+                    await Navigation.PushAsync(new SinglePlayerPage("hard", WordRowsDifficultymultiplier));
+                }
+                else
+                {
+
+                    await Navigation.PushAsync(new MultiPlayerPage("hard", WordRowsDifficultymultiplier));
+                }
             }
             else
             {
@@ -56,7 +82,15 @@ namespace ProjectC.Pages
         {
             if (DifficultyHasBeenPicked)
             {
-                await Navigation.PushAsync(new SinglePlayerPage("legendary", WordRowsDifficultymultiplier));
+                if (soloOrDuo == "solo")
+                {
+                    await Navigation.PushAsync(new SinglePlayerPage("legendary", WordRowsDifficultymultiplier));
+                }
+                else
+                {
+
+                    await Navigation.PushAsync(new MultiPlayerPage("legendary", WordRowsDifficultymultiplier));
+                }
             }
             else
             {

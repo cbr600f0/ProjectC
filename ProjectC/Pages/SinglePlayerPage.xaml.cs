@@ -34,6 +34,8 @@ namespace ProjectC.Pages
         string difficultySelected;
         string highscoreWord = "";
         int highscoreWordPoints = 0;
+        public int totalPoints = 0;
+        public int turn = 3;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
             difficultySelected = difficulty;
@@ -188,6 +190,7 @@ namespace ProjectC.Pages
                     Frame frame = new Frame()
                     {
                         BorderColor = Color.Black,
+                        BackgroundColor = Color.Transparent,
                         Content = gridForLabels,
                         HeightRequest = ConfigFile.unrealHighNumber,
                         HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -413,7 +416,7 @@ namespace ProjectC.Pages
 
             wordContainer.Children.Add(insideGrid);
             grid.Children.Add(wordContainer, 1, grid.RowDefinitions.Count - 1);
-            ConfigFile.turn--;
+            turn--;
             if (highscoreWordPoints < getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar)))
             {
                 highscoreWord = "";
@@ -434,14 +437,14 @@ namespace ProjectC.Pages
                 }
             }
 
-            ConfigFile.totalPoints += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
-            viewPointCounter.Text = "totale score: " + ConfigFile.totalPoints;
-            viewTurnCounter.Text = "beurten over: " + ConfigFile.turn;
+            totalPoints += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
+            viewPointCounter.Text = "totale score: " + totalPoints;
+            viewTurnCounter.Text = "beurten over: " + turn;
             // PushButton Geluid
             var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
             player2.Load("Correct.wav");
             player2.Play();
-            if (ConfigFile.turn <= 0)
+            if (turn <= 0)
             {
                 GameOverHandler();
             }
@@ -590,9 +593,9 @@ namespace ProjectC.Pages
         {
             if (BasePage.CurrentUserId.HasValue)
             {
-                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, ConfigFile.totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
+                BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage(currentUser, ConfigFile.totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+            await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
