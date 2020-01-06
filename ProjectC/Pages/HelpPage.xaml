@@ -95,7 +95,7 @@
                 <Label Text="- 1. Als je het wachtwoord bent vergeten, kan je in het scherm 'Inloggen,' de knop 'Wachtwoord Vergeten' klikken" FontSize="Large"/>
                 <Label Text="- Volg de stappen om je wachtwoord te veranderen" FontSize="Large"/>
                 <Label Text="- 2. Als je het wachtwoord gewoon wllt veranderen kan je dit doen in het instellingenmenu. Deze is te vinden op het hoofdmenu" FontSize="Large"/>
-                <Label Text="- Om het wachtwoord te veranderen vul je het oude en nieuwe wachtwoord in op de aangegeven plekkken" FontSize="Large"/>
+                <Label Text="- Om het wachtwoord te veranderen vul je het oude en nieuwe wachtwoord in op de aangegeven plekken" FontSize="Large"/>
                 <Label Text="- Klik hierna op Opslaan. Nu is je wachtwoord veranderd!" FontSize="Large"/>
                 <Label/>
                 <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
