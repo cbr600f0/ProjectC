@@ -21,8 +21,5 @@ namespace ProjectC.Pages
 
         public static Char[] charPool = "AAAAAABBCCDDDDDEEEEEEEEEEEEEEEEEEFFGGGHHIIIIJJKKKLLLMMMNNNNNNNNNNOOOOOOPPQRRRRRSSSSSTTTTTUUUVVWWXYZZ".ToCharArray();
         public static Random random = new Random(DateTime.Now.Millisecond);
-
-        public static int totalPoints = 0;
-        public static int turn = 3;
     }
 }
