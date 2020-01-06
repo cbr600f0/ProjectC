@@ -628,7 +628,7 @@ namespace ProjectC.Pages
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 Navigation.PushAsync(new GameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2));
-                return true;
+                return false;
             });
         }
 
