@@ -596,7 +596,13 @@ namespace ProjectC.Pages
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
+
+            var gesture = new TapGestureRecognizer();
+            gesture.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
+            };
+            Content.GestureRecognizers.Add(gesture);
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
