@@ -14,7 +14,7 @@
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Multi Player">
         <StackLayout>
-            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+           <!-- <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/> --> 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -72,7 +72,7 @@
     </ContentPage>
     <ContentPage Title="Single Player">
         <StackLayout>
-            <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>
+           <!--<Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked"/>--> 
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

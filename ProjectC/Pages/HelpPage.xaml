@@ -17,7 +17,7 @@
                 <Label/>
                 <Label Text="- Je krijgt een aantal letters"
                    FontSize="Large"/>
-                <Label Text="- Je kan deze letters klikken en droppen op het speelscherm"
+                <Label Text="- Je kan op deze letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
                 <Label Text="- Gebruik deze letters om een woord te maken. Het woord moet precies uit het aantal gevraagde letters bestaan"
                    FontSize="Large"/>
@@ -35,7 +35,7 @@
                    FontSize="Large"
                    FontAttributes="Bold"/>
                 <Label/>
-                <!--NOTE! Deze regels zijn een van de mogelijkheiden die we kunnen gebruiken. Nadat we getest hebben welke manier het beste werkt, kunnen we de regels weer aanpassen.-->
+                <!--NOTE! Pas deze regels nog aan. Moet omste beurt.-->
                 <Label Text="- Jij en je tegenstanders krijgen allemaal dezelfde letters" 
                    FontSize="Large"/>
                 <Label Text="- Je kan op je eigen letters klikken en droppen op het speelscherm"
