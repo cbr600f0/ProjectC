@@ -39,7 +39,7 @@ namespace ProjectC.Pages
         int highscoreWordPoints = 0;
         public int totalPointsP1 = 0;
         public int totalPointsP2 = 0;
-        public int turn = 3;
+        public int turn = 1;
         public MultiPlayerPage(string difficulty, int difficultyMultiplier)
         {
             currentPlayerColor = player1Color;
@@ -432,11 +432,17 @@ namespace ProjectC.Pages
             }
 
             if (currentPlayerTurn == 1)
+            {
                 totalPointsP1 += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
+                viewPointCounterP1Label.Text = "totale score: " + totalPointsP1.ToString();
+            }
             else
+            {
                 totalPointsP2 += getValues.WordWorth(FramesToWords.WordCreator(wordCreationBar));
-            //viewPointCounter.Text = "totale score: " + totalPoints;
-            viewTurnCounterLabel.Text = "beurten over: " + turn;
+                viewPointCounterP2Label.Text = "totale score: " + totalPointsP2.ToString();
+            }
+                //viewPointCounter.Text = "totale score: " + totalPoints;
+                viewTurnCounterLabel.Text = "beurten over: " + turn;
             // PushButton Geluid
             var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
             player2.Load("Correct.wav");
@@ -611,13 +617,19 @@ namespace ProjectC.Pages
                 wordCreationBarStackLayout.Children.Add(grid);
             }
         }
-        public async void GameOverHandler()
+        public void GameOverHandler()
         {
             if (BasePage.CurrentUserId.HasValue)
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPointsP1, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage("speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+
+            var gesture = new TapGestureRecognizer();
+            gesture.Tapped += (s, e) =>
+            {
+                Navigation.PushAsync(new GameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2));
+            };
+            Content.GestureRecognizers.Add(gesture);
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)

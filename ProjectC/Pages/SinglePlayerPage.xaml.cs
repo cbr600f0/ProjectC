@@ -213,6 +213,7 @@ namespace ProjectC.Pages
 
         private async Task<Boolean> CheckWord(string word)
         {
+            word = word.ToLower();
             String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {
@@ -595,7 +596,7 @@ namespace ProjectC.Pages
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+            await Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
