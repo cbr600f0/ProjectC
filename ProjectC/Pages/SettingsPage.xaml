@@ -38,12 +38,10 @@
                         </ViewCell>
                     </TableSection>
 
-                <TableSection Title="wachtwoord veranderen" TextColor="#398300">
-                    <EntryCell Placeholder="Huidig Wachtwoord"/>
-                    <EntryCell Placeholder="Nieuw Wachtwoord"/>
-                    <ViewCell>
-                        <StackLayout>
-                            <Button Style="{StaticResource TitleButtons}" Text="Opslaan"/>
+                    <TableSection Title="wachtwoord veranderen" TextColor="#398300">
+                        <ViewCell>
+                            <StackLayout x:Name="changePasswordButtonContainer" IsVisible="False">
+                            <Button x:Name="changePasswordButton" Style="{StaticResource TitleButtons}" Text="Verander je wachtwoord" Clicked="changePasswordButton_Clicked"/>
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
