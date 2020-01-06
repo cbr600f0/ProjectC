@@ -18,6 +18,7 @@
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="Geluid" TextColor="#398300">
+                    <!--Mute SwitchCell-->
                     <SwitchCell Text="Mute" OnChanged="muteCell_OnChanged" x:Name="muteCell"/>
                     <!--Slider-->
                     <ViewCell>
@@ -27,12 +28,13 @@
                             <Slider Minimum ="0.05" Maximum="1.0" ValueChanged="OnSliderValueChanged" x:Name="slider" />
                         </StackLayout>
                     </ViewCell>
-
+                    
+                    <!--KeyboardSwitchCell-->
                     <SwitchCell Text="Keyboardgeluid" OnChanged="keyboardCell_OnChanged" x:Name="keyboardCell"/>
-                        
+                    <!--Overige geluiden SwitchCell-->    
                     <SwitchCell Text="Overige geluiden" OnChanged="otherSoundsCell_OnChanged" x:Name="otherSoundsCell"/>
                     </TableSection>
-
+                    <!--Wachtwoord Veranderen-->
                 <TableSection Title="wachtwoord veranderen" TextColor="#398300">
                     <EntryCell Placeholder="Huidig Wachtwoord"/>
                     <EntryCell Placeholder="Nieuw Wachtwoord"/>
