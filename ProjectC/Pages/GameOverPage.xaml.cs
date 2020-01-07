@@ -15,7 +15,7 @@ namespace ProjectC.Pages
         string difficulty;
         //if(singleplayer){ alles voor singleplayer } else { alles voor mutliplayer }
         // in de singleplayer part alleen pointsp1 gebruiken (pointsp2 zal altijd 0 zijn in singleplayer)
-        public GameOverPage(bool singlePlayer, string name, int pointsp1, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints, int pointsp2)
+        public GameOverPage(bool singlePlayer, string name, int points, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints) //pointsp1&pointsp2
         {
             switch (difficulty)
             {
@@ -52,7 +52,7 @@ namespace ProjectC.Pages
                 Int32 highscore = currentScores.Max(s => s.Points);
                 Highscore.Text = $"{(highscore == points ? "Nieuwe Highscore " : String.Empty )}{highscore}";
             }
-            Points.Text = pointsp1.ToString();
+            Points.Text = points.ToString();
             highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
             Difficulty.Text = "Je speelde op " + this.difficulty;
             Letters.Text = manyLetters ? "met veel letters" : "met weinig letters";

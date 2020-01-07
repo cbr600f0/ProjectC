@@ -14,10 +14,10 @@
                    BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" 
                    HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
             
-            <Label x:Name="lblNewHighScore" Text=""
+            <!--<Label x:Name="lblNewHighScore" Text=""
                    FontSize="Large" FontAttributes="Bold" 
                    BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" 
-                   HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
+                   HorizontalTextAlignment="Center" Margin="0,20,0,80"/>-->
             
             <Label Text="Totale punten" 
                    FontSize="Large"  

@@ -57,7 +57,7 @@ namespace ProjectC.Pages
                     this.lblBestWord.Text = $"{currentScores.OrderByDescending(s => s.BestWordValue).First().BestWord}";
                     this.lblAverageScore.IsVisible = true;
                     this.lblAverageScoretext.IsVisible = true;
-                    this.lblAverageScore.Text = $"{currentScores.Average(s => s.Points)}";
+                    this.lblAverageScore.Text = $"{currentScores.Average(s => s.Points).ToString("F2")}";
                 }
             }
         }

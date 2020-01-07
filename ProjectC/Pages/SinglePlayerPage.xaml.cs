@@ -599,7 +599,7 @@ namespace ProjectC.Pages
             Content.IsEnabled = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
+                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints)); //pointsp2
                 return false;
             });
         }
