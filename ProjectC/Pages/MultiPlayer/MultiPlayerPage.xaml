@@ -26,20 +26,20 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" HasShadow="False" BackgroundColor="DeepSkyBlue" BorderColor="Black" Padding="0" Margin="4">
+                        <Frame Grid.Column="0" HasShadow="False" BackgroundColor="{StaticResource BlueBack}" BorderColor="{StaticResource BlueBorder}" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
                                 <Label x:Name="viewPointCounterP1Label" Text="totale score: 0" FontSize="Small" Margin="0"/>
                                 <Label x:Name="shuffleCounterP1Label" Text="Shuffles: 3" FontSize="Small" Margin="0"/>
                             </StackLayout>
                         </Frame>
-                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="4">
+                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="{StaticResource GreenBack}" BorderColor="{StaticResource GreenBorder}" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
                                 <Label x:Name="viewTurnCounterLabel" Text="Beurten over: 3" FontSize="Small" Margin="0"/>
                                 <Label x:Name="viewCurrentPushwordValueLabel" Text="woordwaarde: 0" FontSize="Small" Margin="0"/>
                                 <Label x:Name="currentPlayersTurnLabel" Text=" beurt: speler 1" FontSize="Small" Margin="0"/>
                             </StackLayout>
                         </Frame>
-                        <Frame Grid.Column="2" HasShadow="False" BackgroundColor="Yellow" BorderColor="Black" Padding="0" Margin="4">
+                        <Frame Grid.Column="2" HasShadow="False" BackgroundColor="{StaticResource YellowBack}" BorderColor="{StaticResource YellowBorder}" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
                                 <Label x:Name="viewPointCounterP2Label" Text="totale score: 0" FontSize="Small" Margin="0"/>
                                 <Label x:Name="shuffleCounterP2Label" Text="Shuffles: 3" FontSize="Small" Margin="0"/>

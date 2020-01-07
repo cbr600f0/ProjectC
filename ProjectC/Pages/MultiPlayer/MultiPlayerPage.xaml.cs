@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using ProjectC.Business.Service;
 using ProjectC.Model;
+using ProjectC.Pages.MultiPlayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -627,7 +628,7 @@ namespace ProjectC.Pages
             Content.IsEnabled = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                Navigation.PushAsync(new GameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints)); //totalPointsP2
+                Navigation.PushAsync(new MultiGameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2)); //totalPointsP2
                 return false;
             });
         }

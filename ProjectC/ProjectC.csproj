@@ -75,7 +75,10 @@
     <EmbeddedResource Update="Pages\Login\ForgotPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\GameOverPage.xaml">
+    <EmbeddedResource Update="Pages\MultiPlayer\MultiGameOverPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SinglePlayer\GameOverPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Login\LoginPage.xaml">
@@ -84,7 +87,7 @@
     <EmbeddedResource Update="Pages\helpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\MultiPlayerPage.xaml">
+    <EmbeddedResource Update="Pages\MultiPlayer\MultiPlayerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Login\RegisterPage.xaml">
@@ -96,7 +99,7 @@
     <EmbeddedResource Update="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\SinglePlayerPage.xaml">
+    <EmbeddedResource Update="Pages\SinglePlayer\SinglePlayerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\StatisticPage.xaml">
@@ -130,7 +133,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Pages\MultiPlayer\" />
     <Folder Include="Pages\SinglePlayer\" />
