@@ -206,6 +206,7 @@ namespace ProjectC.Pages
 
         private async Task<Boolean> CheckWord(string word)
         {
+            word = word.ToLower();
             String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {

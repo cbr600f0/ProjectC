@@ -13,6 +13,10 @@
                    HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
 
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Label Text="Punten speler 1" Grid.Row="0" Grid.Column="0"
                    FontSize="Large"  
                    TextColor="{StaticResource BlueText}" 
