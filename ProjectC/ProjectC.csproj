@@ -30,6 +30,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ChangePasswordPage.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\DifficultyEnum.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DifficultyEnum.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\ForgotPasswordPage.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -53,6 +58,11 @@
     <Compile Update="Pages\HogeScoresPage.xaml.cs">
       <DependentUpon>HogeScoresPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Resources\SecurityQuestionEnum.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SecurityQuestionEnum.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -62,13 +72,13 @@
     <EmbeddedResource Update="Pages\DifficultySelectPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ForgotPasswordPage.xaml">
+    <EmbeddedResource Update="Pages\Login\ForgotPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\GameOverPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\LoginPage.xaml">
+    <EmbeddedResource Update="Pages\Login\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\helpPage.xaml">
@@ -77,7 +87,7 @@
     <EmbeddedResource Update="Pages\MultiPlayerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\RegisterPage.xaml">
+    <EmbeddedResource Update="Pages\Login\RegisterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\HogeScoresPage.xaml">
@@ -95,6 +105,10 @@
     <EmbeddedResource Update="Resources\ChangePasswordPage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangePasswordPage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\DifficultyEnum.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DifficultyEnum.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\ForgotPasswordPage.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -115,5 +129,10 @@
     <EmbeddedResource Update="SplashScreen.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\MultiPlayer\" />
+    <Folder Include="Pages\SinglePlayer\" />
   </ItemGroup>
 </Project>

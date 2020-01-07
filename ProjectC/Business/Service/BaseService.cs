@@ -64,7 +64,7 @@ namespace ProjectC.Business.Service
 
         internal void SetBaseProperties<TModel>(ref TModel model) where TModel : BaseModel, new()
         {
-            if (model.CreatedAt != DateTimeOffset.MinValue)
+            if (model.CreatedAt != DateTimeOffset.MinValue && model.LastSynchronized != null)
             {
                 model.ModifiedAt = DateTimeOffset.Now;
             }

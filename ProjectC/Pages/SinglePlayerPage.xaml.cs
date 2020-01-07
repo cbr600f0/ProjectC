@@ -68,7 +68,7 @@ namespace ProjectC.Pages
 
             try
             {
-                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderByDescending(h => h.Points).FirstOrDefault();
                 viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
@@ -599,7 +599,7 @@ namespace ProjectC.Pages
             Content.IsEnabled = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, 0));
+                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints)); //pointsp2
                 return false;
             });
         }
