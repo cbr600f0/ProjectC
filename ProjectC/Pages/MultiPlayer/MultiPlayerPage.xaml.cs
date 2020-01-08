@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using ProjectC.Business.Service;
 using ProjectC.Model;
+using ProjectC.Pages.MultiPlayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,7 @@ namespace ProjectC.Pages
         public GetValues getValues = new GetValues();
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-        private bool pushWordDebug = false;
+        private bool pushWordDebug = true;
         private int remainingShufflesP1 = 3;
         private int remainingShufflesP2 = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
@@ -39,7 +40,7 @@ namespace ProjectC.Pages
         int highscoreWordPoints = 0;
         public int totalPointsP1 = 0;
         public int totalPointsP2 = 0;
-        public int turn = 1;
+        public int turn = 3;
         public MultiPlayerPage(string difficulty, int difficultyMultiplier)
         {
             currentPlayerColor = player1Color;
@@ -205,6 +206,7 @@ namespace ProjectC.Pages
 
         private async Task<Boolean> CheckWord(string word)
         {
+            word = word.ToLower();
             String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {
@@ -493,12 +495,12 @@ namespace ProjectC.Pages
             if (pushWordDebug)
             {
                 pushWordDebug = false;
-                debugButtonPushBar.BackgroundColor = Color.Green;
+                //debugButtonPushBar.BackgroundColor = Color.Green;
             }
             else
             {
                 pushWordDebug = true;
-                debugButtonPushBar.BackgroundColor = Color.Red;
+                //debugButtonPushBar.BackgroundColor = Color.Red;
             }
         }
 
@@ -627,7 +629,7 @@ namespace ProjectC.Pages
             Content.IsEnabled = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                Navigation.PushAsync(new GameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2));
+                Navigation.PushAsync(new MultiGameOverPage(false, "speler 1", totalPointsP1, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints, totalPointsP2)); //totalPointsP2
                 return false;
             });
         }

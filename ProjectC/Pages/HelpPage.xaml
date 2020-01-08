@@ -17,7 +17,7 @@
                 <Label/>
                 <Label Text="- Je krijgt een aantal letters"
                    FontSize="Large"/>
-                <Label Text="- Je kan deze letters klikken en droppen op het speelscherm"
+                <Label Text="- Je kan op deze letters klikken en droppen op het speelscherm"
                    FontSize="Large"/>
                 <Label Text="- Gebruik deze letters om een woord te maken. Het woord moet precies uit het aantal gevraagde letters bestaan"
                    FontSize="Large"/>
@@ -35,22 +35,15 @@
                    FontSize="Large"
                    FontAttributes="Bold"/>
                 <Label/>
-                <!--NOTE! Deze regels zijn een van de mogelijkheiden die we kunnen gebruiken. Nadat we getest hebben welke manier het beste werkt, kunnen we de regels weer aanpassen.-->
-                <Label Text="- Jij en je tegenstanders krijgen allemaal dezelfde letters" 
+                <Label Text="- De spelregels zijn net als in singleplayer" 
                    FontSize="Large"/>
-                <Label Text="- Je kan op je eigen letters klikken en droppen op het speelscherm"
+                <Label Text="- Maar nu speel je met een andere speler op hetzelfde apparaat"
                    FontSize="Large"/>
-                <Label Text="- Gebruik deze letters om een woord te maken. Het bord ziet er hetzelfde uit voor beide spelers"
+                <Label Text="- Jullie gebruiken dezelfde letters, die aangevuld worden als iemand een woord maakt"
                    FontSize="Large"/>
-                <Label Text="- Als je geen woord kan maken, kan je klikken op de shuffleknop om letters te vervangen"
+                <Label Text="- Maak om de beurt een woord, gebruik zo nodig de shuffleknop"
                    FontSize="Large"/>
-                <Label Text="- Degene die als eerste een woord kan maken, krijgt hiervan de punten"
-                   FontSize="Large"/>
-                <Label Text="- Hoe moeilijker het woord, hoe meer punten de winnaar krijgt"
-                   FontSize="Large"/>
-                <Label Text="- Nadat iemand een woord gemaakt heeft, krijgt iedereen weer nieuwe letters en een nieuw woord"
-                   FontSize="Large"/>
-                <Label Text="- Degene die op het eind zoveel mogelijk punten heeft, wint!"
+                <Label Text="- Degene die na de sessie de meeste punten heeft, wint!"
                    FontSize="Large"/>
 
 

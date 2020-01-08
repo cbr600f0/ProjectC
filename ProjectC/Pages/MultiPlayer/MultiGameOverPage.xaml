@@ -4,54 +4,60 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.GameOverPage"
-             ControlTemplate="{StaticResource BackgroundTemplate}"
-             NavigationPage.HasNavigationBar="False">
+             x:Class="ProjectC.Pages.MultiPlayer.MultiGameOverPage">
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="Name" Text=""
                    FontSize="Large" FontAttributes="Bold" 
-                   BackgroundColor="{StaticResource YellowBack}" TextColor="{StaticResource YellowText}" 
+                   BackgroundColor="{StaticResource GreenBack}" TextColor="{StaticResource GreenText}" 
                    HorizontalTextAlignment="Center" Margin="0,20,0,80"/>
-            
-            <Label Text="Totale punten" 
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text="Punten speler 1" Grid.Row="0" Grid.Column="0"
                    FontSize="Large"  
                    TextColor="{StaticResource BlueText}" 
+                   BackgroundColor="{StaticResource BlueBack}"
                    HorizontalTextAlignment="Center"/>
-            <Label x:Name="Points" 
+                <Label x:Name="Points1" Grid.Row="1" Grid.Column="0"
                    FontSize="Large" FontAttributes="Bold"
                    TextColor="{StaticResource BlueText}"
+                   BackgroundColor="{StaticResource BlueBack}"
                    HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
 
-            <!-- (Oude) Highscore + melding of je die verslagen hebt -->
-            <!-- Melding als je niet bent ingelogd -->
-            <Label x:Name="HighscoreText" Text="Highscore"  IsVisible="False"
-                   FontSize="Medium"  
-                   TextColor="{StaticResource BlueText}" 
+                <Label Text="Punten speler 2" Grid.Row="0" Grid.Column="1"
+                   FontSize="Large"  
+                   TextColor="{StaticResource YellowText}" 
+                   BackgroundColor="{StaticResource YellowBack}"
                    HorizontalTextAlignment="Center"/>
-            <Label x:Name="Highscore"  IsVisible="False"
-                   FontSize="Medium" FontAttributes="Bold"
-                   TextColor="{StaticResource BlueText}"
+                <Label x:Name="Points2" Grid.Row="1" Grid.Column="1"
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="{StaticResource YellowText}"
+                   BackgroundColor="{StaticResource YellowBack}"
                    HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
-
-            <Label Text="Hoogst gespeelde woord:" 
+            </Grid>
+            
+            <Label Text="Hoogst gespeelde woord:"
                    FontSize="Large" 
-                   TextColor="{StaticResource BlueText}"
+                   TextColor="{StaticResource GreenText}"
                    HorizontalTextAlignment="Center"/>
-            <Label x:Name="highscoreWordLabel" 
+            <Label x:Name="highscoreWordLabel1"
                    FontSize="Large" FontAttributes="Bold"
-                   TextColor="{StaticResource BlueText}" 
+                   TextColor="{StaticResource GreenText}" 
                    HorizontalTextAlignment="Center" Margin="0,0,0,40"/>
 
             <Label x:Name="Difficulty" 
                    FontSize="Medium" 
-                   TextColor="{StaticResource BlueText}" 
+                   TextColor="{StaticResource GreenText}" 
                    HorizontalTextAlignment="Center"/>
             <Label x:Name="Letters" 
                    FontSize="Medium" 
-                   TextColor="{StaticResource BlueText}"
+                   TextColor="{StaticResource GreenText}"
                    HorizontalTextAlignment="Center" Margin="0,0,0,80"/>
-            
+
             <Button Clicked="HomeButton_Clicked" Style="{StaticResource TitleButtons}" Text="Klik hier om terug te gaan naar de hoofdpagina" VerticalOptions="End"/>
         </StackLayout>
     </ContentPage.Content>

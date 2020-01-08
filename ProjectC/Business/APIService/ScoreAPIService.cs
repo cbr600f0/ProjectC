@@ -48,7 +48,9 @@ namespace ProjectC.Business.APIService
         {
             List<VMScore> vmScores = new List<VMScore>();
 
-            List<Score> scores = this.Get();
+            List<Score> scores = this.Get()
+                .OrderByDescending(s => s.Points)
+                .ToList();
 
             Int32 rank = 1;
 

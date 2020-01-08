@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="ProjectC.Pages.SinglePlayerPage"
+             x:Class="ProjectC.Pages.MultiPlayerPage"
              NavigationPage.HasNavigationBar="False"
              Title="Scralingo">
     <ContentPage.Content>
@@ -24,19 +24,25 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Frame Grid.Column="0" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="4">
+                        <Frame Grid.Column="0" HasShadow="False" BackgroundColor="{StaticResource BlueBack}" BorderColor="{StaticResource BlueBorder}" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
-                                <Label x:Name="viewPointCounter" Text="totale score: 0" FontSize="Small" Margin="0"/>
-                                <Label x:Name="viewTurnCounter" Text="Beurten over: 3" FontSize="Small" Margin="0"/>
-                                <Label x:Name="shuffleCounter" Text="Shuffles: 3" FontSize="Small" Margin="0"/>
+                                <Label x:Name="viewPointCounterP1Label" Text="totale score: 0" FontSize="Small" Margin="0"/>
+                                <Label x:Name="shuffleCounterP1Label" Text="Shuffles: 3" FontSize="Small" Margin="0"/>
                             </StackLayout>
                         </Frame>
-                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="4">
+                        <Frame Grid.Column="1" HasShadow="False" BackgroundColor="{StaticResource GreenBack}" BorderColor="{StaticResource GreenBorder}" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
-                                <Label x:Name="viewHighscore" Text="HighScore: 0" FontSize="Small" Margin="0"/>
-                                <Label x:Name="viewCurrentPushwordValue" Text="Dit woord: 0 punten" FontSize="Small" Margin="0"/>
-                                <Label x:Name="viewCurrentPlayer" Text="Speler: Mark" FontSize="Small" Margin="0"/>
+                                <Label x:Name="viewTurnCounterLabel" Text="Beurten over: 3" FontSize="Small" Margin="0"/>
+                                <Label x:Name="viewCurrentPushwordValueLabel" Text="woordwaarde: 0" FontSize="Small" Margin="0"/>
+                                <Label x:Name="currentPlayersTurnLabel" Text=" beurt: speler 1" FontSize="Small" Margin="0"/>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Grid.Column="2" HasShadow="False" BackgroundColor="{StaticResource YellowBack}" BorderColor="{StaticResource YellowBorder}" Padding="0" Margin="4">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
+                                <Label x:Name="viewPointCounterP2Label" Text="totale score: 0" FontSize="Small" Margin="0"/>
+                                <Label x:Name="shuffleCounterP2Label" Text="Shuffles: 3" FontSize="Small" Margin="0"/>
                             </StackLayout>
                         </Frame>
                     </Grid>
@@ -49,7 +55,7 @@
                 <StackLayout Grid.Row="2" HorizontalOptions="FillAndExpand" x:Name="wordCreationBarStackLayout" VerticalOptions="FillAndExpand" Padding="10, 5" />
 
                 <!-- Usable letters -->
-                <StackLayout Grid.Row="3" x:Name="UsableLetters" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Margin="0, 15, 0, 0" Padding="10, 5" BackgroundColor="#D4D4D4"/>
+                <StackLayout Grid.Row="3" x:Name="UsableLetters" HorizontalOptions="CenterAndExpand" VerticalOptions="FillAndExpand" Margin="0, 15, 0, 0" Padding="10, 5"/>
                 <StackLayout Grid.Row="4" Margin="0" Padding="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -57,7 +63,7 @@
                             <ColumnDefinition Width="7*" />
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="debugButtonPushBar" Clicked="DebugButton_Clicked" BackgroundColor="Green" Grid.Column="0"/>
+                        <!--<Button x:Name="debugButtonPushBar" Clicked="DebugButton_Clicked" BackgroundColor="Green" Grid.Column="0"/>-->
                         <Button Clicked="PushButton_Clicked" Text="Woord pushen" Grid.Column="1" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Medium"/>
                         <Button Clicked="ShuffleUsableLetterBord" Text="SHUFFLE" Grid.Column="2" />
                     </Grid>
