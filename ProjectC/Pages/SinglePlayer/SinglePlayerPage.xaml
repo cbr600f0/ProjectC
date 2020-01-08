@@ -57,7 +57,7 @@
                             <ColumnDefinition Width="7*" />
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="debugButtonPushBar" Clicked="DebugButton_Clicked" BackgroundColor="Green" Grid.Column="0"/>
+                        <!--<Button x:Name="debugButtonPushBar" Clicked="DebugButton_Clicked" BackgroundColor="Green" Grid.Column="0"/>-->
                         <Button Clicked="PushButton_Clicked" Text="Woord pushen" Grid.Column="1" BorderWidth="3" BorderColor="#8FE64D" TextColor="#398300" BackgroundColor="#B6F287" FontSize="Medium"/>
                         <Button Clicked="ShuffleUsableLetterBord" Text="SHUFFLE" Grid.Column="2" />
                     </Grid>

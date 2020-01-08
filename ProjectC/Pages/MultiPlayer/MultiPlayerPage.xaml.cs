@@ -27,7 +27,7 @@ namespace ProjectC.Pages
         public GetValues getValues = new GetValues();
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-        private bool pushWordDebug = false;
+        private bool pushWordDebug = true;
         private int remainingShufflesP1 = 3;
         private int remainingShufflesP2 = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
@@ -40,7 +40,7 @@ namespace ProjectC.Pages
         int highscoreWordPoints = 0;
         public int totalPointsP1 = 0;
         public int totalPointsP2 = 0;
-        public int turn = 1;
+        public int turn = 3;
         public MultiPlayerPage(string difficulty, int difficultyMultiplier)
         {
             currentPlayerColor = player1Color;
@@ -495,12 +495,12 @@ namespace ProjectC.Pages
             if (pushWordDebug)
             {
                 pushWordDebug = false;
-                debugButtonPushBar.BackgroundColor = Color.Green;
+                //debugButtonPushBar.BackgroundColor = Color.Green;
             }
             else
             {
                 pushWordDebug = true;
-                debugButtonPushBar.BackgroundColor = Color.Red;
+                //debugButtonPushBar.BackgroundColor = Color.Red;
             }
         }
 

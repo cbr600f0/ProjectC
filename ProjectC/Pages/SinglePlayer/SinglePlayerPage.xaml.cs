@@ -23,7 +23,7 @@ namespace ProjectC.Pages
         public GetValues getValues = new GetValues();
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-        private bool pushWordDebug = false;
+        private bool pushWordDebug = true;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
         public string currentUser = "Je bent niet ingelogd";
@@ -35,7 +35,7 @@ namespace ProjectC.Pages
         string highscoreWord = "";
         int highscoreWordPoints = 0;
         public int totalPoints = 0;
-        public int turn = 3;
+        public int turn = 7;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
             difficultySelected = difficulty;
@@ -488,12 +488,12 @@ namespace ProjectC.Pages
             if (pushWordDebug)
             {
                 pushWordDebug = false;
-                debugButtonPushBar.BackgroundColor = Color.Green;
+                //debugButtonPushBar.BackgroundColor = Color.Green;
             }
             else
             {
                 pushWordDebug = true;
-                debugButtonPushBar.BackgroundColor = Color.Red;
+                //debugButtonPushBar.BackgroundColor = Color.Red;
             }
         }
 
