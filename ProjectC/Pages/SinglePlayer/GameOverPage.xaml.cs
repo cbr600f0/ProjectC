@@ -13,7 +13,9 @@ namespace ProjectC.Pages
     public partial class GameOverPage : ContentPage
     {
         string difficulty;
-        public GameOverPage(string name, int points, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints)
+        //if(singleplayer){ alles voor singleplayer } else { alles voor mutliplayer }
+        // in de singleplayer part alleen pointsp1 gebruiken (pointsp2 zal altijd 0 zijn in singleplayer)
+        public GameOverPage(bool singlePlayer, string name, int points, bool manyLetters, string difficulty, string highscoreWord, int highscoreWordPoints) //pointsp1&pointsp2
         {
             switch (difficulty)
             {
@@ -47,7 +49,8 @@ namespace ProjectC.Pages
                 List<Score> currentScores = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value);
                 Highscore.IsVisible = true;
                 HighscoreText.IsVisible = true;
-                Highscore.Text = $"{currentScores.Max(s => s.Points)}";
+                Int32 highscore = currentScores.Max(s => s.Points);
+                Highscore.Text = $"{(highscore == points ? "Nieuwe Highscore " : String.Empty )}{highscore}";
             }
             Points.Text = points.ToString();
             highscoreWordLabel.Text = highscoreWord + ", voor " + highscoreWordPoints.ToString() + " punten.";
@@ -66,7 +69,7 @@ namespace ProjectC.Pages
 
         private async void HomeButton_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PopToRootAsync();
         }
 
         protected override bool OnBackButtonPressed()

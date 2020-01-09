@@ -27,7 +27,7 @@ namespace ProjectC
 
         public static readonly NetworkAccess connectivity = Connectivity.NetworkAccess;  
 
-        public static readonly String BaseUrl = "https://145.137.57.69:44353/api/";
+        public static readonly String BaseUrl = "https://192.168.0.156:44353/api/";
 
         public App()
         {
@@ -71,6 +71,8 @@ namespace ProjectC
         {
             List<Score> scoresFromAPI = BasePage.ScoreAPIService.Get();
             List<Score> scoresFromDataBase = BasePage.ScoreService.Get();
+
+            this.Synchronize<Score>(scoresFromAPI, scoresFromDataBase, new Score());
         }
 
         private void Synchronize<T>(List<T> modelsFromAPI, List<T> modelsFromDatabase, T model) where T : class, BaseModel, new()
@@ -82,10 +84,10 @@ namespace ProjectC
 
             // New items added
             List<T> addedItemsLocally = modelsFromDatabase.Where(m => m.LastSynchronized == null).ToList();
-            List<T> modelsToAdd = new List<T>();
             foreach(T item in addedItemsLocally)
             {
-                this.Delete<T>(item.Id);
+                T modelToAdd = item;
+                this.UpdateModel<T>(ref modelToAdd);
             }
 
             // Items updated

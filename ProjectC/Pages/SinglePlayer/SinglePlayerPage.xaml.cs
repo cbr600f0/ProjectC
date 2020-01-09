@@ -23,7 +23,7 @@ namespace ProjectC.Pages
         public GetValues getValues = new GetValues();
         //Creates a grid for the available letters the user can use.
         Grid grid = new Grid() { VerticalOptions = LayoutOptions.CenterAndExpand };
-        private bool pushWordDebug = false;
+        private bool pushWordDebug = true;
         private int remainingShuffles = 3;
         public List<Frame> UsableLetterList = new List<Frame>();
         public string currentUser = "Je bent niet ingelogd";
@@ -35,7 +35,7 @@ namespace ProjectC.Pages
         string highscoreWord = "";
         int highscoreWordPoints = 0;
         public int totalPoints = 0;
-        public int turn = 3;
+        public int turn = 7;
         public SinglePlayerPage(string difficulty, int difficultyMultiplier)
         {
             difficultySelected = difficulty;
@@ -68,7 +68,7 @@ namespace ProjectC.Pages
 
             try
             {
-                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderBy(h => h.Points).FirstOrDefault();
+                score = BasePage.ScoreService.GetByUserId(BasePage.CurrentUserId.Value).OrderByDescending(h => h.Points).FirstOrDefault();
                 viewHighscore.Text = score != null ? "HighScore: " + score.Points.ToString() : "HighScore: 0";
             }
             catch { }
@@ -213,6 +213,7 @@ namespace ProjectC.Pages
 
         private async Task<Boolean> CheckWord(string word)
         {
+            word = word.ToLower();
             String baseUrl = $"https://languagetool.org/api/v2/check?text={word}&language=nl";
             using (HttpClient client = new HttpClient())
             {
@@ -516,12 +517,12 @@ namespace ProjectC.Pages
             if (pushWordDebug)
             {
                 pushWordDebug = false;
-                debugButtonPushBar.BackgroundColor = Color.Green;
+                //debugButtonPushBar.BackgroundColor = Color.Green;
             }
             else
             {
                 pushWordDebug = true;
-                debugButtonPushBar.BackgroundColor = Color.Red;
+                //debugButtonPushBar.BackgroundColor = Color.Red;
             }
         }
 
@@ -622,13 +623,18 @@ namespace ProjectC.Pages
                 wordCreationBarStackLayout.Children.Add(grid);
             }
         }
-        public async void GameOverHandler()
+        public void GameOverHandler()
         {
             if (BasePage.CurrentUserId.HasValue)
             {
                 BasePage.ScoreAPIService.AddOrUpdate(new Score(BasePage.CurrentUserId.Value, totalPoints, DateTimeOffset.Now, difficultyMultiplier == 3, highscoreWord, highscoreWordPoints, this.difficultyEnum));
             }
-            await Navigation.PushAsync(new GameOverPage(currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+            Content.IsEnabled = false;
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                Navigation.PushAsync(new GameOverPage(true, currentUser, totalPoints, difficultyMultiplier == 3, difficultySelected, highscoreWord, highscoreWordPoints));
+                return false;
+            });
         }
 
         private async void BackButton_Clicked(object sender, EventArgs e)
