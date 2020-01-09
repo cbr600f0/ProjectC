@@ -43,7 +43,13 @@
                    FontSize="Large"/>
                 <Label Text="- Maak om de beurt een woord, gebruik zo nodig de shuffleknop"
                    FontSize="Large"/>
-                <Label Text="- Degene die na de sessie de meeste punten heeft, wint!"
+                <Label Text="- Degene die als eerste een woord kan maken, krijgt hiervan de punten"
+                   FontSize="Large"/>
+                <Label Text="- Hoe moeilijker het woord, hoe meer punten de winnaar krijgt"
+                   FontSize="Large"/>
+                <Label Text="- Nadat iemand een woord gemaakt heeft, krijgt iedereen weer nieuwe letters en een nieuw woord"
+                   FontSize="Large"/>
+                <Label Text="- Wie aan het einde van het spel de meeste punten heeft wint!"
                    FontSize="Large"/>
 
 
@@ -78,6 +84,18 @@
                        FontSize="Large"/>
                 <Label Text="- Om te spelen kan je klikken op SinglePlayer, of MultiPlayer op het hoofdscherm"
                        FontSize="Large"/>
+                <Label/>
+                
+                
+                <Label/>
+                <Label Text="Wachtwoord veranderen" FontSize="Large" FontAttributes="Bold"/>
+                <Label/>
+                <Label Text="- Het wachtwoord kan op 2 manieren worden veranderd" FontSize="Large"/>
+                <Label Text="- 1. Als je het wachtwoord bent vergeten, kan je in het scherm 'Inloggen,' de knop 'Wachtwoord Vergeten' klikken" FontSize="Large"/>
+                <Label Text="- Volg de stappen om je wachtwoord te veranderen" FontSize="Large"/>
+                <Label Text="- 2. Als je het wachtwoord gewoon wllt veranderen kan je dit doen in het instellingenmenu. Deze is te vinden op het hoofdmenu" FontSize="Large"/>
+                <Label Text="- Om het wachtwoord te veranderen vul je het oude en nieuwe wachtwoord in op de aangegeven plekken" FontSize="Large"/>
+                <Label Text="- Klik hierna op Opslaan. Nu is je wachtwoord veranderd!" FontSize="Large"/>
                 <Label/>
                 <Button Style="{StaticResource BackButton}" Clicked="BackButton_Clicked" Margin="0,0,0,0"/>
             </StackLayout>

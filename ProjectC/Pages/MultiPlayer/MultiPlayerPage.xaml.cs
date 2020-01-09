@@ -236,9 +236,12 @@ namespace ProjectC.Pages
             }
             frame.BackgroundColor = Color.Red;
             // Toetsenbord Geluid
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player.Load("Click.wav");
-            player.Play();
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
+            {
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load("Click.wav");
+                player.Play();
+            }
         }
 
         public void AddLetersToList(Frame frame)
@@ -275,10 +278,14 @@ namespace ProjectC.Pages
 
                     gridFrame.BackgroundColor = currentPlayerColor;
                     // Pushbar Geluid
-                    var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-                    player2.Load("Pop.wav");
-                    player2.Play();
-                    return;
+                    if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
+                    {
+                        var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                        player2.Volume = ConfigFile.Slider;
+                        player2.Load("Pop.wav");
+                        player2.Play();
+                    }
+                        return;
                 }
             }
 
@@ -299,9 +306,13 @@ namespace ProjectC.Pages
                     }
                 }
                 // Pushbar Geluid
-                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-                player.Load("Pop.wav");
-                player.Play();
+                if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
+                {
+                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                    player.Volume = ConfigFile.Slider;
+                    player.Load("Pop.wav");
+                    player.Play();
+                }
             }
         }
 
@@ -331,9 +342,13 @@ namespace ProjectC.Pages
                 if (!await CheckWord(pushingWord))
                 {
                     // Geluid voor fout antwoord
-                    var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-                    player.Load("Incorrect.mp3");
-                    player.Play();
+                    if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
+                    {
+                        var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                        player.Volume = ConfigFile.Slider;
+                        player.Load("Incorrect.mp3");
+                        player.Play();
+                    }
 
                     await DisplayAlert("Alert", "Je woord bestaat niet. Probeer een ander woord", "OK");
                     return;
@@ -446,9 +461,13 @@ namespace ProjectC.Pages
                 //viewPointCounter.Text = "totale score: " + totalPoints;
                 viewTurnCounterLabel.Text = "beurten over: " + turn;
             // PushButton Geluid
-            var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player2.Load("Correct.wav");
-            player2.Play();
+            if (ConfigFile.soundIsOn && ConfigFile.otherSoundsOn)
+            {
+                var player2 = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player2.Volume = ConfigFile.Slider;
+                player2.Load("Correct.wav");
+                player2.Play();
+            }
             if (turn <= 0)
             {
                 GameOverHandler();
@@ -463,10 +482,14 @@ namespace ProjectC.Pages
 
         private void PushButton_Clicked(object sender, EventArgs e)
         {
-            // geluid voor pushbutton (sorry dat t hardcoded is)
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player.Load("Click.wav");
-            player.Play();
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
+            {
+                // geluid voor pushbutton
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
+                player.Load("Click.wav");
+                player.Play();
+            }
 
             PushCurrentWord();
         }
@@ -523,9 +546,13 @@ namespace ProjectC.Pages
         private void ShuffleUsableLetterBord(object sender, EventArgs e)
         {
             //geluid voor de Shuffleknop
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player.Load("Click.wav");
-            player.Play();
+            if (ConfigFile.soundIsOn && ConfigFile.keyboardSoundOn)
+            {
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Volume = ConfigFile.Slider;
+                player.Load("Click.wav");
+                player.Play();
+            }
 
             if (currentPlayerTurn == 1)
             {
