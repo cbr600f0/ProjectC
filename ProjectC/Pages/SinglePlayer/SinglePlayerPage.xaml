@@ -28,7 +28,7 @@
                         <Frame Grid.Column="0" HasShadow="False" BackgroundColor="#B6F287" BorderColor="Black" Padding="0" Margin="4">
                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="3" Margin="0">
                                 <Label x:Name="viewPointCounter" Text="totale score: 0" FontSize="Small" Margin="0"/>
-                                <Label x:Name="viewTurnCounter" Text="Beurten over: 3" FontSize="Small" Margin="0"/>
+                                <Label x:Name="viewTurnCounter" Text="Beurten over: 7" FontSize="Small" Margin="0"/>
                                 <Label x:Name="shuffleCounter" Text="Shuffles: 3" FontSize="Small" Margin="0"/>
                             </StackLayout>
                         </Frame>
