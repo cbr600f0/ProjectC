@@ -95,6 +95,19 @@
                             </RelativeLayout>
                         </ScrollView>
                     </ControlTemplate>
+
+            <ControlTemplate x:Key="BackgroundTemplateNoScroll">
+                <RelativeLayout>
+                    <Image
+                        Aspect="AspectFill"
+                        Source="BackGround4k.png"
+                        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                    </Image>
+                    <ContentPresenter/>
+                </RelativeLayout>
+            </ControlTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
