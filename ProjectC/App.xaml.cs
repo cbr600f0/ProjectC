@@ -27,7 +27,7 @@ namespace ProjectC
 
         public static readonly NetworkAccess connectivity = Connectivity.NetworkAccess;  
 
-        public static readonly String BaseUrl = "https://192.168.0.156:44353/api/";
+        public static readonly String BaseUrl = "https://145.137.58.134:44353/api/";
 
         public App()
         {
